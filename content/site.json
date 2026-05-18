@@ -1,0 +1,100 @@
+{
+  "hero": {
+    "badge": "Solutions digitales pour entreprises",
+    "title_part1": "Des solutions digitales",
+    "title_highlight": "simples",
+    "title_part2": "pour mieux gérer votre entreprise",
+    "subtitle": "Datalio aide les petites entreprises à automatiser leurs tâches, suivre leurs clients, organiser leurs ventes et gagner du temps avec des outils simples, efficaces et personnalisés.",
+    "tagline": "Gérez mieux. Automatisez plus. Avancez vite.",
+    "cta_primary": "Discuter sur WhatsApp",
+    "cta_secondary": "Voir les solutions",
+    "point_1": "Outils sur-mesure",
+    "point_2": "Mise en place rapide",
+    "point_3": "Accompagnement inclus"
+  },
+  "whatsapp": {
+    "number": "261386984531",
+    "default_message": "Bonjour, je suis intéressé(e) par les solutions digitales Datalio. J'aimerais en savoir plus pour mon entreprise."
+  },
+  "services": [
+    {
+      "icon": "📊",
+      "title": "Outils de gestion personnalisés",
+      "tag": "",
+      "description": "Tableaux de bord, suivi des ventes, gestion de stock, trésorerie, commandes et livraisons — réunis dans un outil pensé pour vous.",
+      "benefits": ["Tableau de bord clair", "Suivi ventes & stock", "Trésorerie & livraisons"],
+      "featured": false
+    },
+    {
+      "icon": "⚡",
+      "title": "Automatisation des tâches",
+      "tag": "",
+      "description": "Suivis, calculs, rappels, rapports et processus répétitifs : Datalio automatise ce qui peut l'être pour vous libérer du temps.",
+      "benefits": ["Rappels automatiques", "Rapports périodiques", "Calculs & alertes"],
+      "featured": true
+    },
+    {
+      "icon": "💬",
+      "title": "Chatbots pour entreprises",
+      "tag": "",
+      "description": "Des assistants intelligents capables de répondre à vos clients à partir des informations propres à votre entreprise.",
+      "benefits": ["Réponses 24/7", "Basé sur vos données", "Intégration WhatsApp & Web"],
+      "featured": false
+    },
+    {
+      "icon": "👥",
+      "title": "Suivi client intelligent",
+      "tag": "",
+      "description": "Centralisez les demandes, l'historique client, les relances et toute votre organisation commerciale au même endroit.",
+      "benefits": ["Fiches & historique client", "Relances et rappels", "Pipeline commercial"],
+      "featured": false
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Mialy R.",
+      "role": "Vendeuse en ligne · Antananarivo",
+      "quote": "Avec Datalio je suis enfin organisée. Je vois mes commandes, mes paiements et mes livraisons dans un seul écran. Un vrai changement pour ma boutique en ligne."
+    },
+    {
+      "name": "Jean-Luc A.",
+      "role": "Petite boutique · Abidjan",
+      "quote": "Le suivi de stock est devenu automatique. Je sais exactement ce qu'il me reste, ce qu'il faut commander, et je ne perds plus de ventes."
+    },
+    {
+      "name": "Fatou D.",
+      "role": "Prestataire de service · Dakar",
+      "quote": "Le chatbot répond à mes clients à ma place pour les questions courantes. Je gagne du temps chaque jour et mes clients adorent la rapidité."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Est-ce que Datalio crée uniquement des fichiers Excel ?",
+      "answer": "Non. Datalio propose des solutions digitales complètes : outils de gestion (Excel, Google Sheets ou applications légères), automatisations, chatbots et systèmes de suivi client. Le format est choisi en fonction de votre besoin."
+    },
+    {
+      "question": "Est-ce que vous pouvez personnaliser un outil pour mon activité ?",
+      "answer": "Oui, c'est notre cœur de métier. Chaque solution est adaptée à votre secteur, vos produits, votre devise et vos processus. On commence par un échange pour bien comprendre votre besoin."
+    },
+    {
+      "question": "Est-ce que je dois être fort en informatique ?",
+      "answer": "Pas du tout. Nos outils sont conçus pour des utilisateurs débutants. Tout est expliqué simplement, et vous bénéficiez d'un accompagnement pour la prise en main."
+    },
+    {
+      "question": "Est-ce que vous créez aussi des chatbots ?",
+      "answer": "Oui. Nous créons des chatbots pour WhatsApp, sites web ou pages Facebook, capables de répondre à vos clients à partir des informations spécifiques à votre entreprise."
+    },
+    {
+      "question": "Comment commander une solution ?",
+      "answer": "Le plus simple est de cliquer sur le bouton \"Discuter sur WhatsApp\". On échange sur votre besoin, on vous propose la solution adaptée, puis on lance la mise en place."
+    },
+    {
+      "question": "Est-ce qu'il y a une assistance ?",
+      "answer": "Oui. Une assistance est incluse pour vous aider à utiliser votre outil. Vous pouvez nous écrire directement sur WhatsApp en cas de question."
+    }
+  ],
+  "contact": {
+    "phone": "+261 38 69 845 31",
+    "phone_link": "+261386984531"
+  }
+}

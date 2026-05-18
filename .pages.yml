@@ -1,0 +1,143 @@
+# Configuration Pages CMS — interface admin Datalio
+# Plus d'infos : https://pagescms.org/docs/
+
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: site
+    label: "Contenu du site"
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+
+      # ---------------- HERO ----------------
+      - name: hero
+        label: "Section d'accueil (Hero)"
+        type: object
+        fields:
+          - name: badge
+            label: "Petite étiquette en haut"
+            type: string
+          - name: title_part1
+            label: "Titre — début"
+            type: string
+          - name: title_highlight
+            label: "Titre — mot en jaune doré"
+            type: string
+          - name: title_part2
+            label: "Titre — fin"
+            type: string
+          - name: subtitle
+            label: "Sous-titre"
+            type: text
+          - name: tagline
+            label: "Slogan"
+            type: string
+          - name: cta_primary
+            label: "Bouton WhatsApp (texte)"
+            type: string
+          - name: cta_secondary
+            label: "Bouton secondaire (texte)"
+            type: string
+          - name: point_1
+            label: "Point clé 1"
+            type: string
+          - name: point_2
+            label: "Point clé 2"
+            type: string
+          - name: point_3
+            label: "Point clé 3"
+            type: string
+
+      # ---------------- WHATSAPP ----------------
+      - name: whatsapp
+        label: "WhatsApp"
+        type: object
+        fields:
+          - name: number
+            label: "Numéro WhatsApp (avec code pays, sans +)"
+            type: string
+            description: "Exemple : 261386984531"
+          - name: default_message
+            label: "Message prérempli par défaut"
+            type: text
+
+      # ---------------- SERVICES ----------------
+      - name: services
+        label: "Nos solutions (4 services)"
+        type: object
+        list: true
+        fields:
+          - name: icon
+            label: "Icône (emoji)"
+            type: string
+          - name: title
+            label: "Titre"
+            type: string
+          - name: description
+            label: "Description"
+            type: text
+          - name: benefits
+            label: "3 bénéfices"
+            type: string
+            list: true
+          - name: featured
+            label: "Mettre en avant ?"
+            type: boolean
+            default: false
+          - name: tag
+            label: "Étiquette (optionnel)"
+            type: string
+            required: false
+
+      # ---------------- TEMOIGNAGES ----------------
+      - name: testimonials
+        label: "Témoignages clients"
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: "Nom"
+            type: string
+          - name: role
+            label: "Rôle / ville"
+            type: string
+          - name: quote
+            label: "Témoignage"
+            type: text
+
+      # ---------------- FAQ ----------------
+      - name: faq
+        label: "Questions fréquentes (FAQ)"
+        type: object
+        list: true
+        fields:
+          - name: question
+            label: "Question"
+            type: string
+          - name: answer
+            label: "Réponse"
+            type: text
+
+      # ---------------- CONTACT ----------------
+      - name: contact
+        label: "Contact"
+        type: object
+        fields:
+          - name: phone
+            label: "Téléphone (affiché)"
+            type: string
+            description: "Exemple : +261 38 69 845 31"
+          - name: phone_link
+            label: "Téléphone (clic-pour-appeler)"
+            type: string
+            description: "Format international, ex: +261386984531"
+
+  - name: logo
+    label: "Logo Datalio"
+    type: file
+    path: assets/logo.png
+    format: raw
