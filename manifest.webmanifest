@@ -1,0 +1,19 @@
+{
+  "name": "Datalio — Solutions digitales pour entreprises",
+  "short_name": "Datalio",
+  "description": "Solutions digitales pour entreprises : outils de gestion, automatisation, chatbots et suivi client pour petites entreprises et entrepreneurs en Afrique francophone.",
+  "start_url": "/Kiro-test/",
+  "scope": "/Kiro-test/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#05045F",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
