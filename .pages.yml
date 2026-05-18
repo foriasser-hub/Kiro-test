@@ -67,13 +67,34 @@ content:
 
       # ---------------- SERVICES ----------------
       - name: services
-        label: "Nos solutions (4 services)"
+        label: "Nos solutions"
         type: object
         list: true
         fields:
           - name: icon
-            label: "Icône (emoji)"
-            type: string
+            label: "Icône"
+            type: select
+            description: "Choisissez l'icône qui correspond le mieux au service"
+            options:
+              values:
+                - { value: "bar-chart",   label: "📊 Graphique (gestion / tableau de bord)" }
+                - { value: "zap",         label: "⚡ Éclair (automatisation)" }
+                - { value: "bot",         label: "🤖 Robot (chatbot)" }
+                - { value: "globe",       label: "🌐 Globe (site web)" }
+                - { value: "users",       label: "👥 Personnes (suivi client)" }
+                - { value: "rocket",      label: "🚀 Fusée (rapide / prêt à l'emploi)" }
+                - { value: "target",      label: "🎯 Cible (sur-mesure)" }
+                - { value: "sparkles",    label: "✨ Étincelles (qualité)" }
+                - { value: "store",       label: "🏪 Boutique" }
+                - { value: "gem",         label: "💎 Diamant (premium)" }
+                - { value: "settings",    label: "⚙️ Engrenage (paramétrable)" }
+                - { value: "trending-up", label: "📈 Tendance haussière" }
+                - { value: "handshake",   label: "🤝 Poignée de main (accompagnement)" }
+                - { value: "timer",       label: "⏱️ Chrono (gain de temps)" }
+                - { value: "sprout",      label: "🌱 Pousse (facile)" }
+                - { value: "message",     label: "💬 Bulle de message" }
+                - { value: "notebook",    label: "📓 Cahier" }
+                - { value: "calculator",  label: "🧮 Calculatrice" }
           - name: title
             label: "Titre"
             type: string

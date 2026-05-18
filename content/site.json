@@ -4,7 +4,7 @@
     "title_part1": "Des solutions digitales",
     "title_highlight": "simples",
     "title_part2": "pour mieux gérer votre entreprise",
-    "subtitle": "Datalio aide les petites entreprises à automatiser leurs tâches, suivre leurs clients, organiser leurs ventes et gagner du temps avec des outils simples, efficaces et personnalisés.",
+    "subtitle": "Datalio aide les petites entreprises à automatiser leurs tâches, suivre leurs clients, organiser leurs ventes, créer leur site web et gagner du temps avec des outils simples, efficaces et personnalisés.",
     "tagline": "Gérez mieux. Automatisez plus. Avancez vite.",
     "cta_primary": "Discuter sur WhatsApp",
     "cta_secondary": "Voir les solutions",
@@ -18,7 +18,7 @@
   },
   "services": [
     {
-      "icon": "📊",
+      "icon": "bar-chart",
       "title": "Outils de gestion personnalisés",
       "tag": "",
       "description": "Tableaux de bord, suivi des ventes, gestion de stock, trésorerie, commandes et livraisons — réunis dans un outil pensé pour vous.",
@@ -26,7 +26,7 @@
       "featured": false
     },
     {
-      "icon": "⚡",
+      "icon": "zap",
       "title": "Automatisation des tâches",
       "tag": "",
       "description": "Suivis, calculs, rappels, rapports et processus répétitifs : Datalio automatise ce qui peut l'être pour vous libérer du temps.",
@@ -34,7 +34,7 @@
       "featured": true
     },
     {
-      "icon": "💬",
+      "icon": "bot",
       "title": "Chatbots pour entreprises",
       "tag": "",
       "description": "Des assistants intelligents capables de répondre à vos clients à partir des informations propres à votre entreprise.",
@@ -42,7 +42,15 @@
       "featured": false
     },
     {
-      "icon": "👥",
+      "icon": "globe",
+      "title": "Création de sites web",
+      "tag": "",
+      "description": "Sites vitrines et landing pages professionnels pour donner à votre entreprise une présence en ligne crédible et moderne.",
+      "benefits": ["Design responsive & rapide", "Optimisé SEO", "Hébergement & HTTPS inclus"],
+      "featured": false
+    },
+    {
+      "icon": "users",
       "title": "Suivi client intelligent",
       "tag": "",
       "description": "Centralisez les demandes, l'historique client, les relances et toute votre organisation commerciale au même endroit.",
@@ -70,7 +78,7 @@
   "faq": [
     {
       "question": "Est-ce que Datalio crée uniquement des fichiers Excel ?",
-      "answer": "Non. Datalio propose des solutions digitales complètes : outils de gestion (Excel, Google Sheets ou applications légères), automatisations, chatbots et systèmes de suivi client. Le format est choisi en fonction de votre besoin."
+      "answer": "Non. Datalio propose des solutions digitales complètes : outils de gestion (Excel, Google Sheets ou applications légères), automatisations, chatbots, sites web et systèmes de suivi client. Le format est choisi en fonction de votre besoin."
     },
     {
       "question": "Est-ce que vous pouvez personnaliser un outil pour mon activité ?",
@@ -81,8 +89,8 @@
       "answer": "Pas du tout. Nos outils sont conçus pour des utilisateurs débutants. Tout est expliqué simplement, et vous bénéficiez d'un accompagnement pour la prise en main."
     },
     {
-      "question": "Est-ce que vous créez aussi des chatbots ?",
-      "answer": "Oui. Nous créons des chatbots pour WhatsApp, sites web ou pages Facebook, capables de répondre à vos clients à partir des informations spécifiques à votre entreprise."
+      "question": "Est-ce que vous créez aussi des chatbots et des sites web ?",
+      "answer": "Oui. Nous créons des chatbots pour WhatsApp, sites web ou pages Facebook, ainsi que des sites vitrines et landing pages professionnels qui représentent votre entreprise en ligne."
     },
     {
       "question": "Comment commander une solution ?",

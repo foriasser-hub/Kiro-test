@@ -66,14 +66,27 @@
     }
     setupReveal();
 
-    /* =========================================
-       Chargement du contenu depuis content/site.json
-       (modifiable depuis l'interface admin Pages CMS)
-       ========================================= */
-    function setText(selector, value) {
-        if (value == null) return;
-        document.querySelectorAll(selector).forEach(function (el) { el.textContent = value; });
+    /* ----- Mapping des noms d'icônes vers le sprite SVG ----- */
+    // Si l'admin utilise un emoji par habitude, on le convertit automatiquement.
+    var EMOJI_TO_ICON = {
+        '📊': 'bar-chart', '⚡': 'zap',  '💬': 'bot',     '👥': 'users',
+        '🌐': 'globe',     '🚀': 'rocket','🎯': 'target', '🌱': 'sprout',
+        '⏱️': 'timer',     '🤝': 'handshake', '✨': 'sparkles',
+        '🏪': 'store',     '💎': 'gem',  '⚙️': 'settings', '📈': 'trending-up',
+        '📓': 'notebook',  '🧮': 'calculator', '📉': 'trending-down',
+        '🤖': 'bot'
+    };
+    function resolveIconName(raw) {
+        if (!raw) return 'sparkles';
+        if (EMOJI_TO_ICON[raw]) return EMOJI_TO_ICON[raw];
+        // Sinon on suppose que c'est déjà un nom d'icône valide (ex: "bar-chart")
+        return String(raw).toLowerCase().trim();
     }
+    function iconHtml(name, extraClass) {
+        var cls = 'icon' + (extraClass ? ' ' + extraClass : '');
+        return '<svg class="' + cls + '" aria-hidden="true"><use href="#icon-' + escapeAttr(resolveIconName(name)) + '"></use></svg>';
+    }
+
 
     function applyContent(c) {
         if (!c) return;
@@ -109,7 +122,7 @@
                 var featuredClass = s.featured ? ' solution--featured' : '';
                 return ''
                     + '<article class="solution reveal' + featuredClass + '">'
-                    +   '<div class="solution__icon">' + escapeHtml(s.icon || '') + '</div>'
+                    +   '<div class="solution__icon">' + iconHtml(s.icon) + '</div>'
                     +   '<h3>' + escapeHtml(s.title || '') + '</h3>'
                     +   '<p>' + escapeHtml(s.description || '') + '</p>'
                     +   '<ul class="solution__list">' + benefits + '</ul>'
