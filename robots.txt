@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://foriasser-hub.github.io/Kiro-test/sitemap.xml
