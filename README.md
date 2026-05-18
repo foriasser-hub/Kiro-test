@@ -1,20 +1,28 @@
-# ExcelPro — Site vitrine
+# Datalio — Site vitrine
 
-Site vitrine professionnel pour vendre des templates Excel et mini logiciels de gestion destinés aux petites entreprises, vendeurs en ligne, commerçants, freelances et entrepreneurs en Afrique francophone.
+**Datalio — Solutions digitales pour entreprises**
+*Gérez mieux. Automatisez plus. Avancez vite.*
+
+Site vitrine professionnel pour Datalio : outils de gestion personnalisés, automatisation, chatbots et suivi client pour petites entreprises, vendeurs en ligne, commerces, freelances et entrepreneurs.
+
+## Charte graphique
+
+- Bleu nuit `#05045F` (couleur principale)
+- Jaune doré `#F5B800` (accent)
+- Blanc `#FFFFFF`, Gris clair `#F5F7FA`, Gris texte `#5B6472`
+- Bleu tech `#2D6BFF` (détails subtils)
+- Police : **Poppins**
 
 ## Aperçu
 
-- HTML / CSS / JavaScript pur, **aucune installation requise**
-- Design premium responsive (violet profond, blanc, gris clair, touches dorées et vert émeraude)
-- Toutes les sections demandées : Hero, Problème, Solution, Produits, Avantages, Étapes, Témoignages, FAQ, CTA finale, Footer
-- Boutons WhatsApp préremplis vers `+261386984531`
-- Animations légères (apparition au scroll, mockup, bouton flottant)
+- HTML / CSS / JavaScript pur — **aucune installation, compatible GitHub Pages**
+- Responsive (mobile, tablette, desktop)
+- Animations légères (apparition au scroll, dashboard, dots & rings)
+- Bouton WhatsApp dynamique et bouton flottant
 
 ## Lancer le site
 
-Ouvrez simplement `index.html` dans votre navigateur. C'est tout.
-
-Pour un rendu plus proche de la production (rechargement live), vous pouvez utiliser n'importe quel mini-serveur statique, par exemple :
+Ouvrez simplement `index.html` dans votre navigateur, ou hébergez le dossier sur n'importe quel serveur statique (GitHub Pages, Netlify, Vercel…).
 
 ```bash
 python3 -m http.server 8000
@@ -26,13 +34,13 @@ python3 -m http.server 8000
 ```
 .
 ├── index.html      # Toutes les sections du site
-├── styles.css      # Design premium responsive
+├── styles.css      # Charte Datalio + responsive
 ├── script.js       # WhatsApp dynamique, FAQ, animations
 └── README.md
 ```
 
 ## Personnaliser rapidement
 
-- **Numéro WhatsApp / message** : `script.js`, en haut du fichier (`WHATSAPP_NUMBER`, `WHATSAPP_MESSAGE`).
-- **Couleurs** : `styles.css`, bloc `:root` en haut.
-- **Textes / produits / témoignages** : directement dans `index.html` (chaque section est commentée).
+- **Numéro WhatsApp / message** : `script.js` (`WHATSAPP_NUMBER`, `WHATSAPP_MESSAGE`)
+- **Couleurs** : `styles.css`, bloc `:root`
+- **Textes / services / témoignages** : directement dans `index.html` (sections commentées)
