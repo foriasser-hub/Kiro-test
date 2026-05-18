@@ -1,4 +1,4 @@
-# ExcelPro — Site vitrine
+# Datalio — Site vitrine
 
 Site vitrine professionnel pour vendre des templates Excel et mini logiciels de gestion destinés aux petites entreprises, vendeurs en ligne, commerçants, freelances et entrepreneurs en Afrique francophone.
 
