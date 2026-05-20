@@ -78,58 +78,94 @@
     var chatbotInput = document.getElementById('chatbot-input');
     var chatbotSuggestions = document.getElementById('chatbot-suggestions');
 
-    // Base de connaissances du chatbot
+    // Base de connaissances du chatbot - Vraies informations Datalio
     var botKnowledge = {
         greetings: [
-            "Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider aujourd'hui ?",
-            "Bienvenue chez Datalio ! 🎉 Je suis là pour répondre à vos questions sur nos solutions digitales.",
-            "Salut ! 😊 Ravi de vous accueillir. Que puis-je faire pour vous ?"
+            "Bonjour ! 👋 Je suis l'assistant virtuel de Datalio. Comment puis-je vous aider ?",
+            "Bienvenue chez Datalio ! Je suis là pour répondre à vos questions sur nos solutions digitales pour entreprises.",
+            "Bonjour ! 😊 Datalio accompagne les petites entreprises dans leur digitalisation. Que puis-je faire pour vous ?"
         ],
-        services: "Datalio propose **5 services** pour digitaliser votre entreprise :\n\n" +
-            "📊 **Outils de gestion** — Tableaux de bord, suivi ventes, stock, trésorerie\n" +
-            "⚡ **Automatisation** — Rappels, rapports, calculs automatiques\n" +
-            "🤖 **Chatbots** — Assistants 24/7 pour WhatsApp et Web\n" +
-            "🌐 **Sites web** — Sites vitrines professionnels et optimisés SEO\n" +
-            "👥 **Suivi client** — CRM simple pour gérer vos relations clients\n\n" +
-            "Quel service vous intéresse ?",
-        pricing: "Nos tarifs sont **personnalisés** selon vos besoins. 💰\n\n" +
-            "Chaque solution est adaptée à votre activité, vos processus et votre budget.\n\n" +
-            "Pour obtenir un **devis gratuit**, discutons sur WhatsApp ! Je peux vous y rediriger si vous le souhaitez. 📱",
-        order: "Commander chez Datalio, c'est simple ! 🚀\n\n" +
-            "1️⃣ **Discutez** avec nous sur WhatsApp\n" +
-            "2️⃣ **Expliquez** votre besoin et votre activité\n" +
-            "3️⃣ **Recevez** une proposition adaptée\n" +
-            "4️⃣ **Validez** et on lance la mise en place !\n\n" +
-            "Voulez-vous que je vous redirige vers WhatsApp pour démarrer ?",
-        human: "Bien sûr ! 🙋‍♂️ Je comprends que vous préfériez parler à un humain.\n\n" +
-            "Notre équipe est disponible sur **WhatsApp** au **+261 38 69 845 31**.\n\n" +
-            "Cliquez sur le bouton ci-dessous pour nous contacter directement !",
-        automation: "L'**automatisation** est notre spécialité ! ⚡\n\n" +
+        services: "Datalio propose **5 solutions digitales** pour votre entreprise :\n\n" +
+            "📊 **Outils de gestion personnalisés**\nTableaux de bord, suivi des ventes, gestion de stock, trésorerie, commandes et livraisons — réunis dans un outil pensé pour vous.\n\n" +
+            "⚡ **Automatisation des tâches**\nSuivis, calculs, rappels, rapports et processus répétitifs : on automatise ce qui peut l'être pour vous libérer du temps.\n\n" +
+            "🤖 **Chatbots pour entreprises**\nDes assistants intelligents qui répondent à vos clients 24/7, basés sur vos données, intégrés à WhatsApp et Web.\n\n" +
+            "🌐 **Création de sites web**\nSites vitrines professionnels avec design responsive, optimisés SEO, hébergement et HTTPS inclus.\n\n" +
+            "👥 **Suivi client intelligent**\nCentralisez les demandes, l'historique client, les relances et votre organisation commerciale.\n\n" +
+            "Quel service vous intéresse le plus ?",
+        pricing: "Chez Datalio, **chaque solution est personnalisée** selon votre secteur, vos produits, votre devise et vos processus. 💰\n\n" +
+            "Il n'y a pas de tarif fixe car on adapte tout à votre besoin réel.\n\n" +
+            "Pour obtenir un **devis gratuit**, contactez-nous sur WhatsApp au **+261 38 69 845 31**. On échange sur votre besoin, puis on vous propose la solution adaptée.",
+        order: "Commander une solution Datalio, c'est simple :\n\n" +
+            "1️⃣ **Cliquez sur \"Discuter sur WhatsApp\"**\n" +
+            "2️⃣ **On échange** pour comprendre votre activité et vos objectifs\n" +
+            "3️⃣ **Datalio prépare l'outil** adapté à vos données et votre flux de travail\n" +
+            "4️⃣ **Vous l'utilisez** avec un guide et un accompagnement inclus !\n\n" +
+            "📞 Notre numéro : **+261 38 69 845 31**\n\n" +
+            "Voulez-vous démarrer maintenant ?",
+        human: "Bien sûr ! Notre équipe est disponible pour vous accompagner. 🙋‍♂️\n\n" +
+            "📞 **WhatsApp : +261 38 69 845 31**\n\n" +
+            "On répond généralement sous **24h**. N'hésitez pas à nous écrire directement !",
+        automation: "L'**automatisation des tâches** est l'un de nos services phares ! ⚡\n\n" +
             "On peut automatiser :\n" +
-            "• Rappels et relances clients\n" +
-            "• Génération de rapports\n" +
-            "• Calculs et alertes de stock\n" +
-            "• Envois de messages programmés\n" +
-            "• Et bien plus selon votre activité !\n\n" +
-            "Quelle tâche aimeriez-vous automatiser ?",
-        chatbots: "Nos **chatbots** sont intelligents et personnalisés ! 🤖\n\n" +
-            "Ils peuvent :\n" +
-            "• Répondre à vos clients 24h/24\n" +
-            "• Prendre des commandes\n" +
-            "• Donner des infos sur vos produits\n" +
-            "• S'intégrer à WhatsApp, votre site web ou Facebook\n\n" +
-            "Le tout basé sur **vos données** et votre activité !",
-        website: "Nous créons des **sites web professionnels** ! 🌐\n\n" +
+            "• **Rappels automatiques** (clients, paiements, rendez-vous)\n" +
+            "• **Rapports périodiques** (hebdo, mensuel)\n" +
+            "• **Calculs et alertes** (stock bas, objectifs atteints)\n" +
+            "• Suivis et processus répétitifs\n\n" +
+            "L'objectif : **vous libérer du temps** pour vous concentrer sur l'essentiel.\n\n" +
+            "Quelle tâche répétitive vous prend le plus de temps ?",
+        chatbots: "Nos **chatbots pour entreprises** sont des assistants intelligents personnalisés ! 🤖\n\n" +
+            "Ce qu'ils font :\n" +
+            "• **Réponses 24/7** — vos clients ont des réponses même quand vous dormez\n" +
+            "• **Basés sur vos données** — ils connaissent vos produits, prix, horaires\n" +
+            "• **Intégration WhatsApp & Web** — là où sont vos clients\n\n" +
+            "Comme le dit Fatou D. (prestataire à Dakar) : *\"Le chatbot répond à mes clients à ma place. Je gagne du temps chaque jour !\"*",
+        website: "Nous créons des **sites web professionnels** pour votre entreprise ! 🌐\n\n" +
             "Ce qu'on propose :\n" +
-            "• Design moderne et responsive\n" +
-            "• Optimisation SEO (Google)\n" +
-            "• Hébergement et HTTPS inclus\n" +
-            "• Adapté à votre image de marque\n\n" +
-            "Vous avez déjà une idée de ce que vous voulez ?",
-        thanks: "Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions. Je suis là pour vous aider !",
-        default: "Je comprends votre question ! 🤔\n\n" +
-            "Pour vous donner la meilleure réponse, je vous suggère de **discuter directement avec notre équipe** sur WhatsApp.\n\n" +
-            "Ils pourront vous accompagner personnellement ! 📱"
+            "• **Design responsive et rapide** — beau sur mobile et ordi\n" +
+            "• **Optimisé SEO** — pour être trouvé sur Google\n" +
+            "• **Hébergement et HTTPS inclus** — tout est géré pour vous\n\n" +
+            "Sites vitrines et landing pages pour donner à votre entreprise une présence en ligne crédible et moderne.",
+        gestion: "Les **outils de gestion personnalisés** sont notre cœur de métier ! 📊\n\n" +
+            "On crée pour vous :\n" +
+            "• **Tableaux de bord clairs** — vos chiffres en un coup d'œil\n" +
+            "• **Suivi ventes et stock** — plus jamais de rupture ou d'oubli\n" +
+            "• **Trésorerie et livraisons** — tout centralisé\n\n" +
+            "Comme le dit Mialy R. (vendeuse en ligne à Antananarivo) : *\"Je vois mes commandes, mes paiements et mes livraisons dans un seul écran. Un vrai changement !\"*\n\n" +
+            "Format : Excel, Google Sheets ou application légère selon votre besoin.",
+        suivi: "Le **suivi client intelligent** centralise toute votre relation commerciale ! 👥\n\n" +
+            "Fonctionnalités :\n" +
+            "• **Fiches et historique client** — tout l'historique accessible\n" +
+            "• **Relances et rappels** — ne ratez plus aucune opportunité\n" +
+            "• **Pipeline commercial** — suivez vos prospects jusqu'à la vente\n\n" +
+            "Fini les oublis et les opportunités manquées !",
+        excel: "Non, Datalio ne crée pas uniquement des fichiers Excel ! 📋\n\n" +
+            "On propose des **solutions digitales complètes** :\n" +
+            "• Outils de gestion (Excel, Google Sheets OU applications légères)\n" +
+            "• Automatisations\n" +
+            "• Chatbots\n" +
+            "• Sites web\n" +
+            "• Systèmes de suivi client\n\n" +
+            "Le format est choisi **en fonction de votre besoin** réel.",
+        informatique: "**Pas besoin d'être fort en informatique !** 💪\n\n" +
+            "Nos outils sont conçus pour des utilisateurs débutants. Tout est :\n" +
+            "• Expliqué simplement\n" +
+            "• Facile à prendre en main\n" +
+            "• Accompagné (on vous aide au démarrage)\n\n" +
+            "Une assistance est incluse pour vous aider à utiliser votre outil.",
+        assistance: "Oui, une **assistance est incluse** avec chaque solution ! 🛟\n\n" +
+            "• On vous aide à prendre en main votre outil\n" +
+            "• Vous pouvez nous écrire sur WhatsApp en cas de question\n" +
+            "• Accompagnement personnalisé\n\n" +
+            "📞 **+261 38 69 845 31**",
+        localisation: "Datalio est basé à **Antananarivo, Madagascar** 🇲🇬\n\n" +
+            "Mais on travaille avec des entreprises dans **8 pays francophones** : Madagascar, France, Côte d'Ivoire, Sénégal, Cameroun, Burkina Faso, Togo, Bénin.\n\n" +
+            "Tout se fait à distance via WhatsApp et en ligne !",
+        thanks: "Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions.\n\n" +
+            "Notre slogan : **Gérez mieux. Automatisez plus. Avancez vite.**\n\n" +
+            "On est là pour vous aider !",
+        default: "Je n'ai pas toutes les réponses, mais notre équipe peut vous aider ! 🤔\n\n" +
+            "Contactez-nous sur **WhatsApp** au **+261 38 69 845 31** pour une réponse personnalisée.\n\n" +
+            "Ou posez-moi une question sur nos services : gestion, automatisation, chatbots, sites web, suivi client..."
     };
 
     // Fonction pour formater les messages (markdown basique)
@@ -173,7 +209,7 @@
         if (msg.match(/\b(bonjour|salut|hello|hi|hey|coucou|bonsoir)\b/)) {
             return botKnowledge.greetings[Math.floor(Math.random() * botKnowledge.greetings.length)];
         }
-        if (msg.match(/\b(service|solution|propose|offre|faites|quoi)\b/)) {
+        if (msg.match(/\b(service|solution|propose|offre|faites|quoi faire)\b/)) {
             return botKnowledge.services;
         }
         if (msg.match(/\b(prix|tarif|cout|combien|cher|budget|devis)\b/)) {
@@ -182,19 +218,37 @@
         if (msg.match(/\b(commander|commande|acheter|souscrire|demarrer|commencer|comment faire)\b/)) {
             return botKnowledge.order;
         }
-        if (msg.match(/\b(humain|personne|quelqu'un|parler|agent|conseiller|reel)\b/)) {
+        if (msg.match(/\b(humain|personne|quelqu.?un|parler|agent|conseiller|reel|equipe)\b/)) {
             return botKnowledge.human;
         }
-        if (msg.match(/\b(automat|tache|repetiti|rappel|rapport|calcul)\b/)) {
+        if (msg.match(/\b(automat|tache|repetiti|rappel|rapport|calcul|alertes?)\b/)) {
             return botKnowledge.automation;
         }
-        if (msg.match(/\b(chatbot|bot|assistant|whatsapp|messenger|facebook)\b/)) {
+        if (msg.match(/\b(chatbot|bot|assistant|whatsapp|messenger|facebook|24.?7)\b/)) {
             return botKnowledge.chatbots;
         }
-        if (msg.match(/\b(site|web|internet|vitrine|landing|page)\b/)) {
+        if (msg.match(/\b(site|web|internet|vitrine|landing|page|seo|google)\b/)) {
             return botKnowledge.website;
         }
-        if (msg.match(/\b(merci|thanks|super|genial|parfait|excellent)\b/)) {
+        if (msg.match(/\b(gestion|tableau|bord|stock|vente|tresorerie|livraison|commandes?)\b/)) {
+            return botKnowledge.gestion;
+        }
+        if (msg.match(/\b(suivi|client|crm|relance|historique|pipeline|commercial)\b/)) {
+            return botKnowledge.suivi;
+        }
+        if (msg.match(/\b(excel|sheets?|fichier|format)\b/)) {
+            return botKnowledge.excel;
+        }
+        if (msg.match(/\b(informatique|technique|debutant|facile|difficile|complique)\b/)) {
+            return botKnowledge.informatique;
+        }
+        if (msg.match(/\b(assistance|aide|support|accompagnement|question)\b/)) {
+            return botKnowledge.assistance;
+        }
+        if (msg.match(/\b(ou|localisation|pays|madagascar|antananarivo|afrique|francophone)\b/)) {
+            return botKnowledge.localisation;
+        }
+        if (msg.match(/\b(merci|thanks|super|genial|parfait|excellent|top|cool)\b/)) {
             return botKnowledge.thanks;
         }
         
