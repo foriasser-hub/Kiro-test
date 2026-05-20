@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#05045F" />
 
+    <!-- ===== SÉCURITÉ ===== -->
+    <!-- Content Security Policy - Protection XSS et injection -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https:;
+        connect-src 'self' https://wa.me https://www.google-analytics.com;
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self' https://wa.me;
+    " />
+    <!-- Protection contre le clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <!-- Protection XSS navigateur -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!-- Politique de référent -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- Permissions Policy - Désactiver les fonctionnalités non utilisées -->
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()" />
+
     <!-- ===== SEO essentiel ===== -->
     <title>Datalio — Solutions digitales pour entreprises | Gestion, automatisation, chatbots, sites web</title>
     <meta name="description" content="Datalio aide les petites entreprises, vendeurs en ligne et entrepreneurs en Afrique francophone à automatiser leurs tâches, gérer leurs ventes, suivre leurs clients, créer des chatbots et des sites web professionnels. Solutions digitales simples et personnalisées." />
@@ -39,6 +61,7 @@
     <!-- ===== Préchargements & polices ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 
@@ -918,8 +941,8 @@
                 <button class="chatbot__suggestion" data-message="Je veux parler à un humain">Contact humain</button>
             </div>
 
-            <form class="chatbot__form" id="chatbot-form">
-                <input type="text" class="chatbot__input" id="chatbot-input" placeholder="Écrivez votre message..." autocomplete="off" />
+            <form class="chatbot__form" id="chatbot-form" autocomplete="off">
+                <input type="text" class="chatbot__input" id="chatbot-input" placeholder="Écrivez votre message..." autocomplete="off" maxlength="500" aria-label="Message" />
                 <button type="submit" class="chatbot__send" aria-label="Envoyer">
                     <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="22" y1="2" x2="11" y2="13"></line>

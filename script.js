@@ -5,6 +5,68 @@
 (function () {
     'use strict';
 
+    /* =========================================
+       SÉCURITÉ - Fonctions de protection
+       ========================================= */
+    
+    // Protection XSS - Échappement HTML strict
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        var div = document.createElement('div');
+        div.textContent = String(str);
+        return div.innerHTML;
+    }
+    
+    // Échappement pour les attributs HTML
+    function escapeAttr(str) {
+        return escapeHtml(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    
+    // Validation des URLs (protection contre javascript: et data:)
+    function isValidUrl(url) {
+        if (!url || typeof url !== 'string') return false;
+        var trimmed = url.trim().toLowerCase();
+        // Bloquer les protocoles dangereux
+        if (trimmed.startsWith('javascript:') || 
+            trimmed.startsWith('data:') || 
+            trimmed.startsWith('vbscript:')) {
+            return false;
+        }
+        return true;
+    }
+    
+    // Validation du numéro WhatsApp (chiffres uniquement)
+    function sanitizePhoneNumber(phone) {
+        if (!phone) return '';
+        return String(phone).replace(/[^0-9]/g, '');
+    }
+    
+    // Limitation de la longueur des entrées
+    function truncateInput(str, maxLength) {
+        if (!str) return '';
+        return String(str).substring(0, maxLength || 500);
+    }
+    
+    // Rate limiting simple pour le chatbot (anti-spam)
+    var rateLimiter = {
+        messages: [],
+        maxMessages: 10,
+        timeWindow: 60000, // 1 minute
+        isAllowed: function() {
+            var now = Date.now();
+            // Nettoyer les anciens messages
+            this.messages = this.messages.filter(function(time) {
+                return now - time < this.timeWindow;
+            }.bind(this));
+            // Vérifier la limite
+            if (this.messages.length >= this.maxMessages) {
+                return false;
+            }
+            this.messages.push(now);
+            return true;
+        }
+    };
+
     /* ----- Configuration WhatsApp (valeurs par défaut, surchargées par le CMS) ----- */
     var WHATSAPP_NUMBER  = '261386984531';
     var WHATSAPP_MESSAGE = "Bonjour, je suis intéressé(e) par les solutions digitales Datalio. J'aimerais en savoir plus pour mon entreprise.";
@@ -12,17 +74,26 @@
     function buildWhatsAppLink(productName) {
         var msg = WHATSAPP_MESSAGE;
         if (productName) {
-            msg = "Bonjour Datalio, je suis intéressé(e) par votre service \"" + productName + "\". J'aimerais en savoir plus pour mon entreprise.";
+            // Sécurité : échapper le nom du produit
+            var safeName = truncateInput(productName, 100);
+            msg = "Bonjour Datalio, je suis intéressé(e) par votre service \"" + safeName + "\". J'aimerais en savoir plus pour mon entreprise.";
         }
-        return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+        // Sécurité : valider le numéro
+        var safeNumber = sanitizePhoneNumber(WHATSAPP_NUMBER);
+        if (!safeNumber) return '#';
+        return 'https://wa.me/' + safeNumber + '?text=' + encodeURIComponent(msg);
     }
 
     function refreshWhatsAppLinks() {
         document.querySelectorAll('[data-whatsapp]').forEach(function (el) {
             var product = el.getAttribute('data-product');
-            el.setAttribute('href', buildWhatsAppLink(product));
-            el.setAttribute('target', '_blank');
-            el.setAttribute('rel', 'noopener');
+            var href = buildWhatsAppLink(product);
+            // Sécurité : valider l'URL avant de l'appliquer
+            if (isValidUrl(href)) {
+                el.setAttribute('href', href);
+                el.setAttribute('target', '_blank');
+                el.setAttribute('rel', 'noopener noreferrer');
+            }
         });
     }
     refreshWhatsAppLinks();
@@ -177,9 +248,20 @@
 
     // Ajouter un message dans le chat
     function addMessage(text, isBot) {
+        // Sécurité : limiter la taille du message
+        var safeText = truncateInput(text, 2000);
+        
         var messageDiv = document.createElement('div');
         messageDiv.className = 'chatbot__message chatbot__message--' + (isBot ? 'bot' : 'user');
-        messageDiv.innerHTML = isBot ? formatMessage(text) : escapeHtml(text);
+        
+        // Sécurité : échapper le contenu utilisateur, formater seulement le bot
+        if (isBot) {
+            messageDiv.innerHTML = formatMessage(safeText);
+        } else {
+            // Les messages utilisateur sont toujours échappés en texte pur
+            messageDiv.textContent = safeText;
+        }
+        
         chatbotMessages.appendChild(messageDiv);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         return messageDiv;
@@ -257,13 +339,22 @@
 
     // Gérer l'envoi de message
     function handleUserMessage(text) {
-        if (!text.trim()) return;
+        // Sécurité : vérifier et nettoyer l'entrée
+        if (!text || typeof text !== 'string') return;
+        var cleanText = truncateInput(text.trim(), 500);
+        if (!cleanText) return;
+        
+        // Sécurité : rate limiting anti-spam
+        if (!rateLimiter.isAllowed()) {
+            addMessage("Merci de patienter un moment avant d'envoyer d'autres messages. 🙏", true);
+            return;
+        }
         
         // Cacher le badge après le premier message
         chatbot.classList.add('badge-hidden');
         
         // Ajouter le message utilisateur
-        addMessage(text, false);
+        addMessage(cleanText, false);
         
         // Afficher l'indicateur de frappe
         showTyping();
@@ -272,7 +363,7 @@
         var delay = 800 + Math.random() * 700;
         setTimeout(function() {
             hideTyping();
-            var response = getBotResponse(text);
+            var response = getBotResponse(cleanText);
             addMessage(response, true);
         }, delay);
     }
@@ -315,6 +406,7 @@
         chatbotForm.addEventListener('submit', function(e) {
             e.preventDefault();
             var text = chatbotInput.value;
+            // Sécurité : nettoyer l'input après récupération
             chatbotInput.value = '';
             handleUserMessage(text);
         });
@@ -323,7 +415,10 @@
         chatbotSuggestions.querySelectorAll('.chatbot__suggestion').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 var message = btn.getAttribute('data-message');
-                handleUserMessage(message);
+                // Sécurité : valider que le message vient bien d'un attribut attendu
+                if (message && typeof message === 'string' && message.length < 100) {
+                    handleUserMessage(message);
+                }
             });
         });
     }
@@ -353,12 +448,21 @@
 
 
     function applyContent(c) {
-        if (!c) return;
+        if (!c || typeof c !== 'object') return;
 
         // ----- WhatsApp -----
         if (c.whatsapp) {
-            if (c.whatsapp.number)          WHATSAPP_NUMBER  = String(c.whatsapp.number).replace(/[^0-9]/g, '');
-            if (c.whatsapp.default_message) WHATSAPP_MESSAGE = c.whatsapp.default_message;
+            // Sécurité : valider et sanitizer le numéro
+            if (c.whatsapp.number) {
+                var safeNumber = sanitizePhoneNumber(c.whatsapp.number);
+                if (safeNumber && safeNumber.length >= 8 && safeNumber.length <= 15) {
+                    WHATSAPP_NUMBER = safeNumber;
+                }
+            }
+            // Sécurité : limiter la taille du message
+            if (c.whatsapp.default_message && typeof c.whatsapp.default_message === 'string') {
+                WHATSAPP_MESSAGE = truncateInput(c.whatsapp.default_message, 500);
+            }
         }
 
         // ----- HERO -----
@@ -442,14 +546,14 @@
         setupReveal();
     }
 
-    function escapeHtml(s) {
-        return String(s)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-    }
-    function escapeAttr(s) {
-        return escapeHtml(s).replace(/"/g, '&quot;');
+    // Fonction setText pour le CMS (avec protection)
+    function setText(selector, value) {
+        if (!value) return;
+        var el = document.querySelector(selector);
+        if (el) {
+            // Sécurité : utiliser textContent au lieu de innerHTML
+            el.textContent = truncateInput(value, 500);
+        }
     }
 
     // Charge le contenu depuis le fichier JSON (modifié via Pages CMS)

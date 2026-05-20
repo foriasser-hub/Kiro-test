@@ -1,0 +1,9 @@
+# Datalio Security Policy
+# Contact: WhatsApp +261 38 69 845 31
+
+# If you find a security vulnerability, please contact us via WhatsApp.
+# We take security seriously and will respond within 24 hours.
+
+Contact: https://wa.me/261386984531
+Preferred-Languages: fr, en
+Canonical: https://foriasser-hub.github.io/Kiro-test/security.txt
