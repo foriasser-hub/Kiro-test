@@ -157,9 +157,9 @@
 
     // Liens de redirection
     var LINKS = {
-        solutions: 'https://foriasser-hub.github.io/Kiro-test/#solutions',
+        solutions: 'https://datalio.online/#solutions',
         whatsapp: 'https://wa.me/261386984531',
-        blog: 'https://foriasser-hub.github.io/Kiro-test/blog/'
+        blog: 'https://datalio.online/blog/'
     };
 
     // Normaliser le texte (minuscules, sans accents)
@@ -462,13 +462,27 @@
                     return '<li>' + escapeHtml(b) + '</li>';
                 }).join('');
                 var featuredClass = s.featured ? ' solution--featured' : '';
+                var title = s.title || '';
+                /* Event name dérivé du titre du service pour l'analytics */
+                var lc = title.toLowerCase();
+                var eventName = 'services_click';
+                if (lc.indexOf('site web premium') !== -1 || lc.indexOf('site web') !== -1) {
+                    eventName = 'premium_sites_click';
+                } else if (lc.indexOf('mini-logiciel') !== -1 || lc.indexOf('mini logiciel') !== -1 || lc.indexOf('outil de gestion') !== -1) {
+                    eventName = 'management_software_click';
+                }
                 return ''
                     + '<article class="solution reveal' + featuredClass + '">'
                     +   '<div class="solution__icon">' + iconHtml(s.icon) + '</div>'
-                    +   '<h3>' + escapeHtml(s.title || '') + '</h3>'
+                    +   '<h3>' + escapeHtml(title) + '</h3>'
                     +   '<p>' + escapeHtml(s.description || '') + '</p>'
                     +   '<ul class="solution__list">' + benefits + '</ul>'
-                    +   '<a class="btn btn--gold btn--block" href="#" data-whatsapp data-product="' + escapeAttr(s.title || '') + '">Commander</a>'
+                    +   '<a class="btn btn--gold btn--block" href="#" data-whatsapp'
+                    +     ' data-product="' + escapeAttr(title) + '"'
+                    +     ' data-track-event="' + escapeAttr(eventName) + '"'
+                    +     ' data-track-category="service_card"'
+                    +     ' data-track-label="' + escapeAttr(title) + '"'
+                    +   '>Demander un devis</a>'
                     + '</article>';
             }).join('');
         }
