@@ -6,4 +6,4 @@
 
 Contact: https://wa.me/261386984531
 Preferred-Languages: fr, en
-Canonical: https://foriasser-hub.github.io/Kiro-test/security.txt
+Canonical: https://datalio.online/security.txt

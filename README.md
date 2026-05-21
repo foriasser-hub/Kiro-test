@@ -7,13 +7,13 @@ Site vitrine professionnel pour Datalio : outils de gestion personnalisés, auto
 
 ## 🌐 Site en ligne
 
-https://foriasser-hub.github.io/Kiro-test/
+https://datalio.online/
 
 ## 🛠 Interface admin
 
 Gestion du contenu sans code via [Pages CMS](https://pagescms.org).
 
-1. Va sur **https://foriasser-hub.github.io/Kiro-test/admin/**
+1. Va sur **https://datalio.online/admin/**
 2. Clique sur "Ouvrir l'admin Datalio"
 3. Connecte-toi avec ton compte GitHub
 4. Modifie textes, services, témoignages, FAQ via formulaires
@@ -45,10 +45,10 @@ Le code Analytics est **prêt mais désactivé**. Choisis l'une des deux options
 ### Option A — Plausible *(recommandé : gratuit, sans cookies, RGPD)*
 
 1. Crée un compte sur https://plausible.io (essai 30 jours gratuit, ~9$/mois ensuite)
-2. Ajoute le site `foriasser-hub.github.io/Kiro-test`
+2. Ajoute le site `datalio.online`
 3. Dans `index.html`, trouve le bloc `ANALYTICS` (vers la ligne ~120) et décommente :
    ```html
-   <script defer data-domain="foriasser-hub.github.io" src="https://plausible.io/js/script.js"></script>
+   <script defer data-domain="datalio.online" src="https://plausible.io/js/script.js"></script>
    ```
 
 **Alternative gratuite** : [Umami Cloud](https://umami.is) — 100% gratuit jusqu'à 100k vues/mois.
@@ -76,9 +76,9 @@ Le code Analytics est **prêt mais désactivé**. Choisis l'une des deux options
 Pour suivre ton référencement Google :
 
 1. Va sur https://search.google.com/search-console
-2. Ajoute la propriété `https://foriasser-hub.github.io/Kiro-test/`
+2. Ajoute la propriété `https://datalio.online/`
 3. Vérifie via balise meta (à ajouter dans le `<head>`) ou fichier HTML
-4. Soumets ton sitemap : `https://foriasser-hub.github.io/Kiro-test/sitemap.xml`
+4. Soumets ton sitemap : `https://datalio.online/sitemap.xml`
 
 ## 🎨 Charte graphique
 
