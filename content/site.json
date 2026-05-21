@@ -1,15 +1,15 @@
 {
   "hero": {
     "badge": "Solutions digitales pour entreprises",
-    "title_part1": "Des solutions digitales",
-    "title_highlight": "simples",
-    "title_part2": "pour mieux gérer votre entreprise",
-    "subtitle": "Datalio aide les petites entreprises à automatiser leurs tâches, suivre leurs clients, organiser leurs ventes, créer leur site web et gagner du temps avec des outils simples, efficaces et personnalisés.",
-    "tagline": "Gérez mieux. Automatisez plus. Avancez vite.",
-    "cta_primary": "Discuter sur WhatsApp",
-    "cta_secondary": "Voir les solutions",
-    "point_1": "Outils sur-mesure",
-    "point_2": "Mise en place rapide",
+    "title_part1": "Gagnez 10h par semaine",
+    "title_highlight": "sans embaucher",
+    "title_part2": "grâce à des outils digitaux sur-mesure",
+    "subtitle": "Datalio crée vos outils de gestion, automatise vos tâches répétitives et met en place des chatbots qui répondent à vos clients 24/7. Résultat : vous récupérez votre temps pour développer votre business.",
+    "tagline": "Fini les soirées à répondre aux mêmes questions. Votre entreprise tourne, même quand vous dormez.",
+    "cta_primary": "Parler de mon projet",
+    "cta_secondary": "Découvrir les solutions",
+    "point_1": "Réponse sous 24h",
+    "point_2": "Livraison en 5-10 jours",
     "point_3": "Accompagnement inclus"
   },
   "whatsapp": {
@@ -62,17 +62,17 @@
     {
       "name": "Mialy R.",
       "role": "Vendeuse en ligne · Antananarivo",
-      "quote": "Avec Datalio je suis enfin organisée. Je vois mes commandes, mes paiements et mes livraisons dans un seul écran. Un vrai changement pour ma boutique en ligne."
+      "quote": "Avec Datalio je suis enfin organisée. Je vois mes commandes, mes paiements et mes livraisons dans un seul écran. J'ai récupéré mes soirées et je ne perds plus de commandes."
     },
     {
       "name": "Jean-Luc A.",
       "role": "Petite boutique · Abidjan",
-      "quote": "Le suivi de stock est devenu automatique. Je sais exactement ce qu'il me reste, ce qu'il faut commander, et je ne perds plus de ventes."
+      "quote": "Le suivi de stock est devenu automatique. Je sais exactement ce qu'il me reste, ce qu'il faut commander, et je ne perds plus de ventes. Un vrai game-changer."
     },
     {
       "name": "Fatou D.",
       "role": "Prestataire de service · Dakar",
-      "quote": "Le chatbot répond à mes clients à ma place pour les questions courantes. Je gagne du temps chaque jour et mes clients adorent la rapidité."
+      "quote": "Le chatbot répond à mes clients à ma place pour les questions courantes. Je gagne 2 heures par jour et mes clients adorent la rapidité de réponse."
     }
   ],
   "faq": [

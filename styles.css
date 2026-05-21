@@ -1615,3 +1615,1170 @@ p { margin: 0 0 1em; color: var(--gray-text); }
         height: 54px;
     }
 }
+
+
+
+/* =========================================
+   MICRO-ANIMATIONS PREMIUM
+   Animations subtiles pour UX premium
+   ========================================= */
+
+/* Animation stagger pour les éléments révélés */
+.reveal { 
+    --stagger: 0;
+    transition-delay: calc(var(--stagger) * 0.1s);
+}
+.grid .reveal:nth-child(1) { --stagger: 0; }
+.grid .reveal:nth-child(2) { --stagger: 1; }
+.grid .reveal:nth-child(3) { --stagger: 2; }
+.grid .reveal:nth-child(4) { --stagger: 3; }
+.grid .reveal:nth-child(5) { --stagger: 4; }
+.grid .reveal:nth-child(6) { --stagger: 5; }
+
+/* Animation d'entrée améliorée pour les cartes */
+.problem, .feature, .advantage, .solution, .step, .testimonial, .value {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 
+        opacity 0.6s var(--ease),
+        transform 0.6s var(--ease),
+        box-shadow 0.3s var(--ease),
+        border-color 0.3s;
+}
+.problem.is-visible, .feature.is-visible, .advantage.is-visible, 
+.solution.is-visible, .step.is-visible, .testimonial.is-visible, .value.is-visible,
+.reveal.is-visible .problem, .reveal.is-visible .feature, .reveal.is-visible .advantage,
+.problem.reveal.is-visible, .feature.reveal.is-visible, .advantage.reveal.is-visible,
+.solution.reveal.is-visible, .step.reveal.is-visible, .testimonial.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation survol icônes premium */
+.problem__icon, .feature__icon, .advantage__icon, .solution__icon, .value__icon {
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.problem:hover .problem__icon,
+.feature:hover .feature__icon,
+.advantage:hover .advantage__icon,
+.solution:hover .solution__icon,
+.value:hover .value__icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* Animation des icônes SVG au survol */
+.problem__icon .icon, .feature__icon .icon, .advantage__icon .icon,
+.solution__icon .icon, .value__icon .icon {
+    transition: stroke 0.3s, transform 0.3s var(--ease);
+}
+.problem:hover .problem__icon .icon,
+.feature:hover .feature__icon .icon,
+.advantage:hover .advantage__icon .icon {
+    stroke: var(--gold);
+    transform: scale(1.05);
+}
+.solution:hover .solution__icon .icon {
+    transform: scale(1.1);
+}
+
+/* Animation boutons CTA premium */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s var(--ease), height 0.6s var(--ease);
+}
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+.btn--gold::before {
+    background: rgba(5, 4, 95, 0.08);
+}
+
+/* Animation numéros d'étapes */
+.step__num {
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.step:hover .step__num {
+    transform: scale(1.15);
+    box-shadow: 0 12px 30px rgba(5, 4, 95, 0.35);
+}
+
+/* Animation ligne de progression entre étapes */
+.step__line {
+    position: relative;
+    overflow: hidden;
+}
+.step__line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: var(--gold);
+    transition: width 1.5s var(--ease);
+}
+.step__line.is-visible::after {
+    width: 100%;
+}
+
+/* Animation FAQ accordion fluide */
+.faq__item {
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s var(--ease);
+}
+.faq__item:hover {
+    transform: translateX(4px);
+}
+.faq__item[open] {
+    transform: none;
+}
+.faq__item summary::after {
+    transition: transform 0.3s var(--ease);
+}
+.faq__item[open] summary::after {
+    transform: rotate(180deg);
+}
+.faq__item p {
+    animation: faq-expand 0.3s var(--ease);
+}
+@keyframes faq-expand {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation Hero title - entrée caractère par caractère effet */
+.hero__title {
+    animation: hero-title-in 0.8s var(--ease) 0.2s both;
+}
+.hero__subtitle {
+    animation: hero-fade-up 0.7s var(--ease) 0.4s both;
+}
+.hero__tagline {
+    animation: hero-fade-up 0.7s var(--ease) 0.55s both;
+}
+.hero__cta {
+    animation: hero-fade-up 0.7s var(--ease) 0.7s both;
+}
+.hero__points {
+    animation: hero-fade-up 0.7s var(--ease) 0.85s both;
+}
+@keyframes hero-title-in {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+@keyframes hero-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation Dashboard Hero - entrée élégante */
+.hero__visual .dashboard {
+    animation: dashboard-in 1s var(--ease) 0.5s both;
+}
+@keyframes dashboard-in {
+    from {
+        opacity: 0;
+        transform: perspective(1400px) rotateY(-15deg) rotateX(5deg) translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1400px) rotateY(-5deg) rotateX(2deg) translateY(0);
+    }
+}
+
+/* Animation statistiques compteur */
+.stat__value {
+    display: inline-block;
+    transition: transform 0.3s var(--ease);
+}
+.stat:hover .stat__value {
+    transform: scale(1.1);
+}
+
+/* Animation KPIs dashboard */
+.kpi {
+    transition: transform 0.3s var(--ease), background 0.3s;
+}
+.kpi:hover {
+    transform: translateY(-3px);
+    background: var(--white);
+}
+
+/* Animation liens navbar */
+.nav__links a {
+    position: relative;
+}
+.nav__links a::after {
+    transform-origin: right;
+}
+.nav__links a:hover::after {
+    transform-origin: left;
+}
+
+/* Animation CTA card */
+.cta__card {
+    animation: cta-glow 4s ease-in-out infinite;
+}
+@keyframes cta-glow {
+    0%, 100% {
+        box-shadow: 0 30px 60px rgba(5, 4, 95, 0.25);
+    }
+    50% {
+        box-shadow: 0 35px 70px rgba(5, 4, 95, 0.35), 0 0 60px rgba(245, 184, 0, 0.15);
+    }
+}
+
+/* Animation section eyebrow */
+.eyebrow {
+    animation: eyebrow-in 0.5s var(--ease) both;
+}
+.reveal.is-visible .eyebrow,
+.eyebrow.is-visible {
+    animation-play-state: running;
+}
+
+/* Animation services strip - défilement infini subtil */
+.services-strip__inner {
+    animation: strip-glow 3s ease-in-out infinite;
+}
+@keyframes strip-glow {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
+}
+
+/* Animation avatar témoignages */
+.testimonial .avatar {
+    transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.testimonial:hover .avatar {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(5, 4, 95, 0.2);
+}
+
+/* Animation étoiles témoignages */
+.testimonial__stars {
+    display: inline-flex;
+    gap: 2px;
+}
+.testimonial:hover .testimonial__stars {
+    animation: stars-bounce 0.6s var(--ease);
+}
+@keyframes stars-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Animation scroll indicator subtil */
+@keyframes scroll-hint {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* Animation post cards blog */
+.post-card {
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.3s;
+}
+.post-card:hover {
+    transform: translateY(-8px);
+}
+.post-card__cover {
+    transition: transform 0.5s var(--ease);
+    overflow: hidden;
+}
+.post-card:hover .post-card__cover img {
+    transform: scale(1.05);
+}
+.post-card__cover img {
+    transition: transform 0.5s var(--ease);
+}
+
+/* Animation footer links */
+.footer__links a {
+    transition: color 0.2s, transform 0.2s var(--ease);
+    display: inline-block;
+}
+.footer__links a:hover {
+    transform: translateX(4px);
+}
+
+/* Amélioration animation floating cards hero */
+.floating--bot {
+    animation: float 4.5s ease-in-out infinite, float-in 0.8s var(--ease) 0.8s both;
+}
+.floating--auto {
+    animation: float 4.5s ease-in-out infinite 1s, float-in 0.8s var(--ease) 1s both;
+}
+@keyframes float-in {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Smooth scroll behavior amélioré */
+html {
+    scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Animation focus states pour accessibilité */
+.btn:focus-visible,
+.nav__links a:focus-visible,
+.faq__item summary:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* Animation loading skeleton pour images */
+.post-card__cover img {
+    background: linear-gradient(90deg, var(--light) 25%, var(--light-200) 50%, var(--light) 75%);
+    background-size: 200% 100%;
+}
+
+
+
+
+/* =========================================
+   HIÉRARCHIE VISUELLE & MOBILE OPTIMISÉ
+   Espacement, lisibilité et touch targets
+   ========================================= */
+
+/* ===== Amélioration typographie mobile ===== */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+    
+    h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.15;
+    }
+    
+    h2 {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+        line-height: 1.2;
+    }
+    
+    h3 {
+        font-size: 1.05rem;
+    }
+    
+    p {
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== Hero mobile optimisé ===== */
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 0 4rem;
+    }
+    
+    .hero__title {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .hero__subtitle {
+        text-align: center;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero__tagline {
+        text-align: center;
+        font-size: 0.88rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero__cta {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+    
+    .hero__cta .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .hero__points {
+        justify-content: center;
+        gap: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .hero__points li {
+        flex: 0 0 auto;
+    }
+    
+    /* Dashboard caché sur très petit écran */
+    .hero__visual {
+        display: none;
+    }
+    
+    .services-strip {
+        margin-top: 2rem;
+    }
+    
+    .services-strip__inner {
+        font-size: 0.75rem;
+        gap: 0.6rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 979px) {
+    .hero__visual .dashboard {
+        transform: none;
+        max-width: 100%;
+    }
+    
+    .floating--bot,
+    .floating--auto {
+        display: none;
+    }
+}
+
+/* ===== Sections spacing mobile ===== */
+@media (max-width: 768px) {
+    .section {
+        padding: 3.5rem 0;
+    }
+    
+    .section__head {
+        margin-bottom: 2rem;
+    }
+    
+    .section__title {
+        margin-bottom: 0.75rem;
+    }
+    
+    .section__lead {
+        font-size: 0.95rem;
+    }
+    
+    .eyebrow {
+        font-size: 0.68rem;
+        padding: 0.3rem 0.75rem;
+    }
+}
+
+/* ===== Cartes mobile - touch-friendly ===== */
+@media (max-width: 768px) {
+    .problem, .feature, .advantage {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .problem__icon, .feature__icon, .advantage__icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 0.85rem;
+    }
+    
+    .problem h3, .feature h3, .advantage h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .problem p, .feature p, .advantage p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+/* ===== Solutions mobile ===== */
+@media (max-width: 768px) {
+    .section--dark {
+        padding: 3.5rem 0;
+    }
+    
+    .solutions .solution {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .solution__icon {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .solution h3 {
+        font-size: 1.05rem;
+    }
+    
+    .solution p {
+        font-size: 0.88rem;
+    }
+    
+    .solution__list {
+        margin-top: 0.5rem;
+    }
+    
+    .solution__list li {
+        font-size: 0.85rem;
+        padding-left: 1rem;
+    }
+    
+    .solution .btn {
+        padding: 0.9rem 1.25rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== Steps mobile ===== */
+@media (max-width: 879px) {
+    .steps {
+        gap: 1.25rem;
+    }
+    
+    .step {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .step__num {
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
+    
+    .step h3 {
+        font-size: 1rem;
+    }
+    
+    .step p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== Témoignages mobile ===== */
+@media (max-width: 768px) {
+    .testimonial {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .testimonial blockquote {
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+    
+    .testimonial figcaption {
+        gap: 0.65rem;
+    }
+    
+    .avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 0.95rem;
+    }
+    
+    .testimonial figcaption strong {
+        font-size: 0.95rem;
+    }
+    
+    .testimonial figcaption span {
+        font-size: 0.78rem;
+    }
+}
+
+/* ===== FAQ mobile ===== */
+@media (max-width: 768px) {
+    .faq__item summary {
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .faq__item p {
+        padding: 0 1.25rem 1.1rem;
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+}
+
+/* ===== About mobile ===== */
+@media (max-width: 979px) {
+    .about__inner {
+        gap: 2rem;
+    }
+    
+    .about__lead {
+        font-size: 1rem;
+    }
+    
+    .about__text p {
+        font-size: 0.95rem;
+    }
+    
+    .values {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .value {
+        padding: 1rem;
+    }
+    
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .about__signature {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+}
+
+/* ===== CTA mobile ===== */
+@media (max-width: 768px) {
+    .cta {
+        padding: 3rem 0;
+    }
+    
+    .cta__card {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .cta__title {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+    }
+    
+    .cta__lead {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta__card .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .cta__note {
+        font-size: 0.8rem;
+    }
+}
+
+/* ===== Footer mobile ===== */
+@media (max-width: 719px) {
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+    
+    .footer__inner {
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer h4 {
+        font-size: 0.85rem;
+    }
+    
+    .footer__tag {
+        font-size: 0.88rem;
+    }
+    
+    .footer__links a {
+        font-size: 0.9rem;
+        padding: 0.25rem 0;
+    }
+    
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+/* ===== Navbar mobile améliorée ===== */
+@media (max-width: 879px) {
+    .nav__inner {
+        padding: 0.75rem 1rem;
+    }
+    
+    .brand__logo {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .brand__name {
+        font-size: 1.05rem;
+    }
+    
+    .nav__links--open {
+        padding: 1.25rem 1rem;
+        gap: 0.25rem;
+    }
+    
+    .nav__links--open a {
+        padding: 0.85rem 1rem;
+        font-size: 1rem;
+        border-radius: var(--radius-sm);
+        transition: background 0.2s;
+    }
+    
+    .nav__links--open a:hover {
+        background: var(--light);
+    }
+    
+    /* Touch target minimum 44px */
+    .nav__burger {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* ===== Touch targets minimum 44x44px ===== */
+@media (max-width: 768px) {
+    .btn {
+        min-height: 48px;
+    }
+    
+    .btn--sm {
+        min-height: 44px;
+    }
+    
+    .faq__item summary {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer__links a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* ===== Grilles responsive améliorées ===== */
+@media (max-width: 719px) {
+    .grid--3,
+    .grid--4,
+    .grid--5,
+    .grid--solutions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 719px) {
+    /* 2 colonnes sur tablette portrait pour certaines grilles */
+    .grid--5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== Blog mobile ===== */
+@media (max-width: 768px) {
+    .page-hero {
+        padding: 3.5rem 0 3rem;
+    }
+    
+    .page-hero h1 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+    
+    .page-hero p {
+        font-size: 0.95rem;
+    }
+    
+    .crumbs {
+        font-size: 0.8rem;
+    }
+    
+    .post-card__body {
+        padding: 1.25rem;
+    }
+    
+    .post-card h2 {
+        font-size: 1.05rem;
+    }
+    
+    .post-card p {
+        font-size: 0.88rem;
+    }
+    
+    .post-card__cover {
+        height: 150px;
+    }
+}
+
+/* ===== Article mobile ===== */
+@media (max-width: 768px) {
+    .article-hero {
+        padding: 3rem 0 2.5rem;
+    }
+    
+    .article-hero h1 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+    
+    .article-prose {
+        padding: 2.5rem 1rem 3rem;
+        font-size: 1rem;
+    }
+    
+    .article-prose h2 {
+        font-size: 1.35rem;
+        margin-top: 2rem;
+    }
+    
+    .article-prose h3 {
+        font-size: 1.1rem;
+    }
+    
+    .article-cta {
+        padding: 1.5rem;
+    }
+    
+    .article-cta h3 {
+        font-size: 1.15rem;
+    }
+    
+    .article-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .article-footer {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem 3rem;
+    }
+    
+    .article-footer a {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== Safe area pour notch iPhone ===== */
+@supports (padding: max(0px)) {
+    .nav {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+    
+    .footer {
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+    
+    .fab {
+        right: max(1.25rem, calc(env(safe-area-inset-right) + 0.5rem));
+        bottom: max(1.25rem, calc(env(safe-area-inset-bottom) + 0.5rem));
+    }
+    
+    .chatbot {
+        left: max(1.25rem, calc(env(safe-area-inset-left) + 0.5rem));
+        bottom: max(1.25rem, calc(env(safe-area-inset-bottom) + 0.5rem));
+    }
+}
+
+/* ===== Amélioration contraste et lisibilité ===== */
+.section__lead {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Amélioration espacement sections */
+.section + .section--light,
+.section--light + .section {
+    margin-top: 0;
+}
+
+/* Séparateur visuel subtil entre sections */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(80%, 600px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--light-200), transparent);
+    opacity: 0;
+}
+
+.section--light::before {
+    opacity: 0;
+}
+
+
+
+
+/* =========================================
+   POSITIONNEMENT WHATSAPP & CHATBOT
+   Sans superposition - mobile optimisé
+   ========================================= */
+
+/* ===== WhatsApp FAB - bas droite ===== */
+.fab {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    width: 56px;
+    height: 56px;
+    z-index: 90;
+}
+
+/* ===== Chatbot - bas gauche ===== */
+.chatbot {
+    position: fixed;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 100;
+}
+
+/* ===== Mobile : ajustement positions ===== */
+@media (max-width: 480px) {
+    /* WhatsApp légèrement plus petit sur mobile */
+    .fab {
+        width: 52px;
+        height: 52px;
+        right: 1rem;
+        bottom: 1rem;
+    }
+    
+    /* Chatbot trigger légèrement plus petit */
+    .chatbot {
+        left: 1rem;
+        bottom: 1rem;
+    }
+    
+    .chatbot__trigger {
+        width: 52px;
+        height: 52px;
+    }
+    
+    /* Fenêtre chatbot plein écran sur mobile */
+    .chatbot__window {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+        max-width: 100%;
+        height: 85vh;
+        max-height: 85vh;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    
+    /* Quand chatbot ouvert, cacher le badge WhatsApp pour éviter confusion */
+    .chatbot.is-open ~ .fab {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+
+/* ===== Tablette ===== */
+@media (min-width: 481px) and (max-width: 768px) {
+    .fab {
+        right: 1.25rem;
+        bottom: 1.25rem;
+    }
+    
+    .chatbot {
+        left: 1.25rem;
+        bottom: 1.25rem;
+    }
+    
+    .chatbot__window {
+        width: 360px;
+        max-width: calc(100vw - 3rem);
+        left: 0;
+    }
+}
+
+/* ===== Desktop ===== */
+@media (min-width: 769px) {
+    .fab {
+        right: 1.5rem;
+        bottom: 1.5rem;
+        width: 60px;
+        height: 60px;
+    }
+    
+    .chatbot {
+        left: 1.5rem;
+        bottom: 1.5rem;
+    }
+    
+    .chatbot__trigger {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* ===== Espacement entre les deux boutons flottants ===== */
+/* S'assurer qu'ils ne se chevauchent jamais même sur petit écran */
+@media (max-width: 380px) {
+    .fab {
+        right: 0.75rem;
+        bottom: 0.75rem;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .chatbot {
+        left: 0.75rem;
+        bottom: 0.75rem;
+    }
+    
+    .chatbot__trigger {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .chatbot__badge {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+    }
+}
+
+/* ===== Animation coordonnée ===== */
+/* WhatsApp bob animation - décalée du chatbot */
+.fab {
+    animation: fab-bob 3s ease-in-out infinite;
+}
+
+@keyframes fab-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Chatbot pulse - timing différent */
+.chatbot__trigger::before {
+    animation: chatbot-ring 2.8s ease-out infinite;
+}
+
+@keyframes chatbot-ring {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* ===== États interactifs distincts ===== */
+.fab:hover {
+    transform: scale(1.1) translateY(-3px);
+    animation: none;
+}
+
+.chatbot__trigger:hover {
+    transform: scale(1.1);
+}
+
+.chatbot.is-open .chatbot__trigger {
+    animation: none;
+}
+
+/* ===== Z-index hierarchy claire ===== */
+/* Nav: 50, WhatsApp: 90, Chatbot: 100 (chatbot au-dessus car interactif) */
+.nav { z-index: 50; }
+.fab { z-index: 90; }
+.chatbot { z-index: 100; }
+
+/* ===== Accessibilité - focus visible ===== */
+.fab:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 3px;
+}
+
+.chatbot__trigger:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* ===== Transition quand chatbot s'ouvre ===== */
+.chatbot__window {
+    transition: 
+        opacity 0.3s var(--ease),
+        transform 0.3s var(--ease),
+        visibility 0.3s;
+}
+
+/* ===== Labels accessibles visibles au focus ===== */
+.fab::after,
+.chatbot__trigger::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none;
+    margin-bottom: 8px;
+}
+
+.fab:hover::after,
+.fab:focus-visible::after,
+.chatbot__trigger:hover::after,
+.chatbot__trigger:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Masquer tooltip quand chatbot ouvert */
+.chatbot.is-open .chatbot__trigger::after {
+    display: none;
+}
+
