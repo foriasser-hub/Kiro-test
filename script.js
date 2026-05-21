@@ -132,7 +132,19 @@
     setupReveal();
 
     /* =========================================
-       CHATBOT DATALIO - Basé sur Services & FAQ
+       CHATBOT DATALIO - Agent configuré selon brief
+       
+       COMPORTEMENT :
+       - Répond en français, court et direct (2-3 phrases max)
+       - Ne jamais inventer de prix ou de délais
+       - Si ne sait pas → redirige vers WhatsApp
+       
+       SERVICES :
+       1. Outils de gestion (tableaux de bord, stock, ventes)
+       2. Automatisation (rappels, rapports, alertes)
+       3. Chatbots (WhatsApp, web, Facebook)
+       4. Sites web (vitrine, landing page)
+       5. Suivi client (CRM, relances, pipeline)
        ========================================= */
     var chatbot = document.getElementById('chatbot');
     var chatbotTrigger = document.getElementById('chatbot-trigger');
@@ -143,11 +155,11 @@
     var chatbotInput = document.getElementById('chatbot-input');
     var chatbotSuggestions = document.getElementById('chatbot-suggestions');
 
-    // Données CMS chargées dynamiquement
-    var cmsData = {
-        services: [],
-        faq: [],
-        loaded: false
+    // Liens de redirection
+    var LINKS = {
+        solutions: 'https://foriasser-hub.github.io/Kiro-test/#solutions',
+        whatsapp: 'https://wa.me/261386984531',
+        blog: 'https://foriasser-hub.github.io/Kiro-test/blog/'
     };
 
     // Normaliser le texte (minuscules, sans accents)
@@ -208,182 +220,114 @@
     }
 
     // ============================================
-    // LOGIQUE DE RÉPONSE DU CHATBOT
-    // ============================================
-
-    // Trouver un service par mots-clés spécifiques
-    function findService(keywords) {
-        if (!cmsData.services || cmsData.services.length === 0) return null;
-        
-        for (var i = 0; i < cmsData.services.length; i++) {
-            var service = cmsData.services[i];
-            var searchText = (service.title || '') + ' ' + (service.description || '');
-            if (containsKeyword(searchText, keywords)) {
-                return service;
-            }
-        }
-        return null;
-    }
-
-    // Trouver une FAQ par mots-clés spécifiques
-    function findFAQ(keywords) {
-        if (!cmsData.faq || cmsData.faq.length === 0) return null;
-        
-        for (var i = 0; i < cmsData.faq.length; i++) {
-            var faq = cmsData.faq[i];
-            var searchText = (faq.question || '') + ' ' + (faq.answer || '');
-            if (containsKeyword(searchText, keywords)) {
-                return faq;
-            }
-        }
-        return null;
-    }
-
-    // Formater la réponse d'un service
-    function formatServiceResponse(service) {
-        var response = '**' + service.title + '**\n\n';
-        response += service.description + '\n\n';
-        
-        if (service.benefits && service.benefits.length > 0) {
-            service.benefits.forEach(function(b) {
-                response += '✓ ' + b + '\n';
-            });
-            response += '\n';
-        }
-        
-        response += '→ <a href="#solutions">Voir les détails</a>\n';
-        response += '→ <a href="#" data-whatsapp data-product="' + service.title + '">Commander ce service</a>';
-        
-        return response;
-    }
-
-    // Formater la réponse d'une FAQ
-    function formatFAQResponse(faq) {
-        return faq.answer + '\n\n→ <a href="#faq">Voir toutes les FAQ</a>';
-    }
-
-    // Liste des services
-    function getServicesList() {
-        if (!cmsData.services || cmsData.services.length === 0) {
-            return "Nos services sont en cours de chargement...\n\n→ <a href=\"#solutions\">Voir la section services</a>";
-        }
-
-        var iconMap = {
-            'bar-chart': '📊',
-            'zap': '⚡',
-            'bot': '🤖',
-            'globe': '🌐',
-            'users': '👥'
-        };
-
-        var response = 'Voici nos services :\n\n';
-        cmsData.services.forEach(function(s) {
-            var emoji = iconMap[s.icon] || '✨';
-            response += emoji + ' **' + s.title + '**\n';
-        });
-        response += '\n→ <a href="#solutions">Voir tous les détails</a>\n';
-        response += '→ <a href="#" data-whatsapp>Demander un devis</a>';
-        
-        return response;
-    }
-
-    // ============================================
-    // FONCTION PRINCIPALE DE RÉPONSE
+    // RÉPONSES DE L'AGENT DATALIO
+    // Court, direct, professionnel (2-3 phrases)
     // ============================================
     function getBotResponse(userMessage) {
         var msg = normalizeText(userMessage);
-        var service, faq;
         
         // --- SALUTATIONS ---
         if (containsKeyword(msg, ['bonjour', 'salut', 'hello', 'hi', 'hey', 'coucou', 'bonsoir'])) {
-            return "Bonjour ! 👋 Comment puis-je vous aider ?\n\nVous pouvez me poser des questions sur nos services ou cliquer sur les suggestions ci-dessous.";
+            return "Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?";
         }
         
         // --- REMERCIEMENTS ---
         if (containsKeyword(msg, ['merci', 'thanks', 'super', 'genial', 'parfait', 'excellent'])) {
-            return "Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions.\n\n→ <a href=\"#\" data-whatsapp>Nous contacter sur WhatsApp</a>";
+            return "Avec plaisir ! N'hésitez pas si vous avez d'autres questions. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">WhatsApp</a>";
         }
         
         // --- PARLER À UN HUMAIN ---
-        if (containsKeyword(msg, ['humain', 'personne', 'quelqu', 'parler', 'agent', 'conseiller', 'equipe'])) {
-            return "Notre équipe est disponible pour vous aider !\n\n→ <a href=\"#\" data-whatsapp>Parler à un conseiller sur WhatsApp</a>";
+        if (containsKeyword(msg, ['humain', 'personne', 'quelqu', 'parler', 'agent', 'conseiller', 'equipe', 'contact'])) {
+            return "Notre équipe est disponible sur WhatsApp : <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Discuter maintenant</a>";
+        }
+        
+        // --- PRIX / DEVIS / COMBIEN ---
+        if (containsKeyword(msg, ['prix', 'tarif', 'cout', 'combien', 'cher', 'budget', 'devis', 'gratuit'])) {
+            return "Les tarifs dépendent de votre besoin. Écrivez-nous directement : <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">WhatsApp</a>";
+        }
+        
+        // --- DÉLAI ---
+        if (containsKeyword(msg, ['delai', 'combien temps', 'duree', 'rapide', 'urgent', 'vite'])) {
+            return "Le délai dépend du projet. Discutons de votre besoin : <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">WhatsApp</a>";
         }
         
         // --- LISTE DES SERVICES ---
-        if (containsKeyword(msg, ['service', 'solution', 'propose', 'offre', 'faites', 'quoi faire', 'liste'])) {
-            return getServicesList();
-        }
-        
-        // --- PRIX / DEVIS ---
-        if (containsKeyword(msg, ['prix', 'tarif', 'cout', 'combien', 'cher', 'budget', 'devis'])) {
-            faq = findFAQ(['prix', 'tarif', 'devis']);
-            if (faq) return formatFAQResponse(faq);
-            return "Les prix sont définis selon votre besoin spécifique.\n\nChaque solution est personnalisée pour votre activité.\n\n→ <a href=\"#\" data-whatsapp>Demander un devis gratuit</a>";
+        if (containsKeyword(msg, ['service', 'solution', 'propose', 'offre', 'faites', 'quoi faire', 'liste', 'activite'])) {
+            return "Nous proposons : outils de gestion, automatisation, chatbots, sites web et suivi client. <a href=\"" + LINKS.solutions + "\">Voir les services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- COMMANDER ---
-        if (containsKeyword(msg, ['commander', 'commande', 'acheter', 'souscrire', 'demarrer', 'commencer'])) {
-            faq = findFAQ(['commander', 'commande']);
-            if (faq) return formatFAQResponse(faq);
-            return "Pour commander :\n\n1️⃣ On échange sur votre besoin\n2️⃣ On prépare votre solution\n3️⃣ Vous l'utilisez !\n\n→ <a href=\"#\" data-whatsapp>Commander sur WhatsApp</a>";
+        if (containsKeyword(msg, ['commander', 'commande', 'acheter', 'souscrire', 'demarrer', 'commencer', 'interesse'])) {
+            return "Super ! Écrivez-nous pour en discuter : <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">WhatsApp</a>";
         }
         
         // --- CHATBOT / BOT ---
-        if (containsKeyword(msg, ['chatbot', 'bot', 'assistant', 'whatsapp', 'messenger', '24h', '24/7'])) {
-            service = findService(['chatbot', 'bot', 'assistant']);
-            if (service) return formatServiceResponse(service);
+        if (containsKeyword(msg, ['chatbot', 'bot', 'assistant', 'messenger', '24h', '24/7'])) {
+            return "Nous créons des chatbots sur mesure pour WhatsApp, votre site ou Facebook. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+        }
+        
+        // --- WHATSAPP (service) ---
+        if (containsKeyword(msg, ['whatsapp', 'messagerie', 'repondre client', 'message auto'])) {
+            return "Nous créons des chatbots WhatsApp qui répondent automatiquement à vos clients 24/7. <a href=\"" + LINKS.solutions + "\">En savoir plus</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">commander</a>";
         }
         
         // --- AUTOMATISATION ---
-        if (containsKeyword(msg, ['automat', 'tache', 'repetit', 'rappel', 'rapport', 'calcul', 'alerte'])) {
-            service = findService(['automat', 'tache']);
-            if (service) return formatServiceResponse(service);
+        if (containsKeyword(msg, ['automat', 'tache', 'repetit', 'rappel', 'rapport', 'calcul', 'alerte', 'gain temps'])) {
+            return "Nous automatisons vos tâches répétitives : rappels, rapports, alertes. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- SITE WEB ---
-        if (containsKeyword(msg, ['site', 'web', 'internet', 'vitrine', 'landing', 'page', 'seo', 'google'])) {
-            service = findService(['site', 'web', 'vitrine']);
-            if (service) return formatServiceResponse(service);
+        if (containsKeyword(msg, ['site', 'web', 'internet', 'vitrine', 'landing', 'page', 'seo', 'google', 'en ligne'])) {
+            return "Nous créons des sites vitrines et landing pages professionnels. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- GESTION / TABLEAU DE BORD ---
-        if (containsKeyword(msg, ['gestion', 'tableau', 'bord', 'stock', 'vente', 'tresorerie', 'livraison'])) {
-            service = findService(['gestion', 'tableau', 'stock']);
-            if (service) return formatServiceResponse(service);
+        if (containsKeyword(msg, ['gestion', 'tableau', 'bord', 'stock', 'vente', 'tresorerie', 'livraison', 'inventaire', 'caisse'])) {
+            return "Nous créons des outils de gestion sur mesure : stock, ventes, trésorerie. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- SUIVI CLIENT / CRM ---
-        if (containsKeyword(msg, ['suivi', 'client', 'crm', 'relance', 'historique', 'pipeline', 'commercial'])) {
-            service = findService(['suivi', 'client', 'crm']);
-            if (service) return formatServiceResponse(service);
+        if (containsKeyword(msg, ['suivi', 'client', 'crm', 'relance', 'historique', 'pipeline', 'commercial', 'prospect'])) {
+            return "Nous mettons en place un suivi client intelligent avec relances automatiques. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- EXCEL / FICHIER ---
-        if (containsKeyword(msg, ['excel', 'sheet', 'fichier', 'format'])) {
-            faq = findFAQ(['excel', 'fichier']);
-            if (faq) return formatFAQResponse(faq);
+        if (containsKeyword(msg, ['excel', 'sheet', 'fichier', 'format', 'google'])) {
+            return "Nous proposons des solutions complètes : Excel, Google Sheets, applications et plus. <a href=\"" + LINKS.solutions + "\">Voir nos services</a>";
         }
         
         // --- INFORMATIQUE / DÉBUTANT ---
-        if (containsKeyword(msg, ['informatique', 'technique', 'debutant', 'facile', 'difficile', 'complique', 'fort'])) {
-            faq = findFAQ(['informatique', 'debutant', 'fort']);
-            if (faq) return formatFAQResponse(faq);
+        if (containsKeyword(msg, ['informatique', 'technique', 'debutant', 'facile', 'difficile', 'complique', 'fort', 'savoir'])) {
+            return "Pas besoin d'être expert ! Nos outils sont simples et nous vous accompagnons. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">En savoir plus</a>";
         }
         
         // --- ASSISTANCE / AIDE ---
-        if (containsKeyword(msg, ['assistance', 'aide', 'support', 'accompagnement'])) {
-            faq = findFAQ(['assistance', 'aide']);
-            if (faq) return formatFAQResponse(faq);
+        if (containsKeyword(msg, ['assistance', 'aide', 'support', 'accompagnement', 'formation', 'apprendre'])) {
+            return "Une assistance est incluse avec chaque solution. Nous vous accompagnons ! <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Nous contacter</a>";
         }
         
         // --- PERSONNALISER ---
-        if (containsKeyword(msg, ['personnalis', 'adapte', 'sur mesure', 'specifique', 'activite'])) {
-            faq = findFAQ(['personnalis', 'adapte']);
-            if (faq) return formatFAQResponse(faq);
+        if (containsKeyword(msg, ['personnalis', 'adapte', 'sur mesure', 'specifique', 'besoin', 'secteur'])) {
+            return "Oui, chaque solution est adaptée à votre activité et vos besoins. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Discutons de votre projet</a>";
         }
         
-        // --- RÉPONSE PAR DÉFAUT ---
-        return "Je n'ai pas bien compris votre question. 🤔\n\nVoici ce que je peux faire :\n• Vous présenter nos services\n• Répondre à vos questions\n• Vous mettre en contact avec notre équipe\n\n→ <a href=\"#\" data-whatsapp>Poser votre question sur WhatsApp</a>";
+        // --- BLOG ---
+        if (containsKeyword(msg, ['blog', 'article', 'conseil', 'astuce', 'lire'])) {
+            return "Consultez nos articles sur la digitalisation : <a href=\"" + LINKS.blog + "\" target=\"_blank\">Voir le blog</a>";
+        }
+        
+        // --- LOCALISATION / MADAGASCAR ---
+        if (containsKeyword(msg, ['ou', 'localisation', 'pays', 'madagascar', 'antananarivo', 'afrique', 'distance'])) {
+            return "Nous sommes basés à Antananarivo, Madagascar, et travaillons avec toute l'Afrique francophone. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Nous contacter</a>";
+        }
+        
+        // --- QUI ÊTES-VOUS / DATALIO ---
+        if (containsKeyword(msg, ['qui', 'datalio', 'entreprise', 'agence', 'equipe', 'propos'])) {
+            return "Datalio aide les petites entreprises d'Afrique francophone à digitaliser leur activité. <a href=\"" + LINKS.solutions + "\">Voir nos services</a>";
+        }
+        
+        // --- RÉPONSE PAR DÉFAUT (hors sujet) ---
+        return "Je suis l'assistant Datalio, je réponds aux questions sur nos services. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Contactez-nous sur WhatsApp</a>";
     }
 
     // Gérer l'envoi de message
@@ -419,7 +363,7 @@
             
             if (isOpen && chatbotMessages.children.length === 0) {
                 setTimeout(function() {
-                    addMessage("Bonjour ! 👋 Comment puis-je vous aider ?\n\nVous pouvez me poser des questions sur nos services.", true);
+                    addMessage("Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?", true);
                 }, 300);
             }
             
@@ -481,15 +425,6 @@
 
     function applyContent(c) {
         if (!c || typeof c !== 'object') return;
-
-        // Charger les données dans le chatbot
-        if (Array.isArray(c.services)) {
-            cmsData.services = c.services;
-        }
-        if (Array.isArray(c.faq)) {
-            cmsData.faq = c.faq;
-        }
-        cmsData.loaded = true;
 
         // WhatsApp
         if (c.whatsapp) {
