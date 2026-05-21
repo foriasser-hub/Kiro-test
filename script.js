@@ -473,26 +473,6 @@
             }).join('');
         }
 
-        // TEMOIGNAGES
-        var testimonialsContainer = document.querySelector('.testimonials');
-        if (testimonialsContainer && Array.isArray(c.testimonials) && c.testimonials.length > 0) {
-            testimonialsContainer.innerHTML = c.testimonials.map(function (t) {
-                var initial = (t.name || '?').charAt(0).toUpperCase();
-                return ''
-                    + '<figure class="testimonial reveal">'
-                    +   '<div class="testimonial__stars" aria-label="5 étoiles sur 5">★★★★★</div>'
-                    +   '<blockquote>' + escapeHtml(t.quote || '') + '</blockquote>'
-                    +   '<figcaption>'
-                    +     '<div class="avatar">' + escapeHtml(initial) + '</div>'
-                    +     '<div>'
-                    +       '<strong>' + escapeHtml(t.name || '') + '</strong>'
-                    +       '<span>' + escapeHtml(t.role || '') + '</span>'
-                    +     '</div>'
-                    +   '</figcaption>'
-                    + '</figure>';
-            }).join('');
-        }
-
         // FAQ
         var faqContainer = document.querySelector('.faq');
         if (faqContainer && Array.isArray(c.faq) && c.faq.length > 0) {
