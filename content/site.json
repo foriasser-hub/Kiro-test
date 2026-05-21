@@ -58,23 +58,7 @@
       "featured": false
     }
   ],
-  "testimonials": [
-    {
-      "name": "Mialy R.",
-      "role": "Vendeuse en ligne · Antananarivo",
-      "quote": "Avec Datalio je suis enfin organisée. Je vois mes commandes, mes paiements et mes livraisons dans un seul écran. J'ai récupéré mes soirées et je ne perds plus de commandes."
-    },
-    {
-      "name": "Jean-Luc A.",
-      "role": "Petite boutique · Abidjan",
-      "quote": "Le suivi de stock est devenu automatique. Je sais exactement ce qu'il me reste, ce qu'il faut commander, et je ne perds plus de ventes. Un vrai game-changer."
-    },
-    {
-      "name": "Fatou D.",
-      "role": "Prestataire de service · Dakar",
-      "quote": "Le chatbot répond à mes clients à ma place pour les questions courantes. Je gagne 2 heures par jour et mes clients adorent la rapidité de réponse."
-    }
-  ],
+  "testimonials": [],
   "faq": [
     {
       "question": "Est-ce que Datalio crée uniquement des fichiers Excel ?",

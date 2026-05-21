@@ -114,22 +114,6 @@ content:
             type: string
             required: false
 
-      # ---------------- TEMOIGNAGES ----------------
-      - name: testimonials
-        label: "Témoignages clients"
-        type: object
-        list: true
-        fields:
-          - name: name
-            label: "Nom"
-            type: string
-          - name: role
-            label: "Rôle / ville"
-            type: string
-          - name: quote
-            label: "Témoignage"
-            type: text
-
       # ---------------- FAQ ----------------
       - name: faq
         label: "Questions fréquentes (FAQ)"
