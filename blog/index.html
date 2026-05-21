@@ -208,6 +208,54 @@
         <svg class="icon icon--lg" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
     </a>
 
+    <!-- ========= CHATBOT DATALIO ========= -->
+    <div id="chatbot" class="chatbot">
+        <button id="chatbot-trigger" class="chatbot__trigger" aria-label="Ouvrir le chat Datalio">
+            <svg class="icon icon--lg chatbot__icon-open" aria-hidden="true"><use href="#icon-bot"/></svg>
+            <svg class="icon icon--lg chatbot__icon-close" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="chatbot__badge">1</span>
+        </button>
+        <div id="chatbot-window" class="chatbot__window" aria-hidden="true" role="dialog" aria-label="Chat avec Datalio">
+            <header class="chatbot__header">
+                <div class="chatbot__header-info">
+                    <div class="chatbot__avatar">
+                        <img src="../assets/logo.png" alt="Datalio" />
+                    </div>
+                    <div>
+                        <strong>Datalio</strong>
+                        <div class="chatbot__status">
+                            <span class="chatbot__status-dot"></span>
+                            En ligne
+                        </div>
+                    </div>
+                </div>
+                <button id="chatbot-close" class="chatbot__close" aria-label="Fermer le chat">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </header>
+            <div id="chatbot-messages" class="chatbot__messages"></div>
+            <div id="chatbot-suggestions" class="chatbot__suggestions">
+                <button class="chatbot__suggestion" data-message="Quels sont vos services ?">Services</button>
+                <button class="chatbot__suggestion" data-message="Comment commander ?">Commander</button>
+                <button class="chatbot__suggestion" data-message="Parlez-moi des chatbots">Chatbots</button>
+                <button class="chatbot__suggestion" data-message="Je veux un site web">Site web</button>
+            </div>
+            <form id="chatbot-form" class="chatbot__form" autocomplete="off">
+                <input id="chatbot-input" class="chatbot__input" type="text" placeholder="Écrivez votre message..." aria-label="Message" />
+                <button type="submit" class="chatbot__send" aria-label="Envoyer">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Année + menu mobile + reveal au scroll (version légère, sans dépendre de site.json)
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -229,6 +277,111 @@
         } else {
             document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
         }
+
+        // Chatbot simplifié pour pages blog
+        (function() {
+            var chatbot = document.getElementById('chatbot');
+            var chatbotTrigger = document.getElementById('chatbot-trigger');
+            var chatbotClose = document.getElementById('chatbot-close');
+            var chatbotWindow = document.getElementById('chatbot-window');
+            var chatbotMessages = document.getElementById('chatbot-messages');
+            var chatbotForm = document.getElementById('chatbot-form');
+            var chatbotInput = document.getElementById('chatbot-input');
+            var chatbotSuggestions = document.getElementById('chatbot-suggestions');
+
+            var LINKS = {
+                solutions: 'https://foriasser-hub.github.io/Kiro-test/#solutions',
+                whatsapp: 'https://wa.me/261386984531',
+                blog: 'https://foriasser-hub.github.io/Kiro-test/blog/'
+            };
+
+            function normalizeText(text) {
+                if (!text) return '';
+                return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            }
+
+            function containsKeyword(text, keywords) {
+                var normalized = normalizeText(text);
+                for (var i = 0; i < keywords.length; i++) {
+                    if (normalized.indexOf(keywords[i]) !== -1) return true;
+                }
+                return false;
+            }
+
+            function addMessage(text, isBot) {
+                var messageDiv = document.createElement('div');
+                messageDiv.className = 'chatbot__message chatbot__message--' + (isBot ? 'bot' : 'user');
+                if (isBot) {
+                    messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+                } else {
+                    messageDiv.textContent = text;
+                }
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            function getBotResponse(msg) {
+                var m = normalizeText(msg);
+                if (containsKeyword(m, ['bonjour', 'salut', 'hello', 'hi'])) {
+                    return "Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?";
+                }
+                if (containsKeyword(m, ['service', 'solution', 'propose', 'offre'])) {
+                    return "Nous proposons : outils de gestion, automatisation, chatbots, sites web et suivi client. <a href=\"" + LINKS.solutions + "\">Voir les services</a>";
+                }
+                if (containsKeyword(m, ['prix', 'tarif', 'cout', 'combien', 'devis'])) {
+                    return "Les tarifs dépendent de votre besoin. Écrivez-nous : <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">WhatsApp</a>";
+                }
+                if (containsKeyword(m, ['chatbot', 'bot', 'whatsapp'])) {
+                    return "Nous créons des chatbots sur mesure pour WhatsApp et votre site. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Discuter</a>";
+                }
+                if (containsKeyword(m, ['site', 'web', 'internet'])) {
+                    return "Nous créons des sites vitrines professionnels. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Discuter</a>";
+                }
+                if (containsKeyword(m, ['commander', 'commande', 'interesse'])) {
+                    return "Super ! Écrivez-nous : <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">WhatsApp</a>";
+                }
+                return "Je suis l'assistant Datalio. <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">Contactez-nous sur WhatsApp</a>";
+            }
+
+            function handleMessage(text) {
+                if (!text || !text.trim()) return;
+                chatbot.classList.add('badge-hidden');
+                addMessage(text.trim(), false);
+                setTimeout(function() {
+                    addMessage(getBotResponse(text), true);
+                }, 500);
+            }
+
+            if (chatbot) {
+                chatbotTrigger.addEventListener('click', function() {
+                    var isOpen = chatbot.classList.toggle('is-open');
+                    chatbotWindow.setAttribute('aria-hidden', !isOpen);
+                    if (isOpen && chatbotMessages.children.length === 0) {
+                        setTimeout(function() {
+                            addMessage("Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?", true);
+                        }, 300);
+                    }
+                    if (isOpen) chatbotInput.focus();
+                });
+
+                chatbotClose.addEventListener('click', function() {
+                    chatbot.classList.remove('is-open');
+                    chatbotWindow.setAttribute('aria-hidden', 'true');
+                });
+
+                chatbotForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleMessage(chatbotInput.value);
+                    chatbotInput.value = '';
+                });
+
+                chatbotSuggestions.querySelectorAll('.chatbot__suggestion').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        handleMessage(btn.getAttribute('data-message'));
+                    });
+                });
+            }
+        })();
     </script>
 </body>
 </html>
