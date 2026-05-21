@@ -11,6 +11,12 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="canonical" href="https://datalio.online/blog/" />
 
+    <!-- ===== GOOGLE SEARCH CONSOLE =====
+         Ajouter ici la balise Google Search Console fournie par Google
+         (Settings → Property → Verify ownership → HTML tag)
+         ================================ -->
+    <!-- <meta name="google-site-verification" content="REMPLACER_PAR_VOTRE_CODE_GSC" /> -->
+
     <!-- ===== Open Graph ===== -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
@@ -68,6 +74,32 @@
       ]
     }
     </script>
+
+    <!-- =========================================================
+         GOOGLE ANALYTICS 4 (gtag.js)
+         Remplacer G-XXXXXXXXXX par l'ID Google Analytics réel.
+         Tant que l'ID n'est pas remplacé, gtag.js n'est pas chargé
+         (pas de 404), mais window.gtag reste défini (no-op safe).
+         ========================================================= -->
+    <script>
+      // Remplacer G-XXXXXXXXXX par l'ID Google Analytics réel
+      window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      (function () {
+        var id = window.GA_MEASUREMENT_ID;
+        if (!id || typeof id !== 'string' || id === 'G-XXXXXXXXXX' || id.indexOf('G-') !== 0) return;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+        (document.head || document.body).appendChild(s);
+        gtag('config', id, { anonymize_ip: true });
+      })();
+    </script>
+
+    <!-- ===== Helper analytics partagé (trackEvent + listeners) ===== -->
+    <script defer src="../assets/analytics.js"></script>
 </head>
 <body>
 
@@ -106,7 +138,7 @@
                 <a href="../#faq">FAQ</a>
                 <a href="./">Blog</a>
             </nav>
-            <a class="btn btn--primary btn--sm nav__cta" href="https://wa.me/261386984531" target="_blank" rel="noopener">
+            <a class="btn btn--primary btn--sm nav__cta" href="https://wa.me/261386984531" target="_blank" rel="noopener" data-track-event="whatsapp_click" data-track-category="cta" data-track-label="navbar_discuter">
                 <svg class="icon icon--sm" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
                 Discuter
             </a>
@@ -192,8 +224,8 @@
             <div>
                 <h4>Contact</h4>
                 <ul class="footer__links">
-                    <li><a href="https://wa.me/261386984531" target="_blank" rel="noopener">WhatsApp</a></li>
-                    <li><a href="tel:+261386984531">+261 38 69 845 31</a></li>
+                    <li><a href="https://wa.me/261386984531" target="_blank" rel="noopener" data-track-event="whatsapp_click" data-track-category="footer" data-track-label="footer_whatsapp">WhatsApp</a></li>
+                    <li><a href="tel:+261386984531" data-track-event="contact_click" data-track-category="footer" data-track-label="footer_phone">+261 38 69 845 31</a></li>
                 </ul>
             </div>
         </div>
@@ -204,7 +236,7 @@
     </footer>
 
     <!-- Bouton flottant WhatsApp -->
-    <a class="fab" href="https://wa.me/261386984531" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
+    <a class="fab" href="https://wa.me/261386984531" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp" data-track-event="whatsapp_click" data-track-category="fab" data-track-label="fab_whatsapp">
         <svg class="icon icon--lg" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
     </a>
 
