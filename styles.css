@@ -964,7 +964,7 @@ p { margin: 0 0 1em; color: var(--gray-text); }
     box-shadow: var(--shadow-md);
     border: 1px solid var(--light-200);
     background: linear-gradient(160deg, rgba(5, 4, 95, 0.06), rgba(245, 184, 0, 0.08));
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
 }
 .about__image {
     display: block;
