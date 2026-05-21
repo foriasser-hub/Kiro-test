@@ -138,7 +138,7 @@
     setupReveal();
 
     /* =========================================
-       CHATBOT DATALIO
+       CHATBOT DATALIO - Basé sur les données CMS
        ========================================= */
     var chatbot = document.getElementById('chatbot');
     var chatbotTrigger = document.getElementById('chatbot-trigger');
@@ -149,74 +149,158 @@
     var chatbotInput = document.getElementById('chatbot-input');
     var chatbotSuggestions = document.getElementById('chatbot-suggestions');
 
-    // Base de connaissances du chatbot - Réponses courtes et directes avec liens
-    var botKnowledge = {
+    // Données CMS chargées dynamiquement
+    var cmsData = {
+        services: [],
+        faq: [],
+        loaded: false
+    };
+
+    // Messages de base du chatbot (uniquement les messages génériques)
+    var botMessages = {
         greetings: [
             "Bonjour ! 👋 Comment puis-je vous aider ?",
             "Bienvenue ! Posez-moi vos questions sur nos services.",
             "Bonjour ! 😊 Que puis-je faire pour vous ?"
         ],
-        services: "Nos 5 services :\n\n" +
-            "📊 <a href=\"#solutions\">Outils de gestion</a>\n" +
-            "⚡ <a href=\"#solutions\">Automatisation</a>\n" +
-            "🤖 <a href=\"#solutions\">Chatbots</a>\n" +
-            "🌐 <a href=\"#solutions\">Sites web</a>\n" +
-            "👥 <a href=\"#solutions\">Suivi client</a>\n\n" +
-            "→ <a href=\"#solutions\">Voir tous les détails</a>",
-        pricing: "Les prix sont définis après un audit gratuit de votre besoin.\n\n" +
-            "Chaque solution est personnalisée selon votre activité.\n\n" +
-            "→ <a href=\"#\" data-whatsapp>Demander un devis gratuit sur WhatsApp</a>",
-        order: "Pour commander :\n\n" +
-            "1. On échange sur votre besoin\n" +
-            "2. On prépare votre solution\n" +
-            "3. Vous l'utilisez !\n\n" +
-            "→ <a href=\"#\" data-whatsapp>Commander sur WhatsApp</a>",
-        human: "Notre équipe est disponible sur WhatsApp.\n\n" +
-            "→ <a href=\"#\" data-whatsapp>Parler à un conseiller</a>",
-        automation: "**Automatisation des tâches** :\n" +
-            "Rappels, rapports, calculs et alertes automatiques.\n\n" +
-            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
-            "→ <a href=\"#\" data-whatsapp data-product=\"Automatisation des tâches\">Commander</a>",
-        chatbots: "**Chatbots pour entreprises** :\n" +
-            "Réponses 24/7, basés sur vos données, intégrés à WhatsApp.\n\n" +
-            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
-            "→ <a href=\"#\" data-whatsapp data-product=\"Chatbots pour entreprises\">Commander</a>",
-        website: "**Sites web professionnels** :\n" +
-            "Design responsive, SEO optimisé, hébergement inclus.\n\n" +
-            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
-            "→ <a href=\"#\" data-whatsapp data-product=\"Création de sites web\">Commander</a>",
-        gestion: "**Outils de gestion** :\n" +
-            "Tableau de bord, suivi ventes/stock, trésorerie.\n\n" +
-            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
-            "→ <a href=\"#\" data-whatsapp data-product=\"Outils de gestion personnalisés\">Commander</a>",
-        suivi: "**Suivi client intelligent** :\n" +
-            "Fiches client, relances automatiques, pipeline commercial.\n\n" +
-            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
-            "→ <a href=\"#\" data-whatsapp data-product=\"Suivi client intelligent\">Commander</a>",
-        excel: "Non, pas que Excel ! On propose :\n" +
-            "• Outils de gestion (Excel, Google Sheets ou apps)\n" +
-            "• Automatisations\n" +
-            "• Chatbots\n" +
-            "• Sites web\n" +
-            "• Suivi client\n\n" +
-            "→ <a href=\"#solutions\">Voir nos solutions</a>",
-        informatique: "Pas besoin d'être expert ! Nos outils sont simples et on vous accompagne.\n\n" +
-            "→ <a href=\"#faq\">Voir la FAQ</a>",
-        assistance: "Oui, une assistance est incluse avec chaque solution.\n\n" +
-            "→ <a href=\"#\" data-whatsapp>Nous contacter</a>",
-        localisation: "Basés à Antananarivo 🇲🇬, on travaille avec 8 pays francophones.\n\n" +
-            "→ <a href=\"#apropos\">En savoir plus sur nous</a>",
-        etapes: "Comment ça marche :\n\n" +
-            "1️⃣ Vous décrivez votre besoin\n" +
-            "2️⃣ On prépare l'outil\n" +
-            "3️⃣ Vous l'utilisez !\n\n" +
-            "→ <a href=\"#etapes\">Voir les détails</a>\n" +
-            "→ <a href=\"#\" data-whatsapp>Démarrer maintenant</a>",
-        thanks: "Avec plaisir ! 😊\n\n" +
-            "→ <a href=\"#\" data-whatsapp>Besoin d'autre chose ?</a>",
-        default: "Je n'ai pas la réponse, mais notre équipe peut vous aider !\n\n" +
-            "→ <a href=\"#\" data-whatsapp>Poser la question sur WhatsApp</a>"
+        thanks: "Avec plaisir ! 😊\n\n→ <a href=\"#\" data-whatsapp>Besoin d'autre chose ?</a>",
+        human: "Notre équipe est disponible sur WhatsApp.\n\n→ <a href=\"#\" data-whatsapp>Parler à un conseiller</a>",
+        default: "Je n'ai pas trouvé de réponse précise, mais notre équipe peut vous aider !\n\n→ <a href=\"#\" data-whatsapp>Poser la question sur WhatsApp</a>"
     };
+
+    // Fonction pour normaliser le texte (enlever accents, minuscules)
+    function normalizeText(text) {
+        return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    // Fonction pour calculer la similarité entre deux textes
+    function getMatchScore(text, keywords) {
+        var normalizedText = normalizeText(text);
+        var score = 0;
+        keywords.forEach(function(keyword) {
+            if (normalizedText.indexOf(normalizeText(keyword)) !== -1) {
+                score += keyword.length; // Score plus élevé pour les mots plus longs
+            }
+        });
+        return score;
+    }
+
+    // Extraire les mots-clés d'un texte
+    function extractKeywords(text) {
+        var words = normalizeText(text).split(/\s+/);
+        // Filtrer les mots courts et les mots communs
+        var stopWords = ['le', 'la', 'les', 'un', 'une', 'des', 'de', 'du', 'et', 'ou', 'a', 'au', 'aux', 'en', 'est', 'ce', 'qui', 'que', 'pour', 'dans', 'sur', 'avec', 'par', 'je', 'vous', 'nous', 'il', 'elle', 'ils', 'elles', 'son', 'sa', 'ses', 'votre', 'vos', 'mon', 'ma', 'mes', 'ca', 'cela', 'cette', 'ces', 'quoi', 'comment', 'pourquoi', 'quand', 'faire', 'fait', 'etre', 'avoir', 'plus', 'aussi', 'tres', 'bien', 'tout', 'tous', 'toute', 'toutes'];
+        return words.filter(function(word) {
+            return word.length > 2 && stopWords.indexOf(word) === -1;
+        });
+    }
+
+    // Chercher dans les services
+    function searchServices(userMessage) {
+        if (!cmsData.services || cmsData.services.length === 0) return null;
+        
+        var userKeywords = extractKeywords(userMessage);
+        var bestMatch = null;
+        var bestScore = 0;
+
+        cmsData.services.forEach(function(service) {
+            // Créer une liste de mots-clés à partir du service
+            var serviceKeywords = [];
+            if (service.title) serviceKeywords = serviceKeywords.concat(extractKeywords(service.title));
+            if (service.description) serviceKeywords = serviceKeywords.concat(extractKeywords(service.description));
+            if (service.benefits) {
+                service.benefits.forEach(function(b) {
+                    serviceKeywords = serviceKeywords.concat(extractKeywords(b));
+                });
+            }
+
+            // Calculer le score de correspondance
+            var score = 0;
+            userKeywords.forEach(function(uk) {
+                serviceKeywords.forEach(function(sk) {
+                    if (sk.indexOf(uk) !== -1 || uk.indexOf(sk) !== -1) {
+                        score += Math.min(uk.length, sk.length);
+                    }
+                });
+            });
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestMatch = service;
+            }
+        });
+
+        // Retourner seulement si le score est suffisant
+        if (bestScore >= 4 && bestMatch) {
+            var benefits = (bestMatch.benefits || []).map(function(b) {
+                return '• ' + b;
+            }).join('\n');
+            
+            return '**' + bestMatch.title + '**\n\n' +
+                bestMatch.description + '\n\n' +
+                (benefits ? benefits + '\n\n' : '') +
+                '→ <a href="#solutions">En savoir plus</a>\n' +
+                '→ <a href="#" data-whatsapp data-product="' + bestMatch.title + '">Commander ce service</a>';
+        }
+
+        return null;
+    }
+
+    // Chercher dans la FAQ
+    function searchFAQ(userMessage) {
+        if (!cmsData.faq || cmsData.faq.length === 0) return null;
+        
+        var userKeywords = extractKeywords(userMessage);
+        var bestMatch = null;
+        var bestScore = 0;
+
+        cmsData.faq.forEach(function(faq) {
+            var faqKeywords = extractKeywords(faq.question + ' ' + faq.answer);
+            
+            var score = 0;
+            userKeywords.forEach(function(uk) {
+                faqKeywords.forEach(function(fk) {
+                    if (fk.indexOf(uk) !== -1 || uk.indexOf(fk) !== -1) {
+                        score += Math.min(uk.length, fk.length);
+                    }
+                });
+            });
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestMatch = faq;
+            }
+        });
+
+        // Retourner seulement si le score est suffisant
+        if (bestScore >= 4 && bestMatch) {
+            return '**' + bestMatch.question + '**\n\n' + bestMatch.answer + '\n\n→ <a href="#faq">Voir toutes les FAQ</a>';
+        }
+
+        return null;
+    }
+
+    // Générer la liste des services
+    function getServicesListResponse() {
+        if (!cmsData.services || cmsData.services.length === 0) {
+            return "Nos services sont en cours de chargement...\n\n→ <a href=\"#solutions\">Voir la section services</a>";
+        }
+
+        var iconMap = {
+            'bar-chart': '📊',
+            'zap': '⚡',
+            'bot': '🤖',
+            'globe': '🌐',
+            'users': '👥'
+        };
+
+        var servicesList = cmsData.services.map(function(s) {
+            var emoji = iconMap[s.icon] || '✨';
+            return emoji + ' ' + s.title;
+        }).join('\n');
+
+        return 'Nos services :\n\n' + servicesList + '\n\n→ <a href="#solutions">Voir tous les détails</a>\n→ <a href="#" data-whatsapp>Demander un devis</a>';
+    }
 
     // Fonction pour formater les messages (markdown basique + liens)
     function formatMessage(text) {
@@ -266,61 +350,54 @@
         if (typing) typing.remove();
     }
 
-    // Analyser le message et générer une réponse
+    // Analyser le message et générer une réponse basée sur les données CMS
     function getBotResponse(userMessage) {
-        var msg = userMessage.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        var msg = normalizeText(userMessage);
         
-        // Détection des intentions
+        // 1. Salutations
         if (msg.match(/\b(bonjour|salut|hello|hi|hey|coucou|bonsoir)\b/)) {
-            return botKnowledge.greetings[Math.floor(Math.random() * botKnowledge.greetings.length)];
-        }
-        if (msg.match(/\b(service|solution|propose|offre|faites|quoi faire)\b/)) {
-            return botKnowledge.services;
-        }
-        if (msg.match(/\b(prix|tarif|cout|combien|cher|budget|devis)\b/)) {
-            return botKnowledge.pricing;
-        }
-        if (msg.match(/\b(commander|commande|acheter|souscrire|demarrer|commencer)\b/)) {
-            return botKnowledge.order;
-        }
-        if (msg.match(/\b(comment.*(marche|fonctionne)|etape|processus|procedure)\b/)) {
-            return botKnowledge.etapes;
-        }
-        if (msg.match(/\b(humain|personne|quelqu.?un|parler|agent|conseiller|reel|equipe)\b/)) {
-            return botKnowledge.human;
-        }
-        if (msg.match(/\b(automat|tache|repetiti|rappel|rapport|calcul|alertes?)\b/)) {
-            return botKnowledge.automation;
-        }
-        if (msg.match(/\b(chatbot|bot|assistant|whatsapp|messenger|facebook|24.?7)\b/)) {
-            return botKnowledge.chatbots;
-        }
-        if (msg.match(/\b(site|web|internet|vitrine|landing|page|seo|google)\b/)) {
-            return botKnowledge.website;
-        }
-        if (msg.match(/\b(gestion|tableau|bord|stock|vente|tresorerie|livraison|commandes?)\b/)) {
-            return botKnowledge.gestion;
-        }
-        if (msg.match(/\b(suivi|client|crm|relance|historique|pipeline|commercial)\b/)) {
-            return botKnowledge.suivi;
-        }
-        if (msg.match(/\b(excel|sheets?|fichier|format)\b/)) {
-            return botKnowledge.excel;
-        }
-        if (msg.match(/\b(informatique|technique|debutant|facile|difficile|complique)\b/)) {
-            return botKnowledge.informatique;
-        }
-        if (msg.match(/\b(assistance|aide|support|accompagnement|question)\b/)) {
-            return botKnowledge.assistance;
-        }
-        if (msg.match(/\b(ou|localisation|pays|madagascar|antananarivo|afrique|francophone)\b/)) {
-            return botKnowledge.localisation;
-        }
-        if (msg.match(/\b(merci|thanks|super|genial|parfait|excellent|top|cool)\b/)) {
-            return botKnowledge.thanks;
+            return botMessages.greetings[Math.floor(Math.random() * botMessages.greetings.length)];
         }
         
-        return botKnowledge.default;
+        // 2. Remerciements
+        if (msg.match(/\b(merci|thanks|super|genial|parfait|excellent|top|cool)\b/)) {
+            return botMessages.thanks;
+        }
+        
+        // 3. Demande de parler à un humain
+        if (msg.match(/\b(humain|personne|quelqu.?un|parler|agent|conseiller|reel|equipe)\b/)) {
+            return botMessages.human;
+        }
+        
+        // 4. Demande de liste des services
+        if (msg.match(/\b(service|solution|propose|offre|faites|quoi faire|liste)\b/)) {
+            return getServicesListResponse();
+        }
+        
+        // 5. Questions sur les prix/devis
+        if (msg.match(/\b(prix|tarif|cout|combien|cher|budget|devis)\b/)) {
+            return "Les prix sont définis après un échange sur votre besoin.\n\nChaque solution est personnalisée selon votre activité.\n\n→ <a href=\"#\" data-whatsapp>Demander un devis gratuit sur WhatsApp</a>";
+        }
+        
+        // 6. Comment commander
+        if (msg.match(/\b(commander|commande|acheter|souscrire|demarrer|commencer)\b/)) {
+            return "Pour commander :\n\n1. On échange sur votre besoin\n2. On prépare votre solution\n3. Vous l'utilisez !\n\n→ <a href=\"#\" data-whatsapp>Commander sur WhatsApp</a>";
+        }
+        
+        // 7. Chercher d'abord dans la FAQ (priorité aux questions fréquentes)
+        var faqResponse = searchFAQ(userMessage);
+        if (faqResponse) {
+            return faqResponse;
+        }
+        
+        // 8. Chercher dans les services
+        var serviceResponse = searchServices(userMessage);
+        if (serviceResponse) {
+            return serviceResponse;
+        }
+        
+        // 9. Réponse par défaut
+        return botMessages.default;
     }
 
     // Gérer l'envoi de message
@@ -366,7 +443,7 @@
             // Afficher le message d'accueil au premier ouverture
             if (isOpen && chatbotMessages.children.length === 0) {
                 setTimeout(function() {
-                    addMessage(botKnowledge.greetings[0], true);
+                    addMessage(botMessages.greetings[0], true);
                 }, 300);
             }
             
@@ -435,6 +512,15 @@
 
     function applyContent(c) {
         if (!c || typeof c !== 'object') return;
+
+        // ----- Charger les données dans le chatbot -----
+        if (Array.isArray(c.services)) {
+            cmsData.services = c.services;
+        }
+        if (Array.isArray(c.faq)) {
+            cmsData.faq = c.faq;
+        }
+        cmsData.loaded = true;
 
         // ----- WhatsApp -----
         if (c.whatsapp) {
