@@ -1,0 +1,97 @@
+{
+  "enabled": true,
+  "welcome_message": "Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?",
+  "fallback_message": "Je suis l'assistant Datalio, je réponds aux questions sur nos services. <a href=\"https://wa.me/261386984531\" target=\"_blank\">Contactez-nous sur WhatsApp</a>",
+  "quick_suggestions": [
+    { "label": "Services",      "message": "Quels sont vos services ?" },
+    { "label": "Commander",     "message": "Comment commander ?" },
+    { "label": "Chatbots",      "message": "Parlez-moi des chatbots" },
+    { "label": "Site web",      "message": "Je veux un site web" }
+  ],
+  "qa": [
+    {
+      "topic": "Salutations",
+      "keywords": ["bonjour", "salut", "hello", "hi", "hey", "coucou", "bonsoir"],
+      "answer": "Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?",
+      "redirect_to_whatsapp": false
+    },
+    {
+      "topic": "Remerciements",
+      "keywords": ["merci", "thanks", "super", "genial", "parfait", "excellent"],
+      "answer": "Avec plaisir ! N'hésitez pas si vous avez d'autres questions.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Parler à un humain",
+      "keywords": ["humain", "personne", "quelqu", "parler", "agent", "conseiller", "equipe", "contact"],
+      "answer": "Notre équipe est disponible sur WhatsApp.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Tarifs / Devis",
+      "keywords": ["prix", "tarif", "cout", "combien", "cher", "budget", "devis", "gratuit"],
+      "answer": "Les tarifs dépendent de votre besoin. Écrivez-nous directement sur WhatsApp pour un devis gratuit.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Délais",
+      "keywords": ["delai", "duree", "rapide", "urgent", "vite"],
+      "answer": "Le délai dépend du projet (en général 5 à 10 jours). Discutons de votre besoin.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Liste des services",
+      "keywords": ["service", "solution", "propose", "offre", "faites", "liste", "activite"],
+      "answer": "Nous proposons : sites web premium, mini-logiciels de gestion, chatbots, automatisation et suivi client.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Commander",
+      "keywords": ["commander", "commande", "acheter", "souscrire", "demarrer", "commencer", "interesse"],
+      "answer": "Super ! Écrivez-nous pour en discuter.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Chatbot",
+      "keywords": ["chatbot", "bot", "assistant", "messenger", "24h", "24/7"],
+      "answer": "Nous créons des chatbots sur mesure pour WhatsApp, votre site ou Facebook.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Automatisation",
+      "keywords": ["automat", "tache", "repetit", "rappel", "rapport", "calcul", "alerte"],
+      "answer": "Nous automatisons vos tâches répétitives : rappels, rapports, alertes.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Site web",
+      "keywords": ["site", "web", "internet", "vitrine", "landing", "page", "seo", "google", "en ligne"],
+      "answer": "Nous créons des sites vitrines premium avec chatbot, SEO et espace admin sécurisé.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Gestion",
+      "keywords": ["gestion", "tableau", "bord", "stock", "vente", "tresorerie", "livraison", "inventaire", "caisse"],
+      "answer": "Nous créons des mini-logiciels de gestion sur mesure : stock, ventes, trésorerie.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Suivi client",
+      "keywords": ["suivi", "client", "crm", "relance", "historique", "pipeline", "commercial", "prospect"],
+      "answer": "Nous mettons en place un suivi client intelligent avec relances automatiques.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Localisation",
+      "keywords": ["ou", "localisation", "pays", "madagascar", "antananarivo", "afrique"],
+      "answer": "Nous sommes basés à Antananarivo, Madagascar, et travaillons avec toute l'Afrique francophone.",
+      "redirect_to_whatsapp": true
+    },
+    {
+      "topic": "Qui est Datalio",
+      "keywords": ["qui", "datalio", "entreprise", "agence", "equipe", "propos"],
+      "answer": "Datalio aide les petites entreprises d'Afrique francophone à digitaliser leur activité avec des solutions premium.",
+      "redirect_to_whatsapp": false
+    }
+  ]
+}

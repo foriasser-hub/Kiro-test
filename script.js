@@ -521,8 +521,56 @@
         }
     }
 
-    // Charger le contenu CMS
-    if (window.fetch) {
+    /* =========================================
+       CHARGEMENT DU CONTENU CMS
+       -----------------------------------------
+       1. content/site.json est la source principale (hero, contact,
+          about, expertises, etc.) — toujours chargé en premier.
+       2. content/services.json, faq.json, testimonials.json sont des
+          collections dédiées éditées via Pages CMS. Si elles existent,
+          elles remplacent les sections correspondantes de site.json.
+       3. Si un fichier est absent ou invalide, on retombe silencieusement
+          sur les données de site.json puis sur le HTML statique. Le site
+          ne casse jamais.
+       ========================================= */
+    function fetchJsonSafe(path) {
+        if (!window.fetch) return null;
+        return fetch(path, { cache: 'no-cache' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .catch(function () { return null; });
+    }
+
+    function extractItems(data) {
+        if (!data) return null;
+        if (Array.isArray(data)) return data;
+        if (Array.isArray(data.items)) return data.items;
+        return null;
+    }
+
+    function filterActive(items) {
+        if (!Array.isArray(items)) return items;
+        return items.filter(function (it) {
+            return it && (it.active === undefined || it.active === true);
+        });
+    }
+
+    if (window.fetch && window.Promise) {
+        Promise.all([
+            fetchJsonSafe('content/site.json'),
+            fetchJsonSafe('content/services.json'),
+            fetchJsonSafe('content/faq.json'),
+            fetchJsonSafe('content/testimonials.json')
+        ]).then(function (results) {
+            var data = results[0] || {};
+            var services = extractItems(results[1]);
+            var faq = extractItems(results[2]);
+            var testimonials = extractItems(results[3]);
+            if (services) data.services = filterActive(services);
+            if (faq) data.faq = faq;
+            if (testimonials) data.testimonials = filterActive(testimonials);
+            applyContent(data);
+        }).catch(function () { /* le site garde le HTML statique */ });
+    } else if (window.fetch) {
         fetch('content/site.json', { cache: 'no-cache' })
             .then(function (r) { return r.ok ? r.json() : null; })
             .then(function (data) { if (data) applyContent(data); })

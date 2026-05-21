@@ -1,0 +1,21 @@
+{
+  "seo": {
+    "site_title": "Datalio — Sites web premium et mini-logiciels de gestion pour petites entreprises",
+    "meta_description": "Datalio crée des sites web premium avec chatbot, SEO, Google Analytics, espace admin sécurisé et maintenance, ainsi que des mini-logiciels de gestion locaux pour petites entreprises.",
+    "meta_keywords": "site web premium Madagascar, création site web Madagascar, création site web Antananarivo, site vitrine premium, site web avec chatbot, site web avec Google Analytics, site web avec espace admin, mini logiciel de gestion, logiciel de gestion pour petite entreprise, logiciel de gestion hors ligne, solution digitale pour PME, automatisation pour petite entreprise, chatbot pour entreprise, Datalio, Datalio Madagascar, solutions digitales premium",
+    "og_image": "/assets/og-image.jpg",
+    "og_image_alt": "Datalio — Solutions digitales premium pour petites entreprises à Madagascar",
+    "canonical_url": "https://datalio.online/",
+    "locale": "fr_FR"
+  },
+  "analytics": {
+    "google_analytics_id": "G-3MHBT15C0E",
+    "google_search_console_verification": "",
+    "anonymize_ip": true
+  },
+  "brand": {
+    "name": "Datalio",
+    "slogan": "Solutions digitales premium pour petites entreprises",
+    "footer_tagline": "Solutions digitales pour entreprises. Gestion · Automatisation · Chatbots · Sites web · Suivi client."
+  }
+}

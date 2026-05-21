@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "question": "Est-ce que Datalio crée uniquement des fichiers Excel ?",
+      "answer": "Non. Datalio propose des solutions digitales complètes : outils de gestion (Excel, Google Sheets ou applications légères), automatisations, chatbots, sites web et systèmes de suivi client. Le format est choisi en fonction de votre besoin.",
+      "category": "Services"
+    },
+    {
+      "question": "Est-ce que vous pouvez personnaliser un outil pour mon activité ?",
+      "answer": "Oui, c'est notre cœur de métier. Chaque solution est adaptée à votre secteur, vos produits, votre devise et vos processus. On commence par un échange pour bien comprendre votre besoin.",
+      "category": "Services"
+    },
+    {
+      "question": "Est-ce que je dois être fort en informatique ?",
+      "answer": "Pas du tout. Nos outils sont conçus pour des utilisateurs débutants. Tout est expliqué simplement, et vous bénéficiez d'un accompagnement pour la prise en main.",
+      "category": "Utilisation"
+    },
+    {
+      "question": "Est-ce que vous créez aussi des chatbots et des sites web ?",
+      "answer": "Oui. Nous créons des chatbots pour WhatsApp, sites web ou pages Facebook, ainsi que des sites vitrines et landing pages professionnels qui représentent votre entreprise en ligne.",
+      "category": "Services"
+    },
+    {
+      "question": "Comment commander une solution ?",
+      "answer": "Le plus simple est de cliquer sur le bouton « Discuter sur WhatsApp ». On échange sur votre besoin, on vous propose la solution adaptée, puis on lance la mise en place.",
+      "category": "Commande"
+    },
+    {
+      "question": "Est-ce qu'il y a une assistance ?",
+      "answer": "Oui. Une assistance est incluse pour vous aider à utiliser votre outil. Vous pouvez nous écrire directement sur WhatsApp en cas de question.",
+      "category": "Support"
+    }
+  ]
+}

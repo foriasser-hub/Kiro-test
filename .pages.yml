@@ -1,13 +1,35 @@
-# Configuration Pages CMS — interface admin Datalio
-# Plus d'infos : https://pagescms.org/docs/
+# =============================================================================
+# Pages CMS — Configuration admin Datalio
+# -----------------------------------------------------------------------------
+# Pages CMS (https://pagescms.org) fournit une interface admin pour les sites
+# statiques hébergés sur GitHub Pages. L'authentification se fait via GitHub
+# OAuth — aucun secret, aucun mot de passe et aucun token n'est stocké côté
+# client. Seuls les utilisateurs autorisés sur le repo (collaborators GitHub)
+# peuvent éditer le contenu.
+#
+# Documentation officielle : https://pagescms.org/docs/
+# =============================================================================
 
+# -----------------------------------------------------------------------------
+# Médias — où sont stockées les images uploadées via l'admin
+# -----------------------------------------------------------------------------
+# Les images uploadées dans l'admin sont commitées dans /assets/uploads/.
+# Les fichiers de marque (logo, og-image, photos blog historiques) restent
+# dans /assets/ et /assets/blog/ et ne sont pas modifiés.
 media:
-  input: assets
-  output: /assets
+  input: assets/uploads
+  output: /assets/uploads
 
+# -----------------------------------------------------------------------------
+# Contenu éditable
+# -----------------------------------------------------------------------------
 content:
+
+  # ===========================================================================
+  # 1. CONTENU DU SITE — fichier unique site.json
+  # ===========================================================================
   - name: site
-    label: "Contenu du site"
+    label: "📄 Contenu du site"
     type: file
     path: content/site.json
     format: json
@@ -24,12 +46,15 @@ content:
           - name: title_part1
             label: "Titre — début"
             type: string
+            required: true
           - name: title_highlight
             label: "Titre — mot en jaune doré"
             type: string
+            required: true
           - name: title_part2
             label: "Titre — fin"
             type: string
+            required: true
           - name: subtitle
             label: "Sous-titre"
             type: text
@@ -56,18 +81,285 @@ content:
       - name: whatsapp
         label: "WhatsApp"
         type: object
+        description: "Configuration du bouton WhatsApp et des messages préremplis"
         fields:
           - name: number
-            label: "Numéro WhatsApp (avec code pays, sans +)"
+            label: "Numéro WhatsApp"
             type: string
-            description: "Exemple : 261386984531"
+            required: true
+            description: "Format international SANS le + (ex : 261386984531)"
+            pattern:
+              regex: "^[0-9]{8,15}$"
+              message: "Numéro invalide. Format attendu : 8 à 15 chiffres, sans + ni espace."
           - name: default_message
-            label: "Message prérempli par défaut"
+            label: "Message prérempli — par défaut"
             type: text
+          - name: devis_message
+            label: "Message prérempli — Demande de devis"
+            type: text
+          - name: premium_sites_message
+            label: "Message prérempli — Sites web premium"
+            type: text
+          - name: mini_software_message
+            label: "Message prérempli — Mini-logiciels de gestion"
+            type: text
+          - name: support_message
+            label: "Message prérempli — Support"
+            type: text
+          - name: fab_enabled
+            label: "Afficher le bouton flottant WhatsApp"
+            type: boolean
+            default: true
 
-      # ---------------- SERVICES ----------------
-      - name: services
-        label: "Nos solutions"
+      # ---------------- CONTACT ----------------
+      - name: contact
+        label: "Contact"
+        type: object
+        fields:
+          - name: phone
+            label: "Téléphone (affiché)"
+            type: string
+            description: "Avec espaces, ex : +261 38 69 845 31"
+          - name: phone_link
+            label: "Téléphone (clic-pour-appeler)"
+            type: string
+            description: "Format international, ex : +261386984531"
+          - name: email
+            label: "Email de contact"
+            type: string
+            pattern:
+              regex: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+              message: "Email invalide"
+          - name: address
+            label: "Adresse"
+            type: text
+            description: "Ex : Antananarivo, Madagascar"
+
+      # ---------------- SOCIAL ----------------
+      - name: social
+        label: "Réseaux sociaux"
+        type: object
+        description: "Laissez vide les réseaux que vous n'utilisez pas"
+        fields:
+          - name: facebook
+            label: "Facebook (URL complète)"
+            type: string
+            pattern:
+              regex: "^(https?://.+)?$"
+              message: "URL invalide (doit commencer par http:// ou https://)"
+          - name: linkedin
+            label: "LinkedIn (URL complète)"
+            type: string
+            pattern:
+              regex: "^(https?://.+)?$"
+              message: "URL invalide"
+          - name: instagram
+            label: "Instagram (URL complète)"
+            type: string
+            pattern:
+              regex: "^(https?://.+)?$"
+              message: "URL invalide"
+          - name: youtube
+            label: "YouTube (URL complète)"
+            type: string
+            pattern:
+              regex: "^(https?://.+)?$"
+              message: "URL invalide"
+          - name: tiktok
+            label: "TikTok (URL complète)"
+            type: string
+            pattern:
+              regex: "^(https?://.+)?$"
+              message: "URL invalide"
+
+      # ---------------- À PROPOS ----------------
+      - name: about
+        label: "Section À propos"
+        type: object
+        fields:
+          - name: eyebrow
+            label: "Petit titre au-dessus"
+            type: string
+          - name: title_part1
+            label: "Titre — début"
+            type: string
+          - name: title_highlight
+            label: "Titre — mot en jaune doré"
+            type: string
+          - name: lead
+            label: "Paragraphe d'introduction"
+            type: text
+          - name: paragraph_1
+            label: "Paragraphe 1"
+            type: text
+          - name: paragraph_2
+            label: "Paragraphe 2"
+            type: text
+          - name: paragraph_3
+            label: "Paragraphe 3"
+            type: text
+          - name: image
+            label: "Photo À propos"
+            type: image
+          - name: image_alt
+            label: "Texte alternatif de la photo (accessibilité + SEO)"
+            type: string
+          - name: signature_name
+            label: "Nom signature"
+            type: string
+          - name: signature_role
+            label: "Rôle / lieu signature"
+            type: string
+
+      # ---------------- NOS DEUX EXPERTISES ----------------
+      - name: expertises
+        label: "Nos deux expertises"
+        type: object
+        description: "Mise en avant des deux offres principales : sites web premium + mini-logiciels"
+        fields:
+          - name: title
+            label: "Titre de la section"
+            type: string
+          - name: intro
+            label: "Texte d'introduction"
+            type: text
+          - name: items
+            label: "Les deux expertises"
+            type: object
+            list:
+              min: 0
+              max: 2
+            fields:
+              - name: title
+                label: "Titre"
+                type: string
+                required: true
+              - name: tagline
+                label: "Sous-titre court"
+                type: string
+              - name: description
+                label: "Description"
+                type: text
+              - name: image
+                label: "Image (optionnelle)"
+                type: image
+              - name: cta_text
+                label: "Texte du bouton"
+                type: string
+
+      # ---------------- CE QUI EST INCLUS ----------------
+      - name: included
+        label: "Ce qui est inclus"
+        type: object
+        description: "Liste des éléments compris dans toute prestation Datalio"
+        fields:
+          - name: title
+            label: "Titre de la section"
+            type: string
+          - name: intro
+            label: "Texte d'introduction"
+            type: text
+          - name: items
+            label: "Éléments inclus"
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: "Icône"
+                type: select
+                options:
+                  values:
+                    - { value: "rocket",      label: "🚀 Fusée (rapide)" }
+                    - { value: "target",      label: "🎯 Cible (sur-mesure)" }
+                    - { value: "sparkles",    label: "✨ Étincelles (qualité)" }
+                    - { value: "handshake",   label: "🤝 Accompagnement" }
+                    - { value: "timer",       label: "⏱️ Gain de temps" }
+                    - { value: "settings",    label: "⚙️ Maintenance" }
+                    - { value: "gem",         label: "💎 Premium" }
+                    - { value: "globe",       label: "🌐 Hébergement" }
+                    - { value: "bot",         label: "🤖 Chatbot" }
+                    - { value: "trending-up", label: "📈 Analytics" }
+              - name: title
+                label: "Titre"
+                type: string
+                required: true
+              - name: description
+                label: "Description"
+                type: text
+
+      # ---------------- POURQUOI DATALIO ----------------
+      - name: why_us
+        label: "Pourquoi Datalio"
+        type: object
+        fields:
+          - name: title
+            label: "Titre de la section"
+            type: string
+          - name: intro
+            label: "Texte d'introduction"
+            type: text
+          - name: items
+            label: "Avantages"
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: "Icône"
+                type: select
+                options:
+                  values:
+                    - { value: "sparkles",    label: "✨ Étincelles" }
+                    - { value: "store",       label: "🏪 Boutique" }
+                    - { value: "gem",         label: "💎 Premium" }
+                    - { value: "settings",    label: "⚙️ Engrenage" }
+                    - { value: "trending-up", label: "📈 Tendance haussière" }
+                    - { value: "handshake",   label: "🤝 Poignée de main" }
+                    - { value: "rocket",      label: "🚀 Fusée" }
+                    - { value: "target",      label: "🎯 Cible" }
+                    - { value: "sprout",      label: "🌱 Pousse" }
+              - name: title
+                label: "Titre"
+                type: string
+                required: true
+              - name: description
+                label: "Description"
+                type: text
+
+      # ---------------- COMMENT ÇA MARCHE ----------------
+      - name: how_it_works
+        label: "Comment ça marche"
+        type: object
+        fields:
+          - name: title
+            label: "Titre de la section"
+            type: string
+          - name: intro
+            label: "Texte d'introduction"
+            type: text
+          - name: steps
+            label: "Étapes"
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: "Titre de l'étape"
+                type: string
+                required: true
+              - name: description
+                label: "Description"
+                type: text
+
+  # ===========================================================================
+  # 2. SERVICES — collection (utilisée sur la page d'accueil)
+  # ===========================================================================
+  - name: services
+    label: "🛠 Services"
+    type: file
+    path: content/services.json
+    format: json
+    fields:
+      - name: items
+        label: "Services proposés"
         type: object
         list: true
         fields:
@@ -96,53 +388,414 @@ content:
                 - { value: "notebook",    label: "📓 Cahier" }
                 - { value: "calculator",  label: "🧮 Calculatrice" }
           - name: title
-            label: "Titre"
+            label: "Titre du service"
             type: string
+            required: true
           - name: description
-            label: "Description"
+            label: "Description courte (visible sur la carte)"
+            type: text
+            required: true
+          - name: long_description
+            label: "Description détaillée (optionnelle, pour page dédiée)"
             type: text
           - name: benefits
-            label: "3 bénéfices"
+            label: "Avantages (3 max conseillé)"
             type: string
             list: true
+          - name: image
+            label: "Image illustrative (optionnelle)"
+            type: image
+          - name: image_alt
+            label: "Texte alternatif de l'image (accessibilité + SEO)"
+            type: string
+          - name: cta_text
+            label: "Texte du bouton (par défaut : Demander un devis)"
+            type: string
           - name: featured
             label: "Mettre en avant ?"
             type: boolean
             default: false
+          - name: active
+            label: "Service actif (afficher sur le site)"
+            type: boolean
+            default: true
           - name: tag
-            label: "Étiquette (optionnel)"
+            label: "Étiquette (optionnel — ex : Nouveau, Populaire)"
             type: string
-            required: false
 
-      # ---------------- FAQ ----------------
-      - name: faq
-        label: "Questions fréquentes (FAQ)"
+  # ===========================================================================
+  # 3. PACKS / OFFRES
+  # ===========================================================================
+  - name: packs
+    label: "💎 Packs / Offres"
+    type: file
+    path: content/packs.json
+    format: json
+    description: "Pack Présence Premium, Pack Business Premium, Pack Signature Premium…"
+    fields:
+      - name: items
+        label: "Packs disponibles"
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: "Nom du pack"
+            type: string
+            required: true
+            description: "Ex : Pack Présence Premium"
+          - name: price
+            label: "Prix (texte libre)"
+            type: string
+            required: true
+            description: "Ex : 1 200 000 Ar ou 'Sur devis'"
+          - name: price_period
+            label: "Période / fréquence (optionnel)"
+            type: string
+            description: "Ex : / mois, / projet, / an"
+          - name: tagline
+            label: "Phrase d'accroche courte"
+            type: string
+          - name: description
+            label: "Description du pack"
+            type: text
+            required: true
+          - name: items_included
+            label: "Éléments inclus"
+            type: string
+            list: true
+            description: "Un élément par ligne — affiché sous forme de liste à coches"
+          - name: cta_text
+            label: "Texte du bouton"
+            type: string
+            description: "Par défaut : Demander un devis"
+          - name: cta_whatsapp_message
+            label: "Message WhatsApp prérempli au clic (optionnel)"
+            type: text
+          - name: popular
+            label: "Mettre en avant comme « populaire » ?"
+            type: boolean
+            default: false
+          - name: recommended
+            label: "Mettre en avant comme « recommandé » ?"
+            type: boolean
+            default: false
+          - name: active
+            label: "Pack actif (afficher sur le site)"
+            type: boolean
+            default: true
+          - name: order
+            label: "Ordre d'affichage (1 = premier)"
+            type: number
+
+  # ===========================================================================
+  # 4. FAQ
+  # ===========================================================================
+  - name: faq
+    label: "❓ FAQ"
+    type: file
+    path: content/faq.json
+    format: json
+    fields:
+      - name: items
+        label: "Questions / Réponses"
         type: object
         list: true
         fields:
           - name: question
             label: "Question"
             type: string
+            required: true
           - name: answer
             label: "Réponse"
             type: text
+            required: true
+          - name: category
+            label: "Catégorie (optionnel)"
+            type: string
 
-      # ---------------- CONTACT ----------------
-      - name: contact
-        label: "Contact"
+  # ===========================================================================
+  # 5. TÉMOIGNAGES CLIENTS
+  # ===========================================================================
+  - name: testimonials
+    label: "💬 Témoignages clients"
+    type: file
+    path: content/testimonials.json
+    format: json
+    fields:
+      - name: items
+        label: "Témoignages"
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: "Nom du client"
+            type: string
+            required: true
+          - name: role
+            label: "Activité / entreprise"
+            type: string
+          - name: location
+            label: "Ville (ex : Antananarivo)"
+            type: string
+          - name: quote
+            label: "Témoignage"
+            type: text
+            required: true
+          - name: photo
+            label: "Photo (optionnelle)"
+            type: image
+          - name: photo_alt
+            label: "Texte alternatif de la photo"
+            type: string
+          - name: rating
+            label: "Note sur 5 (optionnelle)"
+            type: number
+          - name: featured
+            label: "Mettre en avant"
+            type: boolean
+            default: false
+          - name: active
+            label: "Témoignage actif (afficher sur le site)"
+            type: boolean
+            default: true
+
+  # ===========================================================================
+  # 6. ARTICLES DE BLOG (collection markdown)
+  # ===========================================================================
+  - name: blog
+    label: "📝 Blog"
+    type: collection
+    path: content/blog
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{fields.slug}.md"
+    view:
+      fields: [title, date, category, status]
+      sort:
+        - field: date
+          direction: desc
+    fields:
+      - name: title
+        label: "Titre de l'article"
+        type: string
+        required: true
+      - name: slug
+        label: "Slug (URL)"
+        type: string
+        required: true
+        description: "Identifiant URL — uniquement minuscules, chiffres et tirets"
+        pattern:
+          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          message: "Slug invalide. Utilisez uniquement minuscules, chiffres et tirets (ex : mon-super-article)"
+      - name: date
+        label: "Date de publication"
+        type: date
+        required: true
+      - name: author
+        label: "Auteur"
+        type: string
+        default: "L'équipe Datalio"
+      - name: cover
+        label: "Image de couverture"
+        type: image
+        description: "Format conseillé : 1200×675 px"
+      - name: cover_alt
+        label: "Texte alternatif de la couverture (SEO + accessibilité)"
+        type: string
+      - name: meta_title
+        label: "Titre SEO (balise <title>)"
+        type: string
+        description: "60 caractères max recommandés"
+      - name: meta_description
+        label: "Description SEO (meta description)"
+        type: text
+        description: "155 caractères max recommandés"
+      - name: tags
+        label: "Tags"
+        type: string
+        list: true
+      - name: category
+        label: "Catégorie"
+        type: select
+        options:
+          values:
+            - "Automatisation"
+            - "Chatbot"
+            - "Sites web"
+            - "Gestion"
+            - "SEO & Analytics"
+            - "Témoignages"
+            - "Actualités"
+      - name: status
+        label: "Statut"
+        type: select
+        default: "draft"
+        options:
+          values:
+            - { value: "draft",     label: "📝 Brouillon" }
+            - { value: "published", label: "✅ Publié" }
+      - name: excerpt
+        label: "Extrait (résumé court affiché sur la liste)"
+        type: text
+      - name: body
+        label: "Contenu de l'article (Markdown)"
+        type: text
+
+  # ===========================================================================
+  # 7. RÉGLAGES SEO + ANALYTICS + TECHNIQUE
+  # ===========================================================================
+  - name: settings
+    label: "⚙️ Réglages SEO & Analytics"
+    type: file
+    path: content/settings.json
+    format: json
+    description: "Réglages globaux du site. Certains champs s'appliquent automatiquement, d'autres nécessitent une mise à jour ponctuelle du code (voir ADMIN-GUIDE.md)."
+    fields:
+
+      # SEO global
+      - name: seo
+        label: "SEO global"
         type: object
         fields:
-          - name: phone
-            label: "Téléphone (affiché)"
+          - name: site_title
+            label: "Titre du site (balise <title>)"
             type: string
-            description: "Exemple : +261 38 69 845 31"
-          - name: phone_link
-            label: "Téléphone (clic-pour-appeler)"
+            required: true
+          - name: meta_description
+            label: "Description SEO du site"
+            type: text
+            description: "155 caractères max recommandés"
+          - name: meta_keywords
+            label: "Mots-clés SEO (séparés par virgules)"
+            type: text
+          - name: og_image
+            label: "Image Open Graph (partage Facebook/WhatsApp/LinkedIn)"
+            type: image
+            description: "1200×630 px recommandés"
+          - name: og_image_alt
+            label: "Texte alternatif de l'image OG"
             type: string
-            description: "Format international, ex: +261386984531"
+          - name: canonical_url
+            label: "URL canonique du site"
+            type: string
+            description: "Ex : https://datalio.online/"
+            pattern:
+              regex: "^(https?://.+)?$"
+              message: "URL invalide"
+          - name: locale
+            label: "Langue / locale"
+            type: string
+            default: "fr_FR"
 
+      # Analytics & Search Console
+      - name: analytics
+        label: "Analytics & Search Console"
+        type: object
+        fields:
+          - name: google_analytics_id
+            label: "Google Analytics 4 — Measurement ID"
+            type: string
+            description: "Format G-XXXXXXXXXX. Modifié dans le code pour des raisons de performance — voir ADMIN-GUIDE.md"
+            pattern:
+              regex: "^(G-[A-Z0-9]+)?$"
+              message: "Format invalide. Attendu : G-XXXXXXXXXX"
+          - name: google_search_console_verification
+            label: "Google Search Console — code de vérification"
+            type: string
+            description: "Code fourni par Search Console pour vérifier la propriété"
+          - name: anonymize_ip
+            label: "Anonymiser les IP (RGPD)"
+            type: boolean
+            default: true
+
+      # Identité éditoriale
+      - name: brand
+        label: "Identité de marque"
+        type: object
+        fields:
+          - name: name
+            label: "Nom de la marque"
+            type: string
+            default: "Datalio"
+          - name: slogan
+            label: "Slogan"
+            type: string
+          - name: footer_tagline
+            label: "Phrase footer"
+            type: text
+
+  # ===========================================================================
+  # 8. CHATBOT
+  # ===========================================================================
+  - name: chatbot
+    label: "🤖 Chatbot"
+    type: file
+    path: content/chatbot.json
+    format: json
+    description: "Configuration du chatbot intégré au site"
+    fields:
+
+      - name: enabled
+        label: "Activer le chatbot"
+        type: boolean
+        default: true
+
+      - name: welcome_message
+        label: "Message de bienvenue"
+        type: text
+        required: true
+
+      - name: fallback_message
+        label: "Message de secours (quand le bot ne comprend pas)"
+        type: text
+        required: true
+        description: "Doit contenir un lien WhatsApp pour basculer vers un humain"
+
+      - name: quick_suggestions
+        label: "Boutons rapides (suggestions)"
+        type: object
+        list:
+          min: 0
+          max: 8
+        fields:
+          - name: label
+            label: "Texte du bouton"
+            type: string
+            required: true
+          - name: message
+            label: "Message envoyé au clic"
+            type: string
+            required: true
+
+      - name: qa
+        label: "Questions / Réponses"
+        type: object
+        list: true
+        description: "Le chatbot cherche les mots-clés dans le message du visiteur. Si aucun ne correspond, il affiche le message de secours."
+        fields:
+          - name: topic
+            label: "Sujet (pour vous y retrouver)"
+            type: string
+            required: true
+            description: "Ex : Tarifs, Services, Site web"
+          - name: keywords
+            label: "Mots-clés déclencheurs"
+            type: string
+            list: true
+            description: "Un mot-clé par ligne. Insensible aux accents et à la casse."
+          - name: answer
+            label: "Réponse (HTML autorisé pour les liens)"
+            type: text
+            required: true
+          - name: redirect_to_whatsapp
+            label: "Inclure un lien WhatsApp dans la réponse"
+            type: boolean
+            default: false
+
+  # ===========================================================================
+  # 9. LOGO (raccourci pour remplacer le logo facilement)
+  # ===========================================================================
   - name: logo
-    label: "Logo Datalio"
+    label: "🖼 Logo Datalio"
     type: file
     path: assets/logo.png
     format: raw
