@@ -149,97 +149,76 @@
     var chatbotInput = document.getElementById('chatbot-input');
     var chatbotSuggestions = document.getElementById('chatbot-suggestions');
 
-    // Base de connaissances du chatbot - Vraies informations Datalio
+    // Base de connaissances du chatbot - Réponses courtes et directes avec liens
     var botKnowledge = {
         greetings: [
-            "Bonjour ! 👋 Je suis l'assistant virtuel de Datalio. Comment puis-je vous aider ?",
-            "Bienvenue chez Datalio ! Je suis là pour répondre à vos questions sur nos solutions digitales pour entreprises.",
-            "Bonjour ! 😊 Datalio accompagne les petites entreprises dans leur digitalisation. Que puis-je faire pour vous ?"
+            "Bonjour ! 👋 Comment puis-je vous aider ?",
+            "Bienvenue ! Posez-moi vos questions sur nos services.",
+            "Bonjour ! 😊 Que puis-je faire pour vous ?"
         ],
-        services: "Datalio propose **5 solutions digitales** pour votre entreprise :\n\n" +
-            "📊 **Outils de gestion personnalisés**\nTableaux de bord, suivi des ventes, gestion de stock, trésorerie, commandes et livraisons — réunis dans un outil pensé pour vous.\n\n" +
-            "⚡ **Automatisation des tâches**\nSuivis, calculs, rappels, rapports et processus répétitifs : on automatise ce qui peut l'être pour vous libérer du temps.\n\n" +
-            "🤖 **Chatbots pour entreprises**\nDes assistants intelligents qui répondent à vos clients 24/7, basés sur vos données, intégrés à WhatsApp et Web.\n\n" +
-            "🌐 **Création de sites web**\nSites vitrines professionnels avec design responsive, optimisés SEO, hébergement et HTTPS inclus.\n\n" +
-            "👥 **Suivi client intelligent**\nCentralisez les demandes, l'historique client, les relances et votre organisation commerciale.\n\n" +
-            "Quel service vous intéresse le plus ?",
-        pricing: "Chez Datalio, **chaque solution est personnalisée** selon votre secteur, vos produits, votre devise et vos processus. 💰\n\n" +
-            "Il n'y a pas de tarif fixe car on adapte tout à votre besoin réel.\n\n" +
-            "Pour obtenir un **devis gratuit**, contactez-nous sur WhatsApp au **+261 38 69 845 31**. On échange sur votre besoin, puis on vous propose la solution adaptée.",
-        order: "Commander une solution Datalio, c'est simple :\n\n" +
-            "1️⃣ **Cliquez sur \"Discuter sur WhatsApp\"**\n" +
-            "2️⃣ **On échange** pour comprendre votre activité et vos objectifs\n" +
-            "3️⃣ **Datalio prépare l'outil** adapté à vos données et votre flux de travail\n" +
-            "4️⃣ **Vous l'utilisez** avec un guide et un accompagnement inclus !\n\n" +
-            "📞 Notre numéro : **+261 38 69 845 31**\n\n" +
-            "Voulez-vous démarrer maintenant ?",
-        human: "Bien sûr ! Notre équipe est disponible pour vous accompagner. 🙋‍♂️\n\n" +
-            "📞 **WhatsApp : +261 38 69 845 31**\n\n" +
-            "On répond généralement sous **24h**. N'hésitez pas à nous écrire directement !",
-        automation: "L'**automatisation des tâches** est l'un de nos services phares ! ⚡\n\n" +
-            "On peut automatiser :\n" +
-            "• **Rappels automatiques** (clients, paiements, rendez-vous)\n" +
-            "• **Rapports périodiques** (hebdo, mensuel)\n" +
-            "• **Calculs et alertes** (stock bas, objectifs atteints)\n" +
-            "• Suivis et processus répétitifs\n\n" +
-            "L'objectif : **vous libérer du temps** pour vous concentrer sur l'essentiel.\n\n" +
-            "Quelle tâche répétitive vous prend le plus de temps ?",
-        chatbots: "Nos **chatbots pour entreprises** sont des assistants intelligents personnalisés ! 🤖\n\n" +
-            "Ce qu'ils font :\n" +
-            "• **Réponses 24/7** — vos clients ont des réponses même quand vous dormez\n" +
-            "• **Basés sur vos données** — ils connaissent vos produits, prix, horaires\n" +
-            "• **Intégration WhatsApp & Web** — là où sont vos clients\n\n" +
-            "Comme le dit Fatou D. (prestataire à Dakar) : *\"Le chatbot répond à mes clients à ma place. Je gagne du temps chaque jour !\"*",
-        website: "Nous créons des **sites web professionnels** pour votre entreprise ! 🌐\n\n" +
-            "Ce qu'on propose :\n" +
-            "• **Design responsive et rapide** — beau sur mobile et ordi\n" +
-            "• **Optimisé SEO** — pour être trouvé sur Google\n" +
-            "• **Hébergement et HTTPS inclus** — tout est géré pour vous\n\n" +
-            "Sites vitrines et landing pages pour donner à votre entreprise une présence en ligne crédible et moderne.",
-        gestion: "Les **outils de gestion personnalisés** sont notre cœur de métier ! 📊\n\n" +
-            "On crée pour vous :\n" +
-            "• **Tableaux de bord clairs** — vos chiffres en un coup d'œil\n" +
-            "• **Suivi ventes et stock** — plus jamais de rupture ou d'oubli\n" +
-            "• **Trésorerie et livraisons** — tout centralisé\n\n" +
-            "Comme le dit Mialy R. (vendeuse en ligne à Antananarivo) : *\"Je vois mes commandes, mes paiements et mes livraisons dans un seul écran. Un vrai changement !\"*\n\n" +
-            "Format : Excel, Google Sheets ou application légère selon votre besoin.",
-        suivi: "Le **suivi client intelligent** centralise toute votre relation commerciale ! 👥\n\n" +
-            "Fonctionnalités :\n" +
-            "• **Fiches et historique client** — tout l'historique accessible\n" +
-            "• **Relances et rappels** — ne ratez plus aucune opportunité\n" +
-            "• **Pipeline commercial** — suivez vos prospects jusqu'à la vente\n\n" +
-            "Fini les oublis et les opportunités manquées !",
-        excel: "Non, Datalio ne crée pas uniquement des fichiers Excel ! 📋\n\n" +
-            "On propose des **solutions digitales complètes** :\n" +
-            "• Outils de gestion (Excel, Google Sheets OU applications légères)\n" +
+        services: "Nos 5 services :\n\n" +
+            "📊 <a href=\"#solutions\">Outils de gestion</a>\n" +
+            "⚡ <a href=\"#solutions\">Automatisation</a>\n" +
+            "🤖 <a href=\"#solutions\">Chatbots</a>\n" +
+            "🌐 <a href=\"#solutions\">Sites web</a>\n" +
+            "👥 <a href=\"#solutions\">Suivi client</a>\n\n" +
+            "→ <a href=\"#solutions\">Voir tous les détails</a>",
+        pricing: "Les prix sont définis après un audit gratuit de votre besoin.\n\n" +
+            "Chaque solution est personnalisée selon votre activité.\n\n" +
+            "→ <a href=\"#\" data-whatsapp>Demander un devis gratuit sur WhatsApp</a>",
+        order: "Pour commander :\n\n" +
+            "1. On échange sur votre besoin\n" +
+            "2. On prépare votre solution\n" +
+            "3. Vous l'utilisez !\n\n" +
+            "→ <a href=\"#\" data-whatsapp>Commander sur WhatsApp</a>",
+        human: "Notre équipe est disponible sur WhatsApp.\n\n" +
+            "→ <a href=\"#\" data-whatsapp>Parler à un conseiller</a>",
+        automation: "**Automatisation des tâches** :\n" +
+            "Rappels, rapports, calculs et alertes automatiques.\n\n" +
+            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
+            "→ <a href=\"#\" data-whatsapp data-product=\"Automatisation des tâches\">Commander</a>",
+        chatbots: "**Chatbots pour entreprises** :\n" +
+            "Réponses 24/7, basés sur vos données, intégrés à WhatsApp.\n\n" +
+            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
+            "→ <a href=\"#\" data-whatsapp data-product=\"Chatbots pour entreprises\">Commander</a>",
+        website: "**Sites web professionnels** :\n" +
+            "Design responsive, SEO optimisé, hébergement inclus.\n\n" +
+            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
+            "→ <a href=\"#\" data-whatsapp data-product=\"Création de sites web\">Commander</a>",
+        gestion: "**Outils de gestion** :\n" +
+            "Tableau de bord, suivi ventes/stock, trésorerie.\n\n" +
+            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
+            "→ <a href=\"#\" data-whatsapp data-product=\"Outils de gestion personnalisés\">Commander</a>",
+        suivi: "**Suivi client intelligent** :\n" +
+            "Fiches client, relances automatiques, pipeline commercial.\n\n" +
+            "→ <a href=\"#solutions\">En savoir plus</a>\n" +
+            "→ <a href=\"#\" data-whatsapp data-product=\"Suivi client intelligent\">Commander</a>",
+        excel: "Non, pas que Excel ! On propose :\n" +
+            "• Outils de gestion (Excel, Google Sheets ou apps)\n" +
             "• Automatisations\n" +
             "• Chatbots\n" +
             "• Sites web\n" +
-            "• Systèmes de suivi client\n\n" +
-            "Le format est choisi **en fonction de votre besoin** réel.",
-        informatique: "**Pas besoin d'être fort en informatique !** 💪\n\n" +
-            "Nos outils sont conçus pour des utilisateurs débutants. Tout est :\n" +
-            "• Expliqué simplement\n" +
-            "• Facile à prendre en main\n" +
-            "• Accompagné (on vous aide au démarrage)\n\n" +
-            "Une assistance est incluse pour vous aider à utiliser votre outil.",
-        assistance: "Oui, une **assistance est incluse** avec chaque solution ! 🛟\n\n" +
-            "• On vous aide à prendre en main votre outil\n" +
-            "• Vous pouvez nous écrire sur WhatsApp en cas de question\n" +
-            "• Accompagnement personnalisé\n\n" +
-            "📞 **+261 38 69 845 31**",
-        localisation: "Datalio est basé à **Antananarivo, Madagascar** 🇲🇬\n\n" +
-            "Mais on travaille avec des entreprises dans **8 pays francophones** : Madagascar, France, Côte d'Ivoire, Sénégal, Cameroun, Burkina Faso, Togo, Bénin.\n\n" +
-            "Tout se fait à distance via WhatsApp et en ligne !",
-        thanks: "Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions.\n\n" +
-            "Notre slogan : **Gérez mieux. Automatisez plus. Avancez vite.**\n\n" +
-            "On est là pour vous aider !",
-        default: "Je n'ai pas toutes les réponses, mais notre équipe peut vous aider ! 🤔\n\n" +
-            "Contactez-nous sur **WhatsApp** au **+261 38 69 845 31** pour une réponse personnalisée.\n\n" +
-            "Ou posez-moi une question sur nos services : gestion, automatisation, chatbots, sites web, suivi client..."
+            "• Suivi client\n\n" +
+            "→ <a href=\"#solutions\">Voir nos solutions</a>",
+        informatique: "Pas besoin d'être expert ! Nos outils sont simples et on vous accompagne.\n\n" +
+            "→ <a href=\"#faq\">Voir la FAQ</a>",
+        assistance: "Oui, une assistance est incluse avec chaque solution.\n\n" +
+            "→ <a href=\"#\" data-whatsapp>Nous contacter</a>",
+        localisation: "Basés à Antananarivo 🇲🇬, on travaille avec 8 pays francophones.\n\n" +
+            "→ <a href=\"#apropos\">En savoir plus sur nous</a>",
+        etapes: "Comment ça marche :\n\n" +
+            "1️⃣ Vous décrivez votre besoin\n" +
+            "2️⃣ On prépare l'outil\n" +
+            "3️⃣ Vous l'utilisez !\n\n" +
+            "→ <a href=\"#etapes\">Voir les détails</a>\n" +
+            "→ <a href=\"#\" data-whatsapp>Démarrer maintenant</a>",
+        thanks: "Avec plaisir ! 😊\n\n" +
+            "→ <a href=\"#\" data-whatsapp>Besoin d'autre chose ?</a>",
+        default: "Je n'ai pas la réponse, mais notre équipe peut vous aider !\n\n" +
+            "→ <a href=\"#\" data-whatsapp>Poser la question sur WhatsApp</a>"
     };
 
-    // Fonction pour formater les messages (markdown basique)
+    // Fonction pour formater les messages (markdown basique + liens)
     function formatMessage(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -257,6 +236,10 @@
         // Sécurité : échapper le contenu utilisateur, formater seulement le bot
         if (isBot) {
             messageDiv.innerHTML = formatMessage(safeText);
+            // Activer les liens WhatsApp dans les messages du bot
+            setTimeout(function() {
+                refreshWhatsAppLinks();
+            }, 10);
         } else {
             // Les messages utilisateur sont toujours échappés en texte pur
             messageDiv.textContent = safeText;
@@ -297,8 +280,11 @@
         if (msg.match(/\b(prix|tarif|cout|combien|cher|budget|devis)\b/)) {
             return botKnowledge.pricing;
         }
-        if (msg.match(/\b(commander|commande|acheter|souscrire|demarrer|commencer|comment faire)\b/)) {
+        if (msg.match(/\b(commander|commande|acheter|souscrire|demarrer|commencer)\b/)) {
             return botKnowledge.order;
+        }
+        if (msg.match(/\b(comment.*(marche|fonctionne)|etape|processus|procedure)\b/)) {
+            return botKnowledge.etapes;
         }
         if (msg.match(/\b(humain|personne|quelqu.?un|parler|agent|conseiller|reel|equipe)\b/)) {
             return botKnowledge.human;

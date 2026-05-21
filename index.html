@@ -845,6 +845,54 @@
         </div>
     </footer>
 
+    <!-- ========= CHATBOT DATALIO ========= -->
+    <div id="chatbot" class="chatbot">
+        <button id="chatbot-trigger" class="chatbot__trigger" aria-label="Ouvrir le chat Datalio">
+            <svg class="icon icon--lg chatbot__icon-open" aria-hidden="true"><use href="#icon-bot"/></svg>
+            <svg class="icon icon--lg chatbot__icon-close" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="chatbot__badge">1</span>
+        </button>
+        <div id="chatbot-window" class="chatbot__window" aria-hidden="true" role="dialog" aria-label="Chat avec Datalio">
+            <header class="chatbot__header">
+                <div class="chatbot__header-info">
+                    <div class="chatbot__avatar">
+                        <img src="assets/logo.png" alt="Datalio" />
+                    </div>
+                    <div>
+                        <strong>Datalio</strong>
+                        <div class="chatbot__status">
+                            <span class="chatbot__status-dot"></span>
+                            En ligne
+                        </div>
+                    </div>
+                </div>
+                <button id="chatbot-close" class="chatbot__close" aria-label="Fermer le chat">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </header>
+            <div id="chatbot-messages" class="chatbot__messages"></div>
+            <div id="chatbot-suggestions" class="chatbot__suggestions">
+                <button class="chatbot__suggestion" data-message="Quels sont vos services ?">Services</button>
+                <button class="chatbot__suggestion" data-message="Comment commander ?">Commander</button>
+                <button class="chatbot__suggestion" data-message="Parlez-moi des chatbots">Chatbots</button>
+                <button class="chatbot__suggestion" data-message="Je veux un site web">Site web</button>
+            </div>
+            <form id="chatbot-form" class="chatbot__form" autocomplete="off">
+                <input id="chatbot-input" class="chatbot__input" type="text" placeholder="Écrivez votre message..." aria-label="Message" />
+                <button type="submit" class="chatbot__send" aria-label="Envoyer">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Bouton flottant WhatsApp -->
     <a class="fab" href="#" data-whatsapp aria-label="Discuter sur WhatsApp">
         <svg class="icon icon--lg" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
