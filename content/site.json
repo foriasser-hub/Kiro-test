@@ -4,7 +4,7 @@
     "title_part1": "Des solutions digitales",
     "title_highlight": "premium",
     "title_part2": "pour gérer, vendre et développer votre entreprise",
-    "subtitle": "Datalio crée des sites web premium avec chatbot, SEO, Google Analytics et espace admin sécurisé, ainsi que des mini-logiciels de gestion locaux pour petites entreprises à Antananarivo, Madagascar et en Afrique francophone.",
+    "subtitle": "Datalio crée des sites web premium, des mini-logiciels de gestion, des chatbots et des automatisations simples pour les petites entreprises à Antananarivo, Madagascar et en Afrique francophone. SEO, Google Analytics et espace admin sécurisé sont inclus dans nos sites premium.",
     "tagline": "Un site qui vend, des outils qui gèrent, un chatbot qui répond. Votre entreprise tourne, même quand vous dormez.",
     "cta_primary": "Demander un devis",
     "cta_secondary": "Voir nos services",
@@ -38,10 +38,10 @@
     "eyebrow": "À propos",
     "title_part1": "L'humain derrière",
     "title_highlight": "Datalio",
-    "lead": "Datalio est né d'un constat simple : les petites entreprises africaines ont les mêmes ambitions que les grandes, mais rarement les mêmes outils. Nous comblons cet écart avec des solutions digitales premium — sites web premium et mini-logiciels de gestion — accessibles, sur-mesure et pensées pour le terrain.",
+    "lead": "Datalio est né d'un constat simple : les petites entreprises africaines ont les mêmes ambitions que les grandes, mais rarement les mêmes outils. Nous comblons cet écart avec des solutions digitales premium — sites web premium, mini-logiciels de gestion, chatbots et automatisations simples — accessibles, sur-mesure et pensées pour le terrain.",
     "paragraph_1": "Notre mission est claire : rendre le digital simple et concret pour les commerçants, vendeurs en ligne, prestataires de service et entrepreneurs qui n'ont ni le temps, ni l'envie, de se battre avec des logiciels compliqués. Nous écoutons votre activité, comprenons vos contraintes, et construisons un outil qui s'intègre vraiment à votre quotidien.",
     "paragraph_2": "Pas de jargon, pas de surcouche inutile. Juste des solutions qui font gagner du temps, sécurisent les données, et donnent une vraie vision sur le business. Chaque projet commence par un échange humain sur WhatsApp, parce qu'un bon outil commence toujours par une bonne conversation.",
-    "paragraph_3": "Basé à Antananarivo, Datalio accompagne les petites entreprises à Madagascar et en Afrique francophone : création de sites web premium, mini-logiciels de gestion locaux, chatbot WhatsApp, SEO et Google Analytics.",
+    "paragraph_3": "Basé à Antananarivo, Datalio accompagne les petites entreprises à Madagascar et en Afrique francophone : sites web premium, mini-logiciels de gestion locaux, chatbots et automatisations simples. SEO, Google Analytics et espace admin sécurisé sont systématiquement inclus dans nos sites premium.",
     "image": "/assets/about-entrepreneur.jpg",
     "image_alt": "Entrepreneur africain en costume, concentré sur son ordinateur portable, dans un bureau moderne avec vue urbaine et lumière naturelle",
     "signature_name": "L'équipe Datalio",
@@ -68,38 +68,48 @@
     ]
   },
   "included": {
-    "title": "Ce qui est inclus",
-    "intro": "Avec chaque projet Datalio, vous bénéficiez d'une prestation complète, sans surprise.",
+    "title": "Inclus dans nos sites premium",
+    "intro": "Avec chaque site web premium Datalio, vous bénéficiez d'une prestation complète. Pas de fonctionnalités à acheter en plus : tout est livré clé en main.",
     "items": [
       {
-        "icon": "rocket",
-        "title": "Livraison rapide",
-        "description": "Mise en ligne en 5 à 10 jours selon le périmètre."
-      },
-      {
-        "icon": "target",
-        "title": "Sur-mesure",
-        "description": "Tout est adapté à votre activité, vos produits et votre façon de travailler."
-      },
-      {
-        "icon": "handshake",
-        "title": "Accompagnement",
-        "description": "Une vraie prise en main avec vous, pas juste un livrable."
+        "icon": "trending-up",
+        "title": "SEO de base & Google Analytics",
+        "description": "Référencement Google configuré (balises, sitemap, Schema.org) et suivi du trafic avec Google Analytics 4."
       },
       {
         "icon": "settings",
-        "title": "Maintenance",
-        "description": "Mises à jour, sauvegardes et corrections inclues sur la durée convenue."
+        "title": "Espace admin sécurisé",
+        "description": "Une interface admin authentifiée via GitHub pour modifier vos textes, images, FAQ et articles sans toucher au code."
       },
       {
-        "icon": "trending-up",
-        "title": "SEO & Analytics",
-        "description": "Référencement Google et suivi du trafic configurés dès la mise en ligne."
+        "icon": "bot",
+        "title": "Chatbot intégré",
+        "description": "Un assistant qui répond aux questions courantes de vos visiteurs, jour et nuit, directement sur le site."
       },
       {
-        "icon": "gem",
-        "title": "Qualité premium",
-        "description": "Design soigné, performances et accessibilité au standard professionnel."
+        "icon": "whatsapp",
+        "title": "Bouton WhatsApp",
+        "description": "Un bouton flottant et des CTA WhatsApp pour discuter en direct avec vous, message pré-rempli."
+      },
+      {
+        "icon": "message",
+        "title": "Formulaire de contact",
+        "description": "Un formulaire sécurisé qui envoie chaque message directement dans votre boîte mail."
+      },
+      {
+        "icon": "sparkles",
+        "title": "Design responsive",
+        "description": "Une expérience soignée sur mobile, tablette et ordinateur, avec performances et accessibilité au standard professionnel."
+      },
+      {
+        "icon": "handshake",
+        "title": "Maintenance technique",
+        "description": "Mises à jour, sauvegardes et corrections prises en charge sur la durée convenue."
+      },
+      {
+        "icon": "rocket",
+        "title": "Mise en ligne",
+        "description": "Hébergement HTTPS, nom de domaine connecté, et site publié — vous n'avez rien à gérer."
       }
     ]
   },

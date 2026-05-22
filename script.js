@@ -140,11 +140,11 @@
        - Si ne sait pas → redirige vers WhatsApp
        
        SERVICES :
-       1. Outils de gestion (tableaux de bord, stock, ventes)
-       2. Automatisation (rappels, rapports, alertes)
-       3. Chatbots (WhatsApp, web, Facebook)
-       4. Sites web (vitrine, landing page)
-       5. Suivi client (CRM, relances, pipeline)
+       1. Sites web premium (avec SEO, Analytics, admin sécurisé inclus)
+       2. Mini-logiciels de gestion (tableaux de bord, stock, ventes)
+       3. Chatbots pour entreprises (WhatsApp, web, Facebook)
+       4. Automatisations pour petites entreprises (rappels, rapports, alertes)
+       5. Maintenance & accompagnement digital (mises à jour, conseils)
        ========================================= */
     var chatbot = document.getElementById('chatbot');
     var chatbotTrigger = document.getElementById('chatbot-trigger');
@@ -253,7 +253,7 @@
         
         // --- LISTE DES SERVICES ---
         if (containsKeyword(msg, ['service', 'solution', 'propose', 'offre', 'faites', 'quoi faire', 'liste', 'activite'])) {
-            return "Nous proposons : outils de gestion, automatisation, chatbots, sites web et suivi client. <a href=\"" + LINKS.solutions + "\">Voir les services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+            return "Nous proposons : sites web premium, mini-logiciels de gestion, chatbots, automatisations et maintenance & accompagnement digital. SEO, Google Analytics et espace admin sécurisé sont inclus dans nos sites premium. <a href=\"" + LINKS.solutions + "\">Voir les services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- COMMANDER ---
@@ -278,7 +278,7 @@
         
         // --- SITE WEB ---
         if (containsKeyword(msg, ['site', 'web', 'internet', 'vitrine', 'landing', 'page', 'seo', 'google', 'en ligne'])) {
-            return "Nous créons des sites vitrines et landing pages professionnels. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+            return "Nous créons des sites web premium sur-mesure. SEO de base, Google Analytics, espace admin sécurisé, chatbot, WhatsApp et formulaire de contact sont inclus. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- GESTION / TABLEAU DE BORD ---
@@ -288,7 +288,7 @@
         
         // --- SUIVI CLIENT / CRM ---
         if (containsKeyword(msg, ['suivi', 'client', 'crm', 'relance', 'historique', 'pipeline', 'commercial', 'prospect'])) {
-            return "Nous mettons en place un suivi client intelligent avec relances automatiques. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+            return "Le suivi client (mini-CRM, relances, historique) peut être intégré à votre mini-logiciel de gestion ou à votre site web premium. <a href=\"" + LINKS.solutions + "\">Voir nos services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- EXCEL / FICHIER ---
