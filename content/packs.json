@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "name": "Pack Présence Premium",
+      "price": "Sur devis",
+      "price_period": "/ projet",
+      "tagline": "L'essentiel pour exister en ligne avec sérieux",
+      "description": "Pour les entrepreneurs qui veulent une présence en ligne propre, rapide à mettre en place, sans se ruiner. Site vitrine premium, SEO de base, intégration WhatsApp et formulaire de contact.",
+      "items_included": [
+        "Site vitrine premium responsive (jusqu'à 5 sections)",
+        "SEO de base : balises, sitemap, robots.txt",
+        "Intégration WhatsApp (bouton + lien)",
+        "Formulaire de contact",
+        "Hébergement GitHub Pages + HTTPS inclus",
+        "Mise en ligne en 5-7 jours",
+        "1 mois de maintenance offert"
+      ],
+      "cta_text": "Demander un devis",
+      "cta_whatsapp_message": "Bonjour Datalio, je suis intéressé(e) par le Pack Présence Premium. J'aimerais en savoir plus.",
+      "popular": false,
+      "recommended": false,
+      "active": true,
+      "order": 1
+    },
+    {
+      "name": "Pack Business Premium",
+      "price": "Sur devis",
+      "price_period": "/ projet",
+      "tagline": "La solution complète pour vendre et gérer en ligne",
+      "description": "Pour les entreprises qui veulent une vraie vitrine ET commencer à automatiser. Tout le Pack Présence + un chatbot intelligent, un mini-logiciel de gestion et le suivi des conversions Google Analytics.",
+      "items_included": [
+        "Tout le Pack Présence Premium",
+        "Chatbot intégré (web + WhatsApp Business)",
+        "Mini-logiciel de gestion (ventes, stock, trésorerie)",
+        "Espace admin sécurisé (GitHub OAuth)",
+        "Google Analytics 4 + événements de conversion",
+        "Search Console & soumission sitemap",
+        "Mise en ligne en 7-10 jours",
+        "3 mois de maintenance offerts"
+      ],
+      "cta_text": "Demander un devis",
+      "cta_whatsapp_message": "Bonjour Datalio, je suis intéressé(e) par le Pack Business Premium. J'aimerais en savoir plus.",
+      "popular": true,
+      "recommended": true,
+      "active": true,
+      "order": 2
+    },
+    {
+      "name": "Pack Signature Premium",
+      "price": "Sur devis",
+      "price_period": "/ projet",
+      "tagline": "Le projet sur-mesure pour les entreprises ambitieuses",
+      "description": "Pour les structures qui veulent un système digital complet, taillé exactement pour leur activité. Tout le Pack Business + suivi client, automatisations sur-mesure, contenu blog et accompagnement éditorial.",
+      "items_included": [
+        "Tout le Pack Business Premium",
+        "Suivi client intelligent (mini-CRM)",
+        "Automatisations sur-mesure (relances, rapports, alertes)",
+        "Blog SEO avec articles fournis",
+        "Accompagnement éditorial (calendrier de contenu)",
+        "Configuration multi-administrateurs",
+        "Formation à l'admin (1h en visio)",
+        "6 mois de maintenance et évolutions inclus"
+      ],
+      "cta_text": "Demander un devis",
+      "cta_whatsapp_message": "Bonjour Datalio, je suis intéressé(e) par le Pack Signature Premium. J'aimerais en discuter.",
+      "popular": false,
+      "recommended": false,
+      "active": true,
+      "order": 3
+    }
+  ]
+}

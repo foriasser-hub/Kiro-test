@@ -1,92 +1,160 @@
 {
   "hero": {
     "badge": "Solutions digitales pour entreprises",
-    "title_part1": "Gagnez 10h par semaine",
-    "title_highlight": "sans embaucher",
-    "title_part2": "grâce à des outils digitaux sur-mesure",
-    "subtitle": "Datalio crée vos outils de gestion, automatise vos tâches répétitives et met en place des chatbots qui répondent à vos clients 24/7. Résultat : vous récupérez votre temps pour développer votre business.",
-    "tagline": "Fini les soirées à répondre aux mêmes questions. Votre entreprise tourne, même quand vous dormez.",
-    "cta_primary": "Parler de mon projet",
-    "cta_secondary": "Découvrir les solutions",
+    "title_part1": "Des solutions digitales",
+    "title_highlight": "premium",
+    "title_part2": "pour gérer, vendre et développer votre entreprise",
+    "subtitle": "Datalio crée des sites web premium avec chatbot, SEO, Google Analytics et espace admin sécurisé, ainsi que des mini-logiciels de gestion locaux pour petites entreprises à Antananarivo, Madagascar et en Afrique francophone.",
+    "tagline": "Un site qui vend, des outils qui gèrent, un chatbot qui répond. Votre entreprise tourne, même quand vous dormez.",
+    "cta_primary": "Demander un devis",
+    "cta_secondary": "Voir nos services",
     "point_1": "Réponse sous 24h",
     "point_2": "Livraison en 5-10 jours",
     "point_3": "Accompagnement inclus"
   },
   "whatsapp": {
-    "number": "261386984531",
-    "default_message": "Bonjour, je suis intéressé(e) par les solutions digitales Datalio. J'aimerais en savoir plus pour mon entreprise."
+    "number": "261386315306",
+    "default_message": "Bonjour Datalio, je souhaite discuter d'un projet digital.",
+    "devis_message": "Bonjour Datalio, j'aimerais demander un devis pour mon projet.",
+    "premium_sites_message": "Bonjour Datalio, je m'intéresse à votre offre Site web premium. J'aimerais en savoir plus.",
+    "mini_software_message": "Bonjour Datalio, je m'intéresse à votre offre Mini-logiciel de gestion. J'aimerais en savoir plus pour mon activité.",
+    "support_message": "Bonjour Datalio, j'ai besoin d'aide / d'assistance.",
+    "fab_enabled": true
   },
-  "services": [
-    {
-      "icon": "bar-chart",
-      "title": "Outils de gestion personnalisés",
-      "tag": "",
-      "description": "Tableaux de bord, suivi des ventes, gestion de stock, trésorerie, commandes et livraisons — réunis dans un outil pensé pour vous.",
-      "benefits": ["Tableau de bord clair", "Suivi ventes & stock", "Trésorerie & livraisons"],
-      "featured": false
-    },
-    {
-      "icon": "zap",
-      "title": "Automatisation des tâches",
-      "tag": "",
-      "description": "Suivis, calculs, rappels, rapports et processus répétitifs : Datalio automatise ce qui peut l'être pour vous libérer du temps.",
-      "benefits": ["Rappels automatiques", "Rapports périodiques", "Calculs & alertes"],
-      "featured": true
-    },
-    {
-      "icon": "bot",
-      "title": "Chatbots pour entreprises",
-      "tag": "",
-      "description": "Des assistants intelligents capables de répondre à vos clients à partir des informations propres à votre entreprise.",
-      "benefits": ["Réponses 24/7", "Basé sur vos données", "Intégration WhatsApp & Web"],
-      "featured": false
-    },
-    {
-      "icon": "globe",
-      "title": "Création de sites web",
-      "tag": "",
-      "description": "Sites vitrines et landing pages professionnels pour donner à votre entreprise une présence en ligne crédible et moderne.",
-      "benefits": ["Design responsive & rapide", "Optimisé SEO", "Hébergement & HTTPS inclus"],
-      "featured": false
-    },
-    {
-      "icon": "users",
-      "title": "Suivi client intelligent",
-      "tag": "",
-      "description": "Centralisez les demandes, l'historique client, les relances et toute votre organisation commerciale au même endroit.",
-      "benefits": ["Fiches & historique client", "Relances et rappels", "Pipeline commercial"],
-      "featured": false
-    }
-  ],
-  "testimonials": [],
-  "faq": [
-    {
-      "question": "Est-ce que Datalio crée uniquement des fichiers Excel ?",
-      "answer": "Non. Datalio propose des solutions digitales complètes : outils de gestion (Excel, Google Sheets ou applications légères), automatisations, chatbots, sites web et systèmes de suivi client. Le format est choisi en fonction de votre besoin."
-    },
-    {
-      "question": "Est-ce que vous pouvez personnaliser un outil pour mon activité ?",
-      "answer": "Oui, c'est notre cœur de métier. Chaque solution est adaptée à votre secteur, vos produits, votre devise et vos processus. On commence par un échange pour bien comprendre votre besoin."
-    },
-    {
-      "question": "Est-ce que je dois être fort en informatique ?",
-      "answer": "Pas du tout. Nos outils sont conçus pour des utilisateurs débutants. Tout est expliqué simplement, et vous bénéficiez d'un accompagnement pour la prise en main."
-    },
-    {
-      "question": "Est-ce que vous créez aussi des chatbots et des sites web ?",
-      "answer": "Oui. Nous créons des chatbots pour WhatsApp, sites web ou pages Facebook, ainsi que des sites vitrines et landing pages professionnels qui représentent votre entreprise en ligne."
-    },
-    {
-      "question": "Comment commander une solution ?",
-      "answer": "Le plus simple est de cliquer sur le bouton \"Discuter sur WhatsApp\". On échange sur votre besoin, on vous propose la solution adaptée, puis on lance la mise en place."
-    },
-    {
-      "question": "Est-ce qu'il y a une assistance ?",
-      "answer": "Oui. Une assistance est incluse pour vous aider à utiliser votre outil. Vous pouvez nous écrire directement sur WhatsApp en cas de question."
-    }
-  ],
   "contact": {
-    "phone": "+261 38 69 845 31",
-    "phone_link": "+261386984531"
+    "phone": "+261 38 63 153 06",
+    "phone_link": "+261386315306",
+    "email": "contact@datalio.online",
+    "address": "Antananarivo, Madagascar"
+  },
+  "social": {
+    "facebook": "",
+    "linkedin": "",
+    "instagram": "",
+    "youtube": "",
+    "tiktok": ""
+  },
+  "about": {
+    "eyebrow": "À propos",
+    "title_part1": "L'humain derrière",
+    "title_highlight": "Datalio",
+    "lead": "Datalio est né d'un constat simple : les petites entreprises africaines ont les mêmes ambitions que les grandes, mais rarement les mêmes outils. Nous comblons cet écart avec des solutions digitales premium — sites web premium et mini-logiciels de gestion — accessibles, sur-mesure et pensées pour le terrain.",
+    "paragraph_1": "Notre mission est claire : rendre le digital simple et concret pour les commerçants, vendeurs en ligne, prestataires de service et entrepreneurs qui n'ont ni le temps, ni l'envie, de se battre avec des logiciels compliqués. Nous écoutons votre activité, comprenons vos contraintes, et construisons un outil qui s'intègre vraiment à votre quotidien.",
+    "paragraph_2": "Pas de jargon, pas de surcouche inutile. Juste des solutions qui font gagner du temps, sécurisent les données, et donnent une vraie vision sur le business. Chaque projet commence par un échange humain sur WhatsApp, parce qu'un bon outil commence toujours par une bonne conversation.",
+    "paragraph_3": "Basé à Antananarivo, Datalio accompagne les petites entreprises à Madagascar et en Afrique francophone : création de sites web premium, mini-logiciels de gestion locaux, chatbot WhatsApp, SEO et Google Analytics.",
+    "image": "/assets/about-entrepreneur.jpg",
+    "image_alt": "Entrepreneur africain en costume, concentré sur son ordinateur portable, dans un bureau moderne avec vue urbaine et lumière naturelle",
+    "signature_name": "L'équipe Datalio",
+    "signature_role": "Antananarivo · au service de l'Afrique francophone"
+  },
+  "expertises": {
+    "title": "Nos deux expertises",
+    "intro": "Deux savoir-faire complémentaires pour donner à votre entreprise les outils dont elle a vraiment besoin.",
+    "items": [
+      {
+        "title": "Sites web premium",
+        "tagline": "Une présence en ligne qui inspire confiance",
+        "description": "Sites vitrines premium avec chatbot intégré, SEO, Google Analytics, espace admin sécurisé et maintenance — pour une présence en ligne crédible et moderne.",
+        "image": "",
+        "cta_text": "Découvrir cette offre"
+      },
+      {
+        "title": "Mini-logiciels de gestion",
+        "tagline": "Pilotez votre activité sans Excel anarchique",
+        "description": "Tableaux de bord, suivi des ventes, gestion de stock, trésorerie, commandes et livraisons — réunis dans un mini-logiciel local pensé pour votre activité.",
+        "image": "",
+        "cta_text": "Découvrir cette offre"
+      }
+    ]
+  },
+  "included": {
+    "title": "Ce qui est inclus",
+    "intro": "Avec chaque projet Datalio, vous bénéficiez d'une prestation complète, sans surprise.",
+    "items": [
+      {
+        "icon": "rocket",
+        "title": "Livraison rapide",
+        "description": "Mise en ligne en 5 à 10 jours selon le périmètre."
+      },
+      {
+        "icon": "target",
+        "title": "Sur-mesure",
+        "description": "Tout est adapté à votre activité, vos produits et votre façon de travailler."
+      },
+      {
+        "icon": "handshake",
+        "title": "Accompagnement",
+        "description": "Une vraie prise en main avec vous, pas juste un livrable."
+      },
+      {
+        "icon": "settings",
+        "title": "Maintenance",
+        "description": "Mises à jour, sauvegardes et corrections inclues sur la durée convenue."
+      },
+      {
+        "icon": "trending-up",
+        "title": "SEO & Analytics",
+        "description": "Référencement Google et suivi du trafic configurés dès la mise en ligne."
+      },
+      {
+        "icon": "gem",
+        "title": "Qualité premium",
+        "description": "Design soigné, performances et accessibilité au standard professionnel."
+      }
+    ]
+  },
+  "why_us": {
+    "title": "Pourquoi Datalio",
+    "intro": "L'expertise digitale, à taille humaine.",
+    "items": [
+      {
+        "icon": "sparkles",
+        "title": "Simple à utiliser",
+        "description": "Une interface claire, pensée pour des utilisateurs non techniques."
+      },
+      {
+        "icon": "store",
+        "title": "Adapté aux petites entreprises",
+        "description": "Conçu pour les TPE, vendeurs en ligne, commerces et freelances."
+      },
+      {
+        "icon": "gem",
+        "title": "Design professionnel",
+        "description": "Une présentation soignée, à la hauteur de votre image de marque."
+      },
+      {
+        "icon": "settings",
+        "title": "Automatisation utile",
+        "description": "Pas de gadgets : seulement des automatisations qui font gagner du temps."
+      },
+      {
+        "icon": "trending-up",
+        "title": "Suivi clair des données",
+        "description": "Vos chiffres clés visibles d'un coup d'œil, en temps réel."
+      },
+      {
+        "icon": "handshake",
+        "title": "Accompagnement personnalisé",
+        "description": "Un échange humain pour comprendre votre besoin et adapter la solution."
+      }
+    ]
+  },
+  "how_it_works": {
+    "title": "Comment ça marche",
+    "intro": "Votre solution en 3 étapes.",
+    "steps": [
+      {
+        "title": "Je décris mon besoin",
+        "description": "On échange sur WhatsApp pour comprendre votre activité et vos objectifs."
+      },
+      {
+        "title": "Datalio prépare l'outil",
+        "description": "On adapte la solution à vos données, votre flux de travail et votre équipe."
+      },
+      {
+        "title": "Je l'utilise au quotidien",
+        "description": "Vous recevez votre outil opérationnel, avec un guide et un accompagnement."
+      }
+    ]
   }
 }

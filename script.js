@@ -65,8 +65,8 @@
     };
 
     /* ----- Configuration WhatsApp ----- */
-    var WHATSAPP_NUMBER  = '261386984531';
-    var WHATSAPP_MESSAGE = "Bonjour, je suis intéressé(e) par les solutions digitales Datalio. J'aimerais en savoir plus pour mon entreprise.";
+    var WHATSAPP_NUMBER  = '261386315306';
+    var WHATSAPP_MESSAGE = "Bonjour Datalio, je souhaite discuter d'un projet digital.";
 
     function buildWhatsAppLink(productName) {
         var msg = WHATSAPP_MESSAGE;
@@ -158,7 +158,7 @@
     // Liens de redirection
     var LINKS = {
         solutions: 'https://datalio.online/#solutions',
-        whatsapp: 'https://wa.me/261386984531',
+        whatsapp: 'https://wa.me/261386315306',
         blog: 'https://datalio.online/blog/'
     };
 
@@ -403,6 +403,172 @@
 
     initChatbot();
 
+    /* =========================================
+       FORMULAIRE DE CONTACT
+       -----------------------------------------
+       Stratégie en deux temps :
+       1. Si une access_key Web3Forms est configurée (chargée depuis
+          content/settings.json), on tente l'envoi via leur API.
+          La access_key est PUBLIQUE par design (clé d'envoi, pas un
+          secret) — équivalent à un identifiant Formspree.
+       2. Sinon (ou si l'envoi Web3Forms échoue), on bascule vers
+          mailto: pour ouvrir le client mail du visiteur avec tous
+          les champs préremplis.
+       Le formulaire ne casse jamais : il a au minimum la fonction
+       mailto comme filet de sécurité.
+       ========================================= */
+    function initContactForm() {
+        var form = document.getElementById('contact-form');
+        if (!form) return;
+
+        var submitBtn      = document.getElementById('contact-form-submit');
+        var submitLabel    = form.querySelector('.form__submit-label');
+        var errorEl        = document.getElementById('contact-form-error');
+        var successEl      = document.getElementById('contact-form-success');
+        var accessKeyInput = document.getElementById('contact-form-access-key');
+        var DEFAULT_RECEIVER_EMAIL = 'contact@datalio.online';
+
+        var originalLabel = submitLabel ? submitLabel.textContent : 'Envoyer ma demande';
+
+        function setBusy(isBusy) {
+            submitBtn.disabled = isBusy;
+            if (submitLabel) submitLabel.textContent = isBusy ? 'Envoi en cours…' : originalLabel;
+        }
+
+        function showSuccess(msg) {
+            if (msg) successEl.textContent = msg;
+            successEl.hidden = false;
+            errorEl.hidden = true;
+        }
+        function showError(msg) {
+            if (msg) errorEl.textContent = msg;
+            errorEl.hidden = false;
+            successEl.hidden = true;
+        }
+        function clearMessages() {
+            errorEl.hidden = true;
+            successEl.hidden = true;
+        }
+
+        // Récupère les valeurs des champs visibles (sans honeypot ni champs Web3Forms)
+        function collectFields() {
+            var fields = {};
+            ['name', 'company', 'email', 'phone', 'project_type', 'budget', 'message'].forEach(function (name) {
+                var el = form.elements[name];
+                if (el) fields[name] = (el.value || '').trim();
+            });
+            return fields;
+        }
+
+        // Fallback mailto: ouvre le client mail avec un message prérempli
+        function openMailto(fields, receiverEmail) {
+            var receiver = receiverEmail || DEFAULT_RECEIVER_EMAIL;
+            var subject = '[Datalio] Demande de ' + (fields.name || 'un visiteur');
+            var bodyLines = [
+                'Nom complet : ' + (fields.name || ''),
+                'Entreprise : ' + (fields.company || '—'),
+                'Email : ' + (fields.email || ''),
+                'Téléphone : ' + (fields.phone || '—'),
+                'Type de projet : ' + (fields.project_type || '—'),
+                'Budget estimé : ' + (fields.budget || '—'),
+                '',
+                '— Message —',
+                fields.message || '',
+                '',
+                '— Envoyé depuis https://datalio.online/#contact'
+            ];
+            var href = 'mailto:' + encodeURIComponent(receiver)
+                + '?subject=' + encodeURIComponent(subject)
+                + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+            window.location.href = href;
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearMessages();
+
+            // --- 1. Honeypot anti-bot ---
+            var honeypot = form.elements['botcheck'];
+            if (honeypot && honeypot.value) {
+                // bot détecté — on simule un succès sans rien envoyer
+                showSuccess();
+                form.reset();
+                return;
+            }
+
+            // --- 2. Validation HTML5 native ---
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // --- 3. Validation custom : message minimum 20 caractères ---
+            var fields = collectFields();
+            if (!fields.message || fields.message.length < 20) {
+                showError('Votre message doit contenir au moins 20 caractères pour que nous puissions bien comprendre votre besoin.');
+                var msgField = form.elements['message'];
+                if (msgField) msgField.focus();
+                return;
+            }
+
+            // --- 4. Tentative Web3Forms si access_key configurée ---
+            var accessKey = accessKeyInput && accessKeyInput.value && accessKeyInput.value.trim();
+            var receiver = (form.dataset.receiverEmail || DEFAULT_RECEIVER_EMAIL).trim();
+
+            if (accessKey && accessKey.length >= 8 && window.fetch) {
+                setBusy(true);
+                var formData = new FormData(form);
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(function (r) { return r.json().catch(function () { return { success: false }; }); })
+                .then(function (data) {
+                    if (data && data.success) {
+                        showSuccess('✓ Votre demande a été envoyée avec succès. Nous vous répondrons rapidement.');
+                        form.reset();
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('form_submit', {
+                                category: 'contact',
+                                label: 'contact_form_web3forms'
+                            });
+                        }
+                    } else {
+                        // Web3Forms a refusé : fallback mailto
+                        showSuccess('Nous ouvrons votre client mail pour finaliser l\'envoi…');
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('form_submit', {
+                                category: 'contact',
+                                label: 'contact_form_mailto_fallback'
+                            });
+                        }
+                        openMailto(fields, receiver);
+                    }
+                })
+                .catch(function () {
+                    showError('Une erreur réseau est survenue. Nous ouvrons votre client mail comme alternative…');
+                    setTimeout(function () { openMailto(fields, receiver); }, 1200);
+                })
+                .then(function () { setBusy(false); });
+                return;
+            }
+
+            // --- 5. Pas d'access_key : fallback direct mailto ---
+            setBusy(true);
+            showSuccess('Nous ouvrons votre client mail avec votre message prérempli. Si rien ne s\'ouvre, contactez-nous sur WhatsApp.');
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('form_submit', {
+                    category: 'contact',
+                    label: 'contact_form_mailto'
+                });
+            }
+            openMailto(fields, receiver);
+            setTimeout(function () { setBusy(false); }, 1500);
+        });
+    }
+    initContactForm();
+
     /* ----- Mapping des icônes ----- */
     var EMOJI_TO_ICON = {
         '📊': 'bar-chart', '⚡': 'zap',  '💬': 'bot',     '👥': 'users',
@@ -507,6 +673,54 @@
                     el.setAttribute('href', 'tel:' + c.contact.phone_link.replace(/\s/g, ''));
                 }
             });
+            // phone_link sur les <a> dédiés (section contact)
+            document.querySelectorAll('[data-cms="contact.phone_link"]').forEach(function (el) {
+                if (c.contact.phone_link) {
+                    el.setAttribute('href', 'tel:' + c.contact.phone_link.replace(/\s/g, ''));
+                }
+            });
+            // email
+            if (c.contact.email && typeof c.contact.email === 'string') {
+                document.querySelectorAll('[data-cms="contact.email"]').forEach(function (el) {
+                    var safeEmail = c.contact.email.trim();
+                    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(safeEmail)) {
+                        if (el.tagName === 'A') {
+                            el.setAttribute('href', 'mailto:' + safeEmail);
+                        }
+                        // Met à jour aussi le texte si l'élément est un simple lien-email
+                        var hasOnlyText = el.children.length === 0;
+                        if (hasOnlyText) el.textContent = safeEmail;
+                    }
+                });
+            }
+            // adresse
+            if (c.contact.address) {
+                document.querySelectorAll('[data-cms="contact.address"]').forEach(function (el) {
+                    el.textContent = c.contact.address;
+                });
+            }
+        }
+
+        // FORMULAIRE DE CONTACT — accès clé Web3Forms + email destinataire
+        if (c.contact_form && typeof c.contact_form === 'object') {
+            var accessKeyInput = document.getElementById('contact-form-access-key');
+            if (accessKeyInput && c.contact_form.web3forms_access_key) {
+                var key = String(c.contact_form.web3forms_access_key).trim();
+                // Ne place que si ressemble vraiment à une access_key (UUID-ish)
+                if (/^[a-zA-Z0-9-]{20,80}$/.test(key)) {
+                    accessKeyInput.value = key;
+                }
+            }
+            var formEl = document.getElementById('contact-form');
+            if (formEl && c.contact_form.receiver_email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.contact_form.receiver_email)) {
+                formEl.dataset.receiverEmail = c.contact_form.receiver_email.trim();
+            }
+            if (formEl && c.contact_form.subject_prefix) {
+                var subjectInput = formEl.querySelector('input[name="subject"]');
+                if (subjectInput) {
+                    subjectInput.value = String(c.contact_form.subject_prefix).slice(0, 200);
+                }
+            }
         }
 
         refreshWhatsAppLinks();
@@ -521,8 +735,60 @@
         }
     }
 
-    // Charger le contenu CMS
-    if (window.fetch) {
+    /* =========================================
+       CHARGEMENT DU CONTENU CMS
+       -----------------------------------------
+       1. content/site.json est la source principale (hero, contact,
+          about, expertises, etc.) — toujours chargé en premier.
+       2. content/services.json, faq.json, testimonials.json sont des
+          collections dédiées éditées via Pages CMS. Si elles existent,
+          elles remplacent les sections correspondantes de site.json.
+       3. Si un fichier est absent ou invalide, on retombe silencieusement
+          sur les données de site.json puis sur le HTML statique. Le site
+          ne casse jamais.
+       ========================================= */
+    function fetchJsonSafe(path) {
+        if (!window.fetch) return null;
+        return fetch(path, { cache: 'no-cache' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .catch(function () { return null; });
+    }
+
+    function extractItems(data) {
+        if (!data) return null;
+        if (Array.isArray(data)) return data;
+        if (Array.isArray(data.items)) return data.items;
+        return null;
+    }
+
+    function filterActive(items) {
+        if (!Array.isArray(items)) return items;
+        return items.filter(function (it) {
+            return it && (it.active === undefined || it.active === true);
+        });
+    }
+
+    if (window.fetch && window.Promise) {
+        Promise.all([
+            fetchJsonSafe('content/site.json'),
+            fetchJsonSafe('content/services.json'),
+            fetchJsonSafe('content/faq.json'),
+            fetchJsonSafe('content/testimonials.json'),
+            fetchJsonSafe('content/settings.json')
+        ]).then(function (results) {
+            var data = results[0] || {};
+            var services = extractItems(results[1]);
+            var faq = extractItems(results[2]);
+            var testimonials = extractItems(results[3]);
+            var settings = results[4] || {};
+            if (services) data.services = filterActive(services);
+            if (faq) data.faq = faq;
+            if (testimonials) data.testimonials = filterActive(testimonials);
+            // settings.contact_form → exposé sous c.contact_form pour applyContent
+            if (settings.contact_form) data.contact_form = settings.contact_form;
+            applyContent(data);
+        }).catch(function () { /* le site garde le HTML statique */ });
+    } else if (window.fetch) {
         fetch('content/site.json', { cache: 'no-cache' })
             .then(function (r) { return r.ok ? r.json() : null; })
             .then(function (data) { if (data) applyContent(data); })

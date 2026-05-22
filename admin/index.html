@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Datalio — Admin</title>
+    <title>Datalio — Espace admin</title>
     <link rel="icon" type="image/png" href="../assets/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
@@ -30,7 +30,7 @@
             padding: 2rem;
         }
         .card {
-            max-width: 560px;
+            max-width: 620px;
             background: rgba(255,255,255,0.06);
             border: 1px solid rgba(255,255,255,0.12);
             backdrop-filter: blur(14px);
@@ -55,22 +55,39 @@
         .tagline {
             color: var(--gold);
             font-size: 0.9rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             letter-spacing: 0.01em;
         }
-        p { color: rgba(255,255,255,0.78); line-height: 1.65; margin: 0 0 1.5rem; font-size: 0.95rem; }
+        p { color: rgba(255,255,255,0.78); line-height: 1.65; margin: 0 0 1.25rem; font-size: 0.95rem; }
         .steps {
             text-align: left;
             background: rgba(0,0,0,0.2);
             border-radius: 14px;
             padding: 1.25rem 1.5rem;
-            margin: 1.5rem 0 2rem;
+            margin: 1.5rem 0 1.5rem;
             font-size: 0.92rem;
         }
         .steps ol { margin: 0; padding-left: 1.25rem; }
         .steps li { margin-bottom: 0.5rem; color: rgba(255,255,255,0.85); }
         .steps li:last-child { margin-bottom: 0; }
         .steps strong { color: var(--gold); }
+        .security {
+            text-align: left;
+            background: rgba(245,184,0,0.08);
+            border: 1px solid rgba(245,184,0,0.25);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin: 0 0 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.55;
+        }
+        .security strong { color: var(--gold); }
+        .security ul {
+            margin: 0.4rem 0 0;
+            padding-left: 1.1rem;
+        }
+        .security li { margin-bottom: 0.2rem; }
         .btn {
             display: inline-flex;
             align-items: center;
@@ -86,14 +103,21 @@
             transition: transform 0.2s ease;
         }
         .btn:hover { transform: translateY(-2px); }
-        .back {
-            display: inline-block;
-            margin-top: 1.25rem;
-            color: rgba(255,255,255,0.6);
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .links a {
+            color: rgba(255,255,255,0.7);
             font-size: 0.85rem;
             text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+            padding-bottom: 2px;
         }
-        .back:hover { color: #fff; }
+        .links a:hover { color: #fff; border-bottom-color: var(--gold); }
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -106,24 +130,39 @@
             letter-spacing: 0.1em;
             margin-bottom: 1rem;
         }
+        .lock {
+            display: inline-block;
+            margin-right: 0.4rem;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <img src="../assets/logo.png" alt="Datalio" class="logo" />
-        <span class="badge">Espace admin</span>
+        <span class="badge"><span class="lock">🔒</span>Espace admin sécurisé</span>
         <h1>Bienvenue, propriétaire 👋</h1>
-        <p class="tagline">Gérez le contenu de votre site Datalio</p>
+        <p class="tagline">Gérez le contenu de Datalio sans toucher au code</p>
 
-        <p>Pour modifier les textes, services, témoignages et FAQ de votre site, connectez-vous à <strong style="color:#fff;">Pages CMS</strong> avec votre compte GitHub.</p>
+        <p>L'admin Datalio est propulsé par <strong style="color:#fff;">Pages CMS</strong>. La connexion se fait via votre compte <strong style="color:#fff;">GitHub</strong>, sans mot de passe à mémoriser ni token à coller.</p>
+
+        <div class="security">
+            <strong>🔐 Sécurité</strong>
+            <ul>
+                <li>Aucun mot de passe stocké dans ce site</li>
+                <li>Aucun token GitHub exposé côté client</li>
+                <li>Seuls les <em>collaborateurs autorisés du repo GitHub</em> peuvent éditer</li>
+                <li>Toutes les modifications sont versionnées (commit Git visible)</li>
+            </ul>
+        </div>
 
         <div class="steps">
             <ol>
-                <li>Cliquez sur le bouton ci-dessous</li>
-                <li>Connectez-vous avec <strong>GitHub</strong> (le compte propriétaire du site)</li>
-                <li>Autorisez l'accès au repo <code>Kiro-test</code></li>
-                <li>Modifiez les textes, ajoutez des témoignages, etc.</li>
-                <li>Cliquez sur <strong>Save</strong> — le site se met à jour en 30 secondes</li>
+                <li>Cliquez sur <strong>Ouvrir l'admin Datalio</strong></li>
+                <li>Connectez-vous avec votre compte <strong>GitHub</strong></li>
+                <li>Autorisez l'accès au repo <code>foriasser-hub/Kiro-test</code></li>
+                <li>Modifiez textes, services, packs, FAQ, blog, témoignages…</li>
+                <li>Cliquez sur <strong>Save</strong> — le site est mis à jour en 30 à 60 secondes</li>
             </ol>
         </div>
 
@@ -132,8 +171,11 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
 
-        <br>
-        <a class="back" href="../">← Retour au site</a>
+        <div class="links">
+            <a href="../ADMIN-GUIDE.md" target="_blank" rel="noopener">📘 Guide admin complet</a>
+            <a href="https://pagescms.org/docs/" target="_blank" rel="noopener">Documentation Pages CMS</a>
+            <a href="../">← Retour au site</a>
+        </div>
     </div>
 </body>
 </html>
