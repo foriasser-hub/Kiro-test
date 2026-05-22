@@ -381,24 +381,12 @@
 
     <!-- ========= HERO ========= -->
     <section class="hero">
-        <div class="hero__bg" aria-hidden="true">
-            <span class="dot dot--1"></span>
-            <span class="dot dot--2"></span>
-            <span class="dot dot--3"></span>
-            <span class="ring ring--1"></span>
-            <span class="ring ring--2"></span>
-            <svg class="grid-lines" viewBox="0 0 800 600" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#g)"/>
-            </svg>
-        </div>
-
         <div class="container hero__inner">
             <div class="hero__content reveal">
+                <span class="hero__badge">
+                    <span class="hero__badge-dot" aria-hidden="true"></span>
+                    Solutions digitales premium
+                </span>
                 <h1 class="hero__title">
                     <span data-cms="hero.title_part1">Des solutions digitales</span> <span class="text-gold" data-cms="hero.title_highlight">premium</span>
                     <span data-cms="hero.title_part2">pour gérer, vendre et développer votre entreprise</span>
@@ -418,9 +406,9 @@
                     </a>
                 </div>
                 <ul class="hero__points">
-                    <li><span class="check"><svg class="icon icon--xs" aria-hidden="true"><use href="#icon-check"/></svg></span> <span data-cms="hero.point_1">Réponse sous 24h</span></li>
-                    <li><span class="check"><svg class="icon icon--xs" aria-hidden="true"><use href="#icon-check"/></svg></span> <span data-cms="hero.point_2">Livraison en 5-10 jours</span></li>
-                    <li><span class="check"><svg class="icon icon--xs" aria-hidden="true"><use href="#icon-check"/></svg></span> <span data-cms="hero.point_3">Accompagnement inclus</span></li>
+                    <li><span class="check"><svg class="icon icon--xs" aria-hidden="true"><use href="#icon-check"/></svg></span> <span data-cms="hero.point_1">Sites web premium</span></li>
+                    <li><span class="check"><svg class="icon icon--xs" aria-hidden="true"><use href="#icon-check"/></svg></span> <span data-cms="hero.point_2">Mini-logiciels de gestion</span></li>
+                    <li><span class="check"><svg class="icon icon--xs" aria-hidden="true"><use href="#icon-check"/></svg></span> <span data-cms="hero.point_3">Chatbots & automatisations</span></li>
                 </ul>
             </div>
 
@@ -1083,53 +1071,7 @@
         </div>
     </footer>
 
-    <!-- ========= CHATBOT DATALIO ========= -->
-    <div id="chatbot" class="chatbot">
-        <button id="chatbot-trigger" class="chatbot__trigger" aria-label="Ouvrir le chat Datalio">
-            <svg class="icon icon--lg chatbot__icon-open" aria-hidden="true"><use href="#icon-bot"/></svg>
-            <svg class="icon icon--lg chatbot__icon-close" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span class="chatbot__badge">1</span>
-        </button>
-        <div id="chatbot-window" class="chatbot__window" aria-hidden="true" role="dialog" aria-label="Chat avec Datalio">
-            <header class="chatbot__header">
-                <div class="chatbot__header-info">
-                    <div class="chatbot__avatar">
-                        <img src="assets/logo.png" alt="Datalio" />
-                    </div>
-                    <div>
-                        <strong>Datalio</strong>
-                        <div class="chatbot__status">
-                            <span class="chatbot__status-dot"></span>
-                            En ligne
-                        </div>
-                    </div>
-                </div>
-                <button id="chatbot-close" class="chatbot__close" aria-label="Fermer le chat">
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                </button>
-            </header>
-            <div id="chatbot-messages" class="chatbot__messages"></div>
-            <div id="chatbot-suggestions" class="chatbot__suggestions">
-                <button class="chatbot__suggestion" data-message="Quels sont vos services ?">Services</button>
-                <button class="chatbot__suggestion" data-message="Comment commander ?">Commander</button>
-                <button class="chatbot__suggestion" data-message="Parlez-moi des chatbots">Chatbots</button>
-                <button class="chatbot__suggestion" data-message="Je veux un site web">Site web</button>
-            </div>
-            <form id="chatbot-form" class="chatbot__form" autocomplete="off">
-                <input id="chatbot-input" class="chatbot__input" type="text" placeholder="Écrivez votre message..." aria-label="Message" />
-                <button type="submit" class="chatbot__send" aria-label="Envoyer">
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </div>
+    <!-- ========= CHATBOT DATALIO (retiré : seul WhatsApp reste flottant à droite) ========= -->
 
     <!-- Bouton flottant WhatsApp -->
     <a class="fab" href="#" data-whatsapp aria-label="Discuter sur WhatsApp" data-track-event="whatsapp_click" data-track-category="fab" data-track-label="fab_whatsapp">
