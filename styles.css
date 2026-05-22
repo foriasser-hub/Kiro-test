@@ -2783,3 +2783,238 @@ html {
     display: none;
 }
 
+
+
+
+/* =========================================
+   Section Contact — formulaire + infos
+   ========================================= */
+.contact {
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+}
+.contact__grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1.4fr);
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 3rem;
+}
+@media (max-width: 900px) {
+    .contact__grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ----- Colonne info ----- */
+.contact__info {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-700) 100%);
+    color: var(--white);
+    padding: 2.25rem 1.85rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+.contact__info::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 50% at 100% 0%, rgba(245, 184, 0, 0.18), transparent 60%);
+    pointer-events: none;
+}
+.contact__info > * { position: relative; z-index: 1; }
+.contact__info-title {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 1.5rem;
+    opacity: 0.9;
+}
+.contact__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.95rem;
+    padding: 0.85rem 0;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s var(--ease);
+}
+.contact__item:last-of-type { border-bottom: none; }
+a.contact__item:hover { transform: translateX(4px); }
+a.contact__item:hover .contact__icon { background: var(--gold); color: var(--navy); }
+.contact__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+.contact__icon svg { width: 20px; height: 20px; }
+.contact__text { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.contact__text strong {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.contact__text > span {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.92);
+    word-break: break-word;
+}
+.contact__whatsapp-btn {
+    margin-top: 1.6rem;
+    width: 100%;
+}
+.contact__whatsapp-note {
+    margin: 0.7rem 0 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.82rem;
+}
+
+/* ----- Formulaire ----- */
+.contact__form {
+    background: var(--white);
+    padding: 2.25rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--light-200);
+}
+.contact__honeypot {
+    position: absolute !important;
+    left: -10000px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+.form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+    margin-bottom: 1.1rem;
+}
+@media (max-width: 600px) {
+    .form__row { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .contact__form { padding: 1.85rem 1.4rem; }
+}
+.form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.1rem;
+}
+.form__field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray-strong);
+    letter-spacing: 0.01em;
+}
+.form__required { color: var(--gold-600); margin-left: 2px; }
+.form__field input,
+.form__field select,
+.form__field textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--light-200);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--gray-strong);
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.form__field textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.55;
+}
+.form__field select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235B6472' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 14px;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+.form__field input::placeholder,
+.form__field textarea::placeholder {
+    color: #9ba3b0;
+}
+.form__field input:focus,
+.form__field select:focus,
+.form__field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(245, 184, 0, 0.18);
+    background: var(--white);
+}
+.form__field input:invalid:not(:placeholder-shown),
+.form__field select:invalid:not([value=""]):not(:focus),
+.form__field textarea:invalid:not(:placeholder-shown) {
+    border-color: #d6404a;
+}
+.form__hint {
+    color: var(--gray-text);
+    font-size: 0.78rem;
+    margin-top: 0.1rem;
+}
+.form__success,
+.form__error {
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    margin: 0.5rem 0 1rem;
+    line-height: 1.5;
+}
+.form__success {
+    background: #e8f7ec;
+    color: #1f7a36;
+    border: 1px solid #b8e6c4;
+}
+.form__error {
+    background: #fdecec;
+    color: #b32030;
+    border: 1px solid #f4c5c8;
+}
+.form__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+}
+.form__submit {
+    align-self: flex-start;
+    min-width: 220px;
+}
+.form__submit[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+.form__legal {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--gray-text);
+    line-height: 1.5;
+    max-width: 480px;
+}
+@media (max-width: 600px) {
+    .form__submit { width: 100%; align-self: stretch; }
+    .form__actions { gap: 0.7rem; }
+    .contact { padding-top: 4rem; padding-bottom: 4.5rem; }
+    .contact__info { padding: 1.85rem 1.5rem; }
+}

@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "welcome_message": "Bonjour ! 👋 Je suis l'assistant Datalio. Comment puis-je vous aider ?",
-  "fallback_message": "Je suis l'assistant Datalio, je réponds aux questions sur nos services. <a href=\"https://wa.me/261386984531\" target=\"_blank\">Contactez-nous sur WhatsApp</a>",
+  "fallback_message": "Je suis l'assistant Datalio, je réponds aux questions sur nos services. <a href=\"https://wa.me/261386315306\" target=\"_blank\">Contactez-nous sur WhatsApp</a>",
   "quick_suggestions": [
     { "label": "Services",      "message": "Quels sont vos services ?" },
     { "label": "Commander",     "message": "Comment commander ?" },

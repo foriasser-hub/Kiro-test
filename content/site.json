@@ -13,8 +13,8 @@
     "point_3": "Accompagnement inclus"
   },
   "whatsapp": {
-    "number": "261386984531",
-    "default_message": "Bonjour, je suis intéressé(e) par les solutions digitales Datalio. J'aimerais en savoir plus pour mon entreprise.",
+    "number": "261386315306",
+    "default_message": "Bonjour Datalio, je souhaite discuter d'un projet digital.",
     "devis_message": "Bonjour Datalio, j'aimerais demander un devis pour mon projet.",
     "premium_sites_message": "Bonjour Datalio, je m'intéresse à votre offre Site web premium. J'aimerais en savoir plus.",
     "mini_software_message": "Bonjour Datalio, je m'intéresse à votre offre Mini-logiciel de gestion. J'aimerais en savoir plus pour mon activité.",
@@ -22,9 +22,9 @@
     "fab_enabled": true
   },
   "contact": {
-    "phone": "+261 38 69 845 31",
-    "phone_link": "+261386984531",
-    "email": "",
+    "phone": "+261 38 63 153 06",
+    "phone_link": "+261386315306",
+    "email": "contact@datalio.online",
     "address": "Antananarivo, Madagascar"
   },
   "social": {

@@ -64,9 +64,10 @@ L'admin affiche une **barre latérale** avec toutes les sections éditables :
 
 - Hero (titre, sous-titre, slogan, points clés)
 - WhatsApp (numéro + message par défaut)
-- Contact (téléphone affiché et clic-pour-appeler)
+- Contact : téléphone affiché, clic-pour-appeler, **email**, **adresse** (visibles dans la section Contact + footer)
 - Services (cartes affichées dans la section Solutions)
 - FAQ (section Questions fréquentes)
+- Formulaire de contact (Web3Forms access_key + email destinataire — voir section 11)
 
 ### Champs gérés mais non encore affichés sur le site
 
@@ -75,7 +76,7 @@ L'admin affiche une **barre latérale** avec toutes les sections éditables :
 - Ce qui est inclus
 - Pourquoi Datalio
 - Comment ça marche
-- Réseaux sociaux, email, adresse
+- Réseaux sociaux
 - Packs / offres
 - Témoignages
 
@@ -151,8 +152,8 @@ Un paragraphe normal. Vous pouvez **mettre en gras** ou *en italique*.
 1. **📄 Contenu du site** → section **WhatsApp**
 2. Modifiez le champ **Numéro WhatsApp**
 3. ⚠️ Format : **chiffres uniquement, avec code pays, SANS le `+`**
-   - ✅ Bon : `261386984531`
-   - ❌ Mauvais : `+261 38 69 845 31`
+   - ✅ Bon : `261386315306`
+   - ❌ Mauvais : `+261 38 63 153 06`
 4. Vous pouvez aussi personnaliser les messages préremplis :
    - Message par défaut
    - Message « Demande de devis »
@@ -161,6 +162,9 @@ Un paragraphe normal. Vous pouvez **mettre en gras** ou *en italique*.
    - Message « Support »
 5. Cochez/décochez **Afficher le bouton flottant WhatsApp**
 6. **Save**
+
+> 💡 **Numéro Datalio actuel** : `+261 38 63 153 06` (format wa.me : `261386315306`)
+> 💡 Pour changer aussi le numéro affiché en clair sur la page, modifiez **Contact → Téléphone** dans la même section. Pour le clic-pour-appeler (`tel:`), modifiez **Contact → Téléphone (clic-pour-appeler)** au format international avec `+`.
 
 ---
 
@@ -246,7 +250,71 @@ Un paragraphe normal. Vous pouvez **mettre en gras** ou *en italique*.
 
 ---
 
-## 11. Uploader des images
+## 11. Configurer le formulaire de contact
+
+Une vraie section **Contact** est en ligne sur la page d'accueil (`#contact`). Le formulaire envoie les messages dans **deux modes** :
+
+### Mode A : Web3Forms (recommandé) — envoi direct par email, sans backend
+
+Web3Forms est un service gratuit qui transmet les soumissions de formulaire vers votre boîte mail, **sans serveur à maintenir** et **sans secret côté client**.
+
+**Pourquoi Web3Forms est sûr** :
+- La « access_key » que vous obtenez est une **clé d'envoi publique** (l'équivalent d'un identifiant Formspree) — elle est conçue pour être visible dans le frontend, comme `<form action>`.
+- Ce n'est pas un mot de passe ni un token API. Quelqu'un qui la copie peut au pire envoyer du spam à votre adresse — Web3Forms inclut un anti-spam et vous pouvez régénérer la clé en un clic.
+- **Aucun secret sensible** n'est stocké dans le repo ni dans le navigateur.
+
+#### Configurer en 5 minutes
+
+1. Allez sur <https://web3forms.com/>
+2. Tapez votre email **`contact@datalio.online`** dans le champ « Get your Access Key »
+3. Confirmez l'email de validation que Web3Forms vous envoie
+4. Vous recevez votre **Access Key** (UUID, ex : `abc12345-6789-...`)
+5. Allez dans l'admin : **⚙️ Réglages SEO & Analytics → Formulaire de contact**
+6. Collez la clé dans **Web3Forms — Access Key**
+7. Vérifiez **Email de réception** = `contact@datalio.online`
+8. **Save**
+
+Dès la sauvegarde, le formulaire enverra les soumissions directement à `contact@datalio.online`.
+
+### Mode B : Fallback mailto (sans config)
+
+Tant que la clé Web3Forms est vide, le formulaire ouvre automatiquement le **client mail** du visiteur (Gmail, Outlook, Apple Mail, etc.) avec un message prérempli contenant tous les champs (nom, entreprise, email, téléphone, type de projet, budget, message).
+
+C'est moins fluide (le visiteur doit cliquer « Envoyer » dans son client mail), mais ça marche **immédiatement** sans aucune configuration.
+
+> Si Web3Forms échoue (problème réseau, quota dépassé), le formulaire bascule **automatiquement** sur le fallback mailto. Le visiteur n'est jamais bloqué.
+
+### Modifier l'email de réception
+
+1. **⚙️ Réglages SEO & Analytics → Formulaire de contact → Email de réception**
+2. Saisissez la nouvelle adresse (format email standard)
+3. **Save**
+
+> ⚠️ Si vous changez aussi sur Web3Forms, n'oubliez pas de mettre à jour l'access_key (Web3Forms en délivre une par adresse vérifiée).
+
+### Tester le formulaire
+
+1. Allez sur <https://datalio.online/#contact>
+2. Remplissez tous les champs (le message doit faire **20 caractères minimum**)
+3. Cliquez **Envoyer ma demande**
+4. Vérifiez :
+   - Si Web3Forms : un message vert « ✓ Votre demande a été envoyée » s'affiche
+   - Vérifiez que vous recevez bien l'email dans `contact@datalio.online` (parfois en spam la première fois)
+   - Si fallback mailto : votre client mail s'ouvre avec tout prérempli
+
+### Vérifier les événements GA4
+
+Dans Google Analytics → **Reports → Realtime → Event count** :
+- `form_submit` (catégorie : `contact`) doit apparaître à chaque envoi
+- `whatsapp_click` (catégorie : `contact`) au clic du bouton WhatsApp de la section
+- `phone_click` au clic du téléphone
+- `contact_click` au clic de l'email
+
+Marquez ces événements comme **conversions** dans GA4 si ce n'est pas déjà fait.
+
+---
+
+## 12. Uploader des images
 
 1. Quand vous éditez un champ de type « image » (cover blog, photo À propos, photo témoignage…), un sélecteur d'images s'ouvre
 2. Cliquez sur **Upload** pour uploader une image depuis votre ordinateur
@@ -264,7 +332,7 @@ Un paragraphe normal. Vous pouvez **mettre en gras** ou *en italique*.
 
 ---
 
-## 12. Publier les modifications
+## 13. Publier les modifications
 
 Pages CMS commit directement sur la branche `main` du repo. Donc :
 
@@ -278,7 +346,7 @@ Pages CMS commit directement sur la branche `main` du repo. Donc :
 
 ---
 
-## 13. Ajouter un autre administrateur
+## 14. Ajouter un autre administrateur
 
 Pour donner à quelqu'un d'autre le droit d'éditer le site :
 
@@ -297,7 +365,7 @@ La personne reçoit un email d'invitation. Une fois acceptée, elle peut se conn
 
 ---
 
-## 14. Quoi faire si l'admin ne se connecte pas ?
+## 15. Quoi faire si l'admin ne se connecte pas ?
 
 ### Cas 1 : « Sign in with GitHub » ne fait rien
 
@@ -332,7 +400,7 @@ La personne reçoit un email d'invitation. Une fois acceptée, elle peut se conn
 
 ---
 
-## 15. Bonnes pratiques
+## 16. Bonnes pratiques
 
 - **Ne supprimez pas** des champs obligatoires sans les remplacer (le site reprendra alors le texte du HTML statique en secours, mais c'est moins propre).
 - **Évitez les copier-coller depuis Word** dans les champs de texte (apporte des caractères invisibles). Préférez un éditeur de texte basique ou tapez directement.

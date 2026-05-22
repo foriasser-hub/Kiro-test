@@ -13,6 +13,12 @@
     "google_search_console_verification": "",
     "anonymize_ip": true
   },
+  "contact_form": {
+    "provider": "web3forms",
+    "web3forms_access_key": "",
+    "receiver_email": "contact@datalio.online",
+    "subject_prefix": "[Datalio] Nouvelle demande depuis le site"
+  },
   "brand": {
     "name": "Datalio",
     "slogan": "Solutions digitales premium pour petites entreprises",

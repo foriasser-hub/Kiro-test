@@ -13,10 +13,10 @@
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com;
         img-src 'self' data: https:;
-        connect-src 'self' https://wa.me https://www.google-analytics.com;
+        connect-src 'self' https://wa.me https://www.google-analytics.com https://api.web3forms.com;
         frame-ancestors 'none';
         base-uri 'self';
-        form-action 'self' https://wa.me;
+        form-action 'self' https://wa.me https://api.web3forms.com;
     " />
     <!-- Protection contre le clickjacking -->
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -89,13 +89,14 @@
           "image": "https://datalio.online/assets/og-image.jpg",
           "description": "Datalio crée des sites web premium et des mini-logiciels de gestion pour petites entreprises.",
           "slogan": "Solutions digitales premium pour petites entreprises",
-          "telephone": "+261386984531",
+          "telephone": "+261386315306",
           "areaServed": ["Madagascar", "Afrique francophone"],
           "sameAs": [],
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+261386984531",
+            "telephone": "+261386315306",
             "contactType": "customer support",
+            "email": "contact@datalio.online",
             "availableLanguage": ["French"]
           }
         },
@@ -105,7 +106,7 @@
           "name": "Datalio",
           "image": "https://datalio.online/assets/og-image.jpg",
           "url": "https://datalio.online/",
-          "telephone": "+261386984531",
+          "telephone": "+261386315306",
           "priceRange": "$$",
           "description": "Création de sites web premium, chatbot, SEO, Google Analytics, espace admin sécurisé et mini-logiciels de gestion locaux.",
           "address": {
@@ -363,6 +364,7 @@
                 <a href="#solutions">Solutions</a>
                 <a href="#etapes">Comment ça marche</a>
                 <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
                 <a href="blog/">Blog</a>
             </nav>
             <a class="btn btn--primary btn--sm nav__cta" href="#" data-whatsapp data-track-event="whatsapp_click" data-track-category="cta" data-track-label="navbar_discuter">
@@ -823,6 +825,166 @@
         </div>
     </section>
 
+    <!-- ========= CONTACT ========= -->
+    <section id="contact" class="section section--light contact">
+        <div class="container">
+            <div class="section__head reveal">
+                <span class="eyebrow">Contact</span>
+                <h2 class="section__title">Discutons de votre <span class="text-gold">projet</span></h2>
+                <p class="section__lead">Vous avez besoin d'un site premium, d'un mini-logiciel de gestion ou d'un chatbot ? Envoyez-nous votre demande, nous vous répondrons rapidement.</p>
+            </div>
+
+            <div class="contact__grid">
+                <!-- Colonne info -->
+                <aside class="contact__info reveal" aria-label="Informations de contact">
+                    <h3 class="contact__info-title">Nous joindre</h3>
+
+                    <a class="contact__item" href="mailto:contact@datalio.online" data-cms="contact.email" data-track-event="contact_click" data-track-category="contact" data-track-label="contact_email">
+                        <span class="contact__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </span>
+                        <span class="contact__text">
+                            <strong>Email</strong>
+                            <span>contact@datalio.online</span>
+                        </span>
+                    </a>
+
+                    <a class="contact__item" href="tel:+261386315306" data-cms="contact.phone_link" data-track-event="phone_click" data-track-category="contact" data-track-label="contact_phone">
+                        <span class="contact__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </span>
+                        <span class="contact__text">
+                            <strong>Téléphone / WhatsApp</strong>
+                            <span data-cms="contact.phone">+261 38 63 153 06</span>
+                        </span>
+                    </a>
+
+                    <div class="contact__item contact__item--static">
+                        <span class="contact__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </span>
+                        <span class="contact__text">
+                            <strong>Localisation</strong>
+                            <span data-cms="contact.address">Antananarivo, Madagascar</span>
+                        </span>
+                    </div>
+
+                    <div class="contact__item contact__item--static">
+                        <span class="contact__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </span>
+                        <span class="contact__text">
+                            <strong>Zone d'intervention</strong>
+                            <span>Madagascar et Afrique francophone</span>
+                        </span>
+                    </div>
+
+                    <a class="btn btn--gold btn--block contact__whatsapp-btn" href="#" data-whatsapp data-track-event="whatsapp_click" data-track-category="contact" data-track-label="contact_whatsapp">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
+                        Discuter sur WhatsApp
+                    </a>
+                    <p class="contact__whatsapp-note">Réponse sous 24h · Sans engagement</p>
+                </aside>
+
+                <!-- Formulaire -->
+                <form id="contact-form" class="contact__form reveal"
+                      method="POST" action="https://api.web3forms.com/submit"
+                      novalidate>
+
+                    <!-- Configuration Web3Forms (clé publique d'envoi, configurée via l'admin) -->
+                    <input type="hidden" name="access_key" id="contact-form-access-key" value="" />
+                    <input type="hidden" name="subject" value="[Datalio] Nouvelle demande depuis le site" />
+                    <input type="hidden" name="from_name" value="Site Datalio — Formulaire de contact" />
+
+                    <!-- Honeypot anti-spam (champ caché aux humains, rempli par les bots) -->
+                    <input type="text" name="botcheck" tabindex="-1" autocomplete="off" class="contact__honeypot" aria-hidden="true" />
+
+                    <div class="form__row">
+                        <div class="form__field">
+                            <label for="cf-name">Nom complet <span class="form__required" aria-hidden="true">*</span></label>
+                            <input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="Votre nom" />
+                        </div>
+                        <div class="form__field">
+                            <label for="cf-company">Nom de l'entreprise</label>
+                            <input id="cf-company" name="company" type="text" autocomplete="organization" placeholder="Optionnel" />
+                        </div>
+                    </div>
+
+                    <div class="form__row">
+                        <div class="form__field">
+                            <label for="cf-email">Email <span class="form__required" aria-hidden="true">*</span></label>
+                            <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="vous@entreprise.com" />
+                        </div>
+                        <div class="form__field">
+                            <label for="cf-phone">Téléphone / WhatsApp</label>
+                            <input id="cf-phone" name="phone" type="tel" autocomplete="tel" placeholder="+261 ..." />
+                        </div>
+                    </div>
+
+                    <div class="form__row">
+                        <div class="form__field">
+                            <label for="cf-project">Type de projet <span class="form__required" aria-hidden="true">*</span></label>
+                            <select id="cf-project" name="project_type" required>
+                                <option value="">— Choisir —</option>
+                                <option value="Site web premium">Site web premium</option>
+                                <option value="Mini-logiciel de gestion">Mini-logiciel de gestion</option>
+                                <option value="Chatbot">Chatbot</option>
+                                <option value="SEO / Google Analytics">SEO / Google Analytics</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form__field">
+                            <label for="cf-budget">Budget estimé</label>
+                            <select id="cf-budget" name="budget">
+                                <option value="">— À choisir —</option>
+                                <option value="580 000 Ar – 950 000 Ar">580 000 Ar – 950 000 Ar</option>
+                                <option value="950 000 Ar – 1 500 000 Ar">950 000 Ar – 1 500 000 Ar</option>
+                                <option value="1 500 000 Ar et plus">1 500 000 Ar et plus</option>
+                                <option value="À discuter">À discuter</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="cf-message">Message <span class="form__required" aria-hidden="true">*</span></label>
+                        <textarea id="cf-message" name="message" rows="5" minlength="20" required placeholder="Décrivez votre projet en quelques lignes..."></textarea>
+                        <small class="form__hint">Minimum 20 caractères.</small>
+                    </div>
+
+                    <p class="form__success" id="contact-form-success" role="status" aria-live="polite" hidden>
+                        ✓ Votre demande a été envoyée avec succès. Nous vous répondrons rapidement.
+                    </p>
+                    <p class="form__error" id="contact-form-error" role="alert" aria-live="assertive" hidden>
+                        Une erreur est survenue. Vous pouvez aussi nous contacter directement sur WhatsApp.
+                    </p>
+
+                    <div class="form__actions">
+                        <button type="submit" class="btn btn--primary btn--lg form__submit" id="contact-form-submit">
+                            <span class="form__submit-label">Envoyer ma demande</span>
+                            <svg class="icon icon--sm" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+                        </button>
+                        <p class="form__legal">
+                            En envoyant ce formulaire, vous acceptez d'être contacté par Datalio à propos de votre demande.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- ========= FOOTER ========= -->
     <footer class="footer">
         <div class="container footer__inner">
@@ -847,7 +1009,8 @@
                 <h4>Contact</h4>
                 <ul class="footer__links">
                     <li><a href="#" data-whatsapp data-track-event="whatsapp_click" data-track-category="footer" data-track-label="footer_whatsapp">WhatsApp</a></li>
-                    <li><a href="tel:+261386984531" data-cms="contact.phone" data-track-event="contact_click" data-track-category="footer" data-track-label="footer_phone">+261 38 69 845 31</a></li>
+                    <li><a href="mailto:contact@datalio.online" data-cms="contact.email" data-track-event="contact_click" data-track-category="footer" data-track-label="footer_email">contact@datalio.online</a></li>
+                    <li><a href="tel:+261386315306" data-cms="contact.phone" data-track-event="phone_click" data-track-category="footer" data-track-label="footer_phone">+261 38 63 153 06</a></li>
                 </ul>
             </div>
         </div>

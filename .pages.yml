@@ -87,7 +87,7 @@ content:
             label: "Numéro WhatsApp"
             type: string
             required: true
-            description: "Format international SANS le + (ex : 261386984531)"
+            description: "Format international SANS le + (ex : 261386315306)"
             pattern:
               regex: "^[0-9]{8,15}$"
               message: "Numéro invalide. Format attendu : 8 à 15 chiffres, sans + ni espace."
@@ -119,11 +119,11 @@ content:
           - name: phone
             label: "Téléphone (affiché)"
             type: string
-            description: "Avec espaces, ex : +261 38 69 845 31"
+            description: "Avec espaces, ex : +261 38 63 153 06"
           - name: phone_link
             label: "Téléphone (clic-pour-appeler)"
             type: string
-            description: "Format international, ex : +261386984531"
+            description: "Format international, ex : +261386315306"
           - name: email
             label: "Email de contact"
             type: string
@@ -706,6 +706,40 @@ content:
             label: "Anonymiser les IP (RGPD)"
             type: boolean
             default: true
+
+      # Formulaire de contact
+      - name: contact_form
+        label: "Formulaire de contact"
+        type: object
+        description: "Configuration du formulaire de la section Contact. Voir ADMIN-GUIDE.md pour configurer Web3Forms en 5 minutes."
+        fields:
+          - name: provider
+            label: "Service utilisé"
+            type: select
+            default: "web3forms"
+            options:
+              values:
+                - { value: "web3forms", label: "Web3Forms (recommandé)" }
+                - { value: "mailto",    label: "Aucun — fallback mailto uniquement" }
+          - name: web3forms_access_key
+            label: "Web3Forms — Access Key"
+            type: string
+            description: "Clé d'envoi PUBLIQUE fournie par web3forms.com (pas un mot de passe). Format UUID. Si laissé vide, le formulaire bascule automatiquement sur mailto:."
+            pattern:
+              regex: "^([a-zA-Z0-9-]{20,80})?$"
+              message: "Format invalide. Attendu : UUID Web3Forms (≥ 20 caractères)"
+          - name: receiver_email
+            label: "Email de réception"
+            type: string
+            required: true
+            description: "Adresse à laquelle les messages du formulaire doivent arriver (utilisé aussi par le fallback mailto)"
+            pattern:
+              regex: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+              message: "Email invalide"
+          - name: subject_prefix
+            label: "Préfixe du sujet des emails"
+            type: string
+            description: "Ex : [Datalio] Nouvelle demande depuis le site"
 
       # Identité éditoriale
       - name: brand
