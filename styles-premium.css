@@ -220,6 +220,19 @@ body .nav.is-scrolled {
     color: #05045F !important;
 }
 
+/* Hero secondary button (.btn--primary "Voir nos services" sur fond clair) :
+   reste navy plein avec texte blanc, c'est notre bouton secondaire */
+.hero .btn--primary {
+    background: #05045F !important;
+    color: #FFFFFF !important;
+    border: 1.5px solid #05045F !important;
+}
+.hero .btn--primary:hover {
+    background: #1a1a8a !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+}
+
 /* Hero points : pills horizontaux discrets */
 .hero__points {
     display: flex !important;
