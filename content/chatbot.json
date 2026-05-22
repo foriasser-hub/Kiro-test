@@ -42,7 +42,7 @@
     {
       "topic": "Liste des services",
       "keywords": ["service", "solution", "propose", "offre", "faites", "liste", "activite"],
-      "answer": "Nous proposons : sites web premium, mini-logiciels de gestion, chatbots, automatisation et suivi client.",
+      "answer": "Nous proposons : sites web premium, mini-logiciels de gestion, chatbots, automatisations et maintenance & accompagnement digital. SEO, Google Analytics et espace admin sécurisé sont inclus dans nos sites premium.",
       "redirect_to_whatsapp": true
     },
     {
@@ -78,7 +78,7 @@
     {
       "topic": "Suivi client",
       "keywords": ["suivi", "client", "crm", "relance", "historique", "pipeline", "commercial", "prospect"],
-      "answer": "Nous mettons en place un suivi client intelligent avec relances automatiques.",
+      "answer": "Le suivi client (mini-CRM, relances, historique) peut être intégré à votre mini-logiciel de gestion ou à votre site web premium.",
       "redirect_to_whatsapp": true
     },
     {
