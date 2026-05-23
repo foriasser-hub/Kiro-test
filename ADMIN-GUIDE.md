@@ -252,110 +252,65 @@ Un paragraphe normal. Vous pouvez **mettre en gras** ou *en italique*.
 
 ## 11. Configurer le formulaire de contact
 
-La section **Contact** de la page d'accueil (`#contact`) propose un vrai formulaire qui envoie les demandes directement sur **`contact@datalio.online`**.
+Une vraie section **Contact** est en ligne sur la page d'accueil (`#contact`). Le formulaire envoie les messages dans **deux modes** :
 
-L'envoi passe par **[Web3Forms](https://web3forms.com/)** : un service gratuit qui transmet les soumissions vers votre boîte mail, **sans serveur à maintenir** et **sans secret côté client**.
+### Mode A : Web3Forms (recommandé) — envoi direct par email, sans backend
 
-> 🚨 **Tant que la clé Web3Forms n'est pas configurée, le formulaire affiche un message d'erreur** invitant le visiteur à passer par WhatsApp. Il n'y a plus de fallback `mailto:` qui ouvre le client mail. **Configurez la clé en priorité** (5 minutes, voir ci-dessous) — sans elle, vous perdez toutes les demandes envoyées via le formulaire.
+Web3Forms est un service gratuit qui transmet les soumissions de formulaire vers votre boîte mail, **sans serveur à maintenir** et **sans secret côté client**.
 
-### Pourquoi Web3Forms est sûr
-
-- La « access_key » Web3Forms est une **clé d'envoi publique** (l'équivalent d'un identifiant Formspree) — elle est conçue pour être visible dans le frontend, comme `<form action>`.
+**Pourquoi Web3Forms est sûr** :
+- La « access_key » que vous obtenez est une **clé d'envoi publique** (l'équivalent d'un identifiant Formspree) — elle est conçue pour être visible dans le frontend, comme `<form action>`.
 - Ce n'est pas un mot de passe ni un token API. Quelqu'un qui la copie peut au pire envoyer du spam à votre adresse — Web3Forms inclut un anti-spam et vous pouvez régénérer la clé en un clic.
 - **Aucun secret sensible** n'est stocké dans le repo ni dans le navigateur.
 
-### Récupérer votre access_key Web3Forms (5 minutes)
+#### Configurer en 5 minutes
 
-1. Aller sur **<https://web3forms.com/>**
-2. Dans la barre **« Get your Access Key »** (en haut de la page), saisir l'email **`contact@datalio.online`** puis cliquer sur **« Create Access Key »**
-3. Web3Forms envoie un email de validation à `contact@datalio.online` — ouvrez-le et cliquez sur le lien de confirmation
-4. La page Web3Forms affiche alors votre **Access Key** (une chaîne de type `abcd1234-5678-90ef-...`). **Copiez-la.**
+1. Allez sur <https://web3forms.com/>
+2. Tapez votre email **`contact@datalio.online`** dans le champ « Get your Access Key »
+3. Confirmez l'email de validation que Web3Forms vous envoie
+4. Vous recevez votre **Access Key** (UUID, ex : `abc12345-6789-...`)
+5. Allez dans l'admin : **⚙️ Réglages SEO & Analytics → Formulaire de contact**
+6. Collez la clé dans **Web3Forms — Access Key**
+7. Vérifiez **Email de réception** = `contact@datalio.online`
+8. **Save**
 
-### Coller la clé dans le site
+Dès la sauvegarde, le formulaire enverra les soumissions directement à `contact@datalio.online`.
 
-**Méthode A — via l'admin (recommandée, aucun code à toucher) :**
+### Mode B : Fallback mailto (sans config)
 
-1. Ouvrir l'admin Datalio : <https://datalio.online/admin/>
-2. Cliquer sur **⚙️ Réglages SEO & Analytics**
-3. Section **Formulaire de contact** :
-   - **Provider** : laisser sur `web3forms`
-   - **Web3Forms — Access Key** : coller la clé
-   - **Email de réception** : `contact@datalio.online` (déjà prérempli)
-   - **Préfixe du sujet** : `[Datalio] Nouvelle demande depuis le site` (déjà prérempli)
-4. Cliquer **Save** en haut à droite
-5. Patientez 30 à 60 secondes que GitHub Pages redéploie
+Tant que la clé Web3Forms est vide, le formulaire ouvre automatiquement le **client mail** du visiteur (Gmail, Outlook, Apple Mail, etc.) avec un message prérempli contenant tous les champs (nom, entreprise, email, téléphone, type de projet, budget, message).
 
-**Méthode B — directement dans le repo (pour développeurs) :**
+C'est moins fluide (le visiteur doit cliquer « Envoyer » dans son client mail), mais ça marche **immédiatement** sans aucune configuration.
 
-Éditer le fichier **`content/settings.json`** et remplir le champ `web3forms_access_key` :
-
-```json
-"contact_form": {
-  "provider": "web3forms",
-  "web3forms_access_key": "VOTRE-CLE-ICI",
-  "receiver_email": "contact@datalio.online",
-  "subject_prefix": "[Datalio] Nouvelle demande depuis le site"
-}
-```
-
-Commiter sur `main` → GitHub Pages redéploie automatiquement.
-
-### Tester l'envoi
-
-1. Aller sur <https://datalio.online/#contact>
-2. Remplir tous les champs (le **message doit faire au moins 20 caractères**)
-3. Cliquer **« Envoyer ma demande »**
-4. Le bouton se met en mode « Envoi en cours… »
-5. Quelques secondes plus tard :
-   - ✅ **Succès** : message vert *« Votre demande a été envoyée avec succès. Nous vous répondrons rapidement. »* + le formulaire se réinitialise
-   - ❌ **Erreur** : message rouge *« Une erreur est survenue. Vous pouvez aussi nous contacter directement sur WhatsApp. »* — le bouton WhatsApp de la même section reste cliquable comme canal secondaire
-6. Vérifier votre boîte **`contact@datalio.online`** (regarder aussi les **spams** la première fois — Web3Forms passe parfois en quarantaine sur le tout premier envoi)
-
-### Champs envoyés dans l'email
-
-L'email reçu sur `contact@datalio.online` contient :
-- Sujet : `[Datalio] Nouvelle demande depuis le site` (configurable)
-- `name` : nom complet
-- `company` : entreprise (optionnel)
-- `email` : email du visiteur
-- `phone` : téléphone / WhatsApp (optionnel)
-- `project_type` : type de projet (Site web premium / Mini-logiciel / Chatbot / SEO / Maintenance / Autre)
-- `budget` : budget estimé (optionnel)
-- `message` : message libre (≥ 20 caractères)
-
-Web3Forms remplit automatiquement le champ `Reply-To` avec l'email du visiteur, donc un simple **« Répondre »** depuis votre boîte mail répond directement au prospect.
-
-### Anti-spam intégré
-
-- **Honeypot** : un champ caché `botcheck` que les humains ne voient jamais. Si un bot le remplit, le formulaire affiche un faux succès et n'envoie rien.
-- **Validation côté navigateur** : champs obligatoires (nom, email, type de projet, message), format email vérifié, message ≥ 20 caractères.
-- **Anti-spam Web3Forms** : couche serveur incluse dans le service.
+> Si Web3Forms échoue (problème réseau, quota dépassé), le formulaire bascule **automatiquement** sur le fallback mailto. Le visiteur n'est jamais bloqué.
 
 ### Modifier l'email de réception
 
 1. **⚙️ Réglages SEO & Analytics → Formulaire de contact → Email de réception**
-2. Saisir la nouvelle adresse
+2. Saisissez la nouvelle adresse (format email standard)
 3. **Save**
 
-> ⚠️ Si la nouvelle adresse n'est pas vérifiée sur Web3Forms, **régénérez aussi une access_key** sur <https://web3forms.com/> avec cette nouvelle adresse, et collez-la dans **Web3Forms — Access Key**. Sinon Web3Forms refusera l'envoi.
+> ⚠️ Si vous changez aussi sur Web3Forms, n'oubliez pas de mettre à jour l'access_key (Web3Forms en délivre une par adresse vérifiée).
+
+### Tester le formulaire
+
+1. Allez sur <https://datalio.online/#contact>
+2. Remplissez tous les champs (le message doit faire **20 caractères minimum**)
+3. Cliquez **Envoyer ma demande**
+4. Vérifiez :
+   - Si Web3Forms : un message vert « ✓ Votre demande a été envoyée » s'affiche
+   - Vérifiez que vous recevez bien l'email dans `contact@datalio.online` (parfois en spam la première fois)
+   - Si fallback mailto : votre client mail s'ouvre avec tout prérempli
 
 ### Vérifier les événements GA4
 
 Dans Google Analytics → **Reports → Realtime → Event count** :
-- `form_submit` (event_category : `contact`, event_label : `contact_form_web3forms`) doit apparaître à chaque envoi **réussi** du formulaire
-- `whatsapp_click` (event_category : `contact`) au clic du bouton WhatsApp de la section Contact
+- `form_submit` (catégorie : `contact`) doit apparaître à chaque envoi
+- `whatsapp_click` (catégorie : `contact`) au clic du bouton WhatsApp de la section
 - `phone_click` au clic du téléphone
 - `contact_click` au clic de l'email
 
-> Marquez `form_submit` comme **conversion** dans GA4 (Admin → Events → Mark as conversion) si ce n'est pas déjà fait. C'est l'indicateur le plus important pour mesurer le taux de transformation du site.
-
-### En cas d'erreur d'envoi
-
-Si un visiteur voit le message rouge *« Une erreur est survenue… »* :
-
-1. Ouvrir la **console du navigateur** (F12) sur la page : un message `[Datalio] Web3Forms access_key absente…` indique que la clé n'est pas configurée — appliquez la procédure « Coller la clé » ci-dessus.
-2. Sinon, vérifier sur <https://web3forms.com/> que votre clé n'a pas été révoquée et que votre quota mensuel n'est pas dépassé (250 envois/mois sur le plan gratuit, suffisant pour un site vitrine).
-3. En attendant la résolution, **les visiteurs peuvent toujours utiliser le bouton WhatsApp** affiché juste à côté du formulaire — c'est notre canal secondaire, intentionnellement maintenu en permanence.
+Marquez ces événements comme **conversions** dans GA4 si ce n'est pas déjà fait.
 
 ---
 
