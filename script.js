@@ -784,32 +784,3 @@
             .catch(function () { /* fallback */ });
     }
 })();
-
-
-
-/* =========================================================
-   Premium polish (inspiration Nexora) — micro-comportement
-   ---------------------------------------------------------
-   Additionne SEULEMENT une classe "is-scrolled" sur la
-   navbar quand on a scrollé un peu, pour activer une ombre
-   plus marquée définie dans styles-premium.css. Ne touche
-   à AUCUN tracking, AUCUN formulaire, AUCUN lien WhatsApp.
-   ========================================================= */
-(function () {
-    var nav = document.querySelector('.nav');
-    if (!nav) return;
-    var ticking = false;
-    function update() {
-        if (window.scrollY > 12) nav.classList.add('is-scrolled');
-        else nav.classList.remove('is-scrolled');
-        ticking = false;
-    }
-    function onScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(update);
-            ticking = true;
-        }
-    }
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-})();
