@@ -932,7 +932,7 @@ p { margin: 0 0 1em; color: var(--gray-text); }
 .about__inner {
     display: grid;
     gap: 3rem;
-    align-items: center;
+    align-items: stretch;
 }
 @media (min-width: 980px) {
     .about__inner { grid-template-columns: 1.05fr 1fr; gap: 4.5rem; }
@@ -969,6 +969,8 @@ p { margin: 0 0 1em; color: var(--gray-text); }
 /* Bloc visuel "image entreprise africaine" */
 .about__visual {
     position: relative;
+    display: flex;
+    height: 100%;
 }
 .about__figure {
     position: relative;
@@ -978,7 +980,15 @@ p { margin: 0 0 1em; color: var(--gray-text); }
     box-shadow: var(--shadow-md);
     border: 1px solid var(--light-200);
     background: linear-gradient(160deg, rgba(5, 4, 95, 0.06), rgba(245, 184, 0, 0.08));
+    width: 100%;
+    min-height: 100%;
     aspect-ratio: 4 / 3;
+}
+@media (min-width: 980px) {
+    .about__figure {
+        aspect-ratio: auto;
+        min-height: 520px;
+    }
 }
 .about__image {
     display: block;
@@ -2795,7 +2805,8 @@ html {
 }
 .contact__grid {
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) minmax(0, 1.4fr);
+    grid-template-columns: minmax(280px, 560px);
+    justify-content: center;
     gap: 2.5rem;
     align-items: start;
     margin-top: 3rem;
