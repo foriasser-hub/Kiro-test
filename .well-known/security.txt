@@ -1,8 +1,8 @@
 # Datalio — Politique de divulgation de vulnérabilités
 # RFC 9116 — https://www.rfc-editor.org/rfc/rfc9116
-#
-# Emplacement canonique : /.well-known/security.txt
-# Ce fichier en racine est conservé pour rétrocompatibilité.
+
+# Si vous découvrez une faille de sécurité, contactez-nous via WhatsApp.
+# Nous prenons la sécurité au sérieux et répondons sous 24h.
 
 Contact: https://wa.me/261386315306
 Contact: mailto:contact@datalio.online

@@ -449,7 +449,11 @@
                 var messageDiv = document.createElement('div');
                 messageDiv.className = 'chatbot__message chatbot__message--' + (isBot ? 'bot' : 'user');
                 if (isBot) {
-                    messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+                    // SECURITY: ne passer ici QUE du HTML statique provenant de
+                    // getBotResponse() ci-dessous. JAMAIS d'input utilisateur.
+                    // Les réponses bot sont des chaînes constantes hardcodées,
+                    // donc safe par construction (pas de XSS exploitable).
+                    messageDiv.innerHTML = text;
                 } else {
                     messageDiv.textContent = text;
                 }

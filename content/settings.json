@@ -14,10 +14,11 @@
     "anonymize_ip": true
   },
   "contact_form": {
-    "provider": "web3forms",
+    "_comment": "Formulaire supprimé du site (contact via WhatsApp/email). Bloc conservé vide pour compat CMS. Réactiver en ajoutant <form id='contact-form'> dans index.html.",
+    "provider": "",
     "web3forms_access_key": "",
     "receiver_email": "contact@datalio.online",
-    "subject_prefix": "[Datalio] Nouvelle demande depuis le site"
+    "subject_prefix": ""
   },
   "brand": {
     "name": "Datalio",
