@@ -140,11 +140,11 @@
        - Si ne sait pas → redirige vers WhatsApp
        
        SERVICES :
-       1. Sites web premium (avec SEO, Analytics, admin sécurisé inclus)
-       2. Mini-logiciels de gestion (tableaux de bord, stock, ventes)
-       3. Chatbots pour entreprises (WhatsApp, web, Facebook)
-       4. Automatisations pour petites entreprises (rappels, rapports, alertes)
-       5. Maintenance & accompagnement digital (mises à jour, conseils)
+       1. Outils de gestion (tableaux de bord, stock, ventes)
+       2. Automatisation (rappels, rapports, alertes)
+       3. Chatbots (WhatsApp, web, Facebook)
+       4. Sites web (vitrine, landing page)
+       5. Suivi client (CRM, relances, pipeline)
        ========================================= */
     var chatbot = document.getElementById('chatbot');
     var chatbotTrigger = document.getElementById('chatbot-trigger');
@@ -253,7 +253,7 @@
         
         // --- LISTE DES SERVICES ---
         if (containsKeyword(msg, ['service', 'solution', 'propose', 'offre', 'faites', 'quoi faire', 'liste', 'activite'])) {
-            return "Nous proposons : sites web premium, mini-logiciels de gestion, chatbots, automatisations et maintenance & accompagnement digital. SEO, Google Analytics et espace admin sécurisé sont inclus dans nos sites premium. <a href=\"" + LINKS.solutions + "\">Voir les services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+            return "Nous proposons : outils de gestion, automatisation, chatbots, sites web et suivi client. <a href=\"" + LINKS.solutions + "\">Voir les services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- COMMANDER ---
@@ -278,7 +278,7 @@
         
         // --- SITE WEB ---
         if (containsKeyword(msg, ['site', 'web', 'internet', 'vitrine', 'landing', 'page', 'seo', 'google', 'en ligne'])) {
-            return "Nous créons des sites web premium sur-mesure. SEO de base, Google Analytics, espace admin sécurisé, chatbot, WhatsApp et formulaire de contact sont inclus. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+            return "Nous créons des sites vitrines et landing pages professionnels. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- GESTION / TABLEAU DE BORD ---
@@ -288,7 +288,7 @@
         
         // --- SUIVI CLIENT / CRM ---
         if (containsKeyword(msg, ['suivi', 'client', 'crm', 'relance', 'historique', 'pipeline', 'commercial', 'prospect'])) {
-            return "Le suivi client (mini-CRM, relances, historique) peut être intégré à votre mini-logiciel de gestion ou à votre site web premium. <a href=\"" + LINKS.solutions + "\">Voir nos services</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
+            return "Nous mettons en place un suivi client intelligent avec relances automatiques. <a href=\"" + LINKS.solutions + "\">Voir le service</a> ou <a href=\"" + LINKS.whatsapp + "\" target=\"_blank\">discuter sur WhatsApp</a>";
         }
         
         // --- EXCEL / FICHIER ---
@@ -406,34 +406,16 @@
     /* =========================================
        FORMULAIRE DE CONTACT
        -----------------------------------------
-       Envoi via Web3Forms (https://web3forms.com) — service gratuit
-       compatible GitHub Pages, sans backend à maintenir.
-
-       L'access_key Web3Forms est PUBLIQUE par design : c'est une clé
-       d'envoi (équivalent d'un identifiant Formspree), pas un secret.
-       Elle est chargée depuis content/settings.json
-       (contact_form.web3forms_access_key) et insérée dans le champ
-       caché `access_key` du formulaire.
-
-       Récupération de la clé :
-         1. Aller sur https://web3forms.com/
-         2. Renseigner contact@datalio.online dans le champ
-            "Get your Access Key"
-         3. Confirmer l'email envoyé par Web3Forms
-         4. Coller la clé reçue dans content/settings.json sous
-            contact_form.web3forms_access_key
-            (ou via l'admin : ⚙️ Réglages → Formulaire de contact)
-
-       Anti-spam :
-         - Honeypot (champ `botcheck` invisible aux humains)
-         - Validation HTML5 + message minimum 20 caractères
-         - Web3Forms applique sa propre couche anti-spam côté serveur
-
-       En cas de succès : message vert + événement GA4 `form_submit`
-       (category=contact). En cas d'erreur (réseau, clé absente, refus
-       Web3Forms) : message rouge avec invitation à utiliser WhatsApp
-       comme canal secondaire (le bouton WhatsApp de la même section
-       reste toujours visible).
+       Stratégie en deux temps :
+       1. Si une access_key Web3Forms est configurée (chargée depuis
+          content/settings.json), on tente l'envoi via leur API.
+          La access_key est PUBLIQUE par design (clé d'envoi, pas un
+          secret) — équivalent à un identifiant Formspree.
+       2. Sinon (ou si l'envoi Web3Forms échoue), on bascule vers
+          mailto: pour ouvrir le client mail du visiteur avec tous
+          les champs préremplis.
+       Le formulaire ne casse jamais : il a au minimum la fonction
+       mailto comme filet de sécurité.
        ========================================= */
     function initContactForm() {
         var form = document.getElementById('contact-form');
@@ -444,116 +426,145 @@
         var errorEl        = document.getElementById('contact-form-error');
         var successEl      = document.getElementById('contact-form-success');
         var accessKeyInput = document.getElementById('contact-form-access-key');
-
-        var SUCCESS_MESSAGE = 'Votre demande a été envoyée avec succès. Nous vous répondrons rapidement.';
-        var ERROR_MESSAGE   = 'Une erreur est survenue. Vous pouvez aussi nous contacter directement sur WhatsApp.';
+        var DEFAULT_RECEIVER_EMAIL = 'contact@datalio.online';
 
         var originalLabel = submitLabel ? submitLabel.textContent : 'Envoyer ma demande';
 
         function setBusy(isBusy) {
-            if (submitBtn) submitBtn.disabled = isBusy;
+            submitBtn.disabled = isBusy;
             if (submitLabel) submitLabel.textContent = isBusy ? 'Envoi en cours…' : originalLabel;
         }
 
-        function showSuccess() {
-            if (!successEl || !errorEl) return;
-            successEl.textContent = SUCCESS_MESSAGE;
+        function showSuccess(msg) {
+            if (msg) successEl.textContent = msg;
             successEl.hidden = false;
             errorEl.hidden = true;
         }
-
-        function showError(customMsg) {
-            if (!successEl || !errorEl) return;
-            errorEl.textContent = customMsg || ERROR_MESSAGE;
+        function showError(msg) {
+            if (msg) errorEl.textContent = msg;
             errorEl.hidden = false;
             successEl.hidden = true;
         }
-
         function clearMessages() {
-            if (errorEl)   errorEl.hidden = true;
-            if (successEl) successEl.hidden = true;
+            errorEl.hidden = true;
+            successEl.hidden = true;
         }
 
-        function trackFormSubmit(label) {
-            if (typeof window.trackEvent === 'function') {
-                window.trackEvent('form_submit', {
-                    category: 'contact',
-                    label: label || 'contact_form'
-                });
-            }
+        // Récupère les valeurs des champs visibles (sans honeypot ni champs Web3Forms)
+        function collectFields() {
+            var fields = {};
+            ['name', 'company', 'email', 'phone', 'project_type', 'budget', 'message'].forEach(function (name) {
+                var el = form.elements[name];
+                if (el) fields[name] = (el.value || '').trim();
+            });
+            return fields;
+        }
+
+        // Fallback mailto: ouvre le client mail avec un message prérempli
+        function openMailto(fields, receiverEmail) {
+            var receiver = receiverEmail || DEFAULT_RECEIVER_EMAIL;
+            var subject = '[Datalio] Demande de ' + (fields.name || 'un visiteur');
+            var bodyLines = [
+                'Nom complet : ' + (fields.name || ''),
+                'Entreprise : ' + (fields.company || '—'),
+                'Email : ' + (fields.email || ''),
+                'Téléphone : ' + (fields.phone || '—'),
+                'Type de projet : ' + (fields.project_type || '—'),
+                'Budget estimé : ' + (fields.budget || '—'),
+                '',
+                '— Message —',
+                fields.message || '',
+                '',
+                '— Envoyé depuis https://datalio.online/#contact'
+            ];
+            var href = 'mailto:' + encodeURIComponent(receiver)
+                + '?subject=' + encodeURIComponent(subject)
+                + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+            window.location.href = href;
         }
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             clearMessages();
 
-            // --- 1. Honeypot anti-bot : si rempli, on simule un succès sans rien envoyer ---
+            // --- 1. Honeypot anti-bot ---
             var honeypot = form.elements['botcheck'];
             if (honeypot && honeypot.value) {
+                // bot détecté — on simule un succès sans rien envoyer
                 showSuccess();
                 form.reset();
                 return;
             }
 
-            // --- 2. Validation HTML5 native (champs requis, format email, etc.) ---
+            // --- 2. Validation HTML5 native ---
             if (!form.checkValidity()) {
                 form.reportValidity();
                 return;
             }
 
             // --- 3. Validation custom : message minimum 20 caractères ---
-            var msgField = form.elements['message'];
-            var msgValue = msgField ? (msgField.value || '').trim() : '';
-            if (msgValue.length < 20) {
+            var fields = collectFields();
+            if (!fields.message || fields.message.length < 20) {
                 showError('Votre message doit contenir au moins 20 caractères pour que nous puissions bien comprendre votre besoin.');
+                var msgField = form.elements['message'];
                 if (msgField) msgField.focus();
                 return;
             }
 
-            // --- 4. Vérification de l'access_key Web3Forms ---
-            var accessKey = accessKeyInput && accessKeyInput.value
-                ? accessKeyInput.value.trim()
-                : '';
-            if (!accessKey || accessKey.length < 8) {
-                console.warn('[Datalio] Web3Forms access_key absente. Renseignez-la dans content/settings.json (contact_form.web3forms_access_key) ou via l\'admin → Réglages → Formulaire de contact. Voir https://web3forms.com/');
-                showError();
+            // --- 4. Tentative Web3Forms si access_key configurée ---
+            var accessKey = accessKeyInput && accessKeyInput.value && accessKeyInput.value.trim();
+            var receiver = (form.dataset.receiverEmail || DEFAULT_RECEIVER_EMAIL).trim();
+
+            if (accessKey && accessKey.length >= 8 && window.fetch) {
+                setBusy(true);
+                var formData = new FormData(form);
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(function (r) { return r.json().catch(function () { return { success: false }; }); })
+                .then(function (data) {
+                    if (data && data.success) {
+                        showSuccess('✓ Votre demande a été envoyée avec succès. Nous vous répondrons rapidement.');
+                        form.reset();
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('form_submit', {
+                                category: 'contact',
+                                label: 'contact_form_web3forms'
+                            });
+                        }
+                    } else {
+                        // Web3Forms a refusé : fallback mailto
+                        showSuccess('Nous ouvrons votre client mail pour finaliser l\'envoi…');
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('form_submit', {
+                                category: 'contact',
+                                label: 'contact_form_mailto_fallback'
+                            });
+                        }
+                        openMailto(fields, receiver);
+                    }
+                })
+                .catch(function () {
+                    showError('Une erreur réseau est survenue. Nous ouvrons votre client mail comme alternative…');
+                    setTimeout(function () { openMailto(fields, receiver); }, 1200);
+                })
+                .then(function () { setBusy(false); });
                 return;
             }
 
-            // --- 5. Vérification du support fetch (très anciens navigateurs uniquement) ---
-            if (!window.fetch) {
-                showError();
-                return;
-            }
-
-            // --- 6. Envoi vers Web3Forms ---
+            // --- 5. Pas d'access_key : fallback direct mailto ---
             setBusy(true);
-            var formData = new FormData(form);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(function (r) {
-                return r.json().catch(function () { return { success: false }; });
-            })
-            .then(function (data) {
-                if (data && data.success) {
-                    showSuccess();
-                    form.reset();
-                    trackFormSubmit('contact_form_web3forms');
-                } else {
-                    showError();
-                }
-            })
-            .catch(function () {
-                // Erreur réseau, blocage CORS, navigateur hors-ligne, etc.
-                showError();
-            })
-            .then(function () {
-                setBusy(false);
-            });
+            showSuccess('Nous ouvrons votre client mail avec votre message prérempli. Si rien ne s\'ouvre, contactez-nous sur WhatsApp.');
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('form_submit', {
+                    category: 'contact',
+                    label: 'contact_form_mailto'
+                });
+            }
+            openMailto(fields, receiver);
+            setTimeout(function () { setBusy(false); }, 1500);
         });
     }
     initContactForm();
@@ -783,33 +794,4 @@
             .then(function (data) { if (data) applyContent(data); })
             .catch(function () { /* fallback */ });
     }
-})();
-
-
-
-/* =========================================================
-   Premium polish (inspiration Nexora) — micro-comportement
-   ---------------------------------------------------------
-   Additionne SEULEMENT une classe "is-scrolled" sur la
-   navbar quand on a scrollé un peu, pour activer une ombre
-   plus marquée définie dans styles-premium.css. Ne touche
-   à AUCUN tracking, AUCUN formulaire, AUCUN lien WhatsApp.
-   ========================================================= */
-(function () {
-    var nav = document.querySelector('.nav');
-    if (!nav) return;
-    var ticking = false;
-    function update() {
-        if (window.scrollY > 12) nav.classList.add('is-scrolled');
-        else nav.classList.remove('is-scrolled');
-        ticking = false;
-    }
-    function onScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(update);
-            ticking = true;
-        }
-    }
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
 })();
